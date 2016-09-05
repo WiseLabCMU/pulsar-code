@@ -1,0 +1,1071 @@
+Archive member included because of file (symbol)
+
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+                              /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o (exit)
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                              /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o) (_global_impure_ptr)
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+                              /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o (__libc_init_array)
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+                              /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o (memset)
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+                              ./utilities/fsl_debug_console.o (symbol from plugin) (strlen)
+/Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+                              /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o) (_exit)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+ .data          0x0000000000000000        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+ .ARM.extab     0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+ .text          0x0000000000000000        0x0 ./utilities/fsl_debug_console.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.mcgModeMatrix.4618
+                0x0000000000000000       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6096.4610
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6100.4611
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6108.4612
+                0x0000000000000000       0x18 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.trimRange.6293.4616
+                0x0000000000000000       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_portBases.4918
+                0x0000000000000000       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_gpioBases.4915
+                0x0000000000000000       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6069.4916
+                0x0000000000000000       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6075.4917
+                0x0000000000000000       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_lpuartBases.5138.4510
+                0x0000000000000000        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_lpuartIRQ.5137.4509
+                0x0000000000000000        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_lpuartClock.5136.4508
+                0x0000000000000000        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6364.5130
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6372.5134
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6377.5135
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6424.5129
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.s_uartIRQ.5517.4424
+                0x0000000000000000        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_Deinit
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_SetBaudRate.4256
+                0x0000000000000000       0xa0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_EnableInterrupts.4252
+                0x0000000000000000       0x64 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_DisableInterrupts.4248
+                0x0000000000000000       0x74 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_GetEnabledInterrupts.4245
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_ClearStatusFlags.4238
+                0x0000000000000000       0x6c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_WriteNonBlocking.5420.4228
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_ReadNonBlocking.5430.4218
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferCreateHandle.4212
+                0x0000000000000000       0x98 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferStartRingBuffer.4206
+                0x0000000000000000       0x5c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferStopRingBuffer.4202
+                0x0000000000000000       0x60 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferSendNonBlocking.4197
+                0x0000000000000000       0x6c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferAbortSend.4193
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferGetSendCount.4188
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferReceiveNonBlocking.4178
+                0x0000000000000000      0x160 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferAbortReceive.4174
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferGetReceiveCount.4169
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferHandleIRQ.4165
+                0x0000000000000000      0x2ac /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_TransferHandleErrorIRQ.4088
+                0x0000000000000000       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6353.5513.4423
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6361.5518.4422
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6366.5519.4421
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6412.5512.4420
+                0x0000000000000000       0x18 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.SMC_SetPowerModeProtection.5571.4063
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.SMC_GetPowerModeState.5582.4051
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.g_defaultClockConfigVlpr.4406
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.g_defaultClockConfigHsrun.4380
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.BOARD_BootClockVLPR.4049
+                0x0000000000000000       0x50 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.BOARD_BootClockHSRUN.4044
+                0x0000000000000000       0x74 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .data          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .bss           0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.CLOCK_SetMcgConfig.4402
+                0x0000000000000000      0x1e0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.InstallIRQHandler.4391
+                0x0000000000000000       0x74 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.GPIO_WritePinOutput.4876.4386
+                0x0000000000000000       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.GPIO_GetInstance.4892.4383
+                0x0000000000000000       0x54 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.GPIO_PinInit.4372
+                0x0000000000000000       0x70 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.GPIO_GetPinsInterruptFlags.4369
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.GPIO_ClearPinsInterruptFlags.4355
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.NVIC_EnableIRQ.4932.4352
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.CLOCK_DisableClock.4943.4346
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.EnableIRQ.4946.4343
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.DisableGlobalIRQ.4949.4341
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.EnableGlobalIRQ.4952.4338
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferGetRxRingBufferLength.4966.4331
+                0x0000000000000000       0x54 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferIsRxRingBufferFull.4992.4327
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_WriteNonBlocking.4997.4322
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_ReadNonBlocking.5002.4317
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_Deinit
+                0x0000000000000000       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_SetBaudRate.4290
+                0x0000000000000000      0x130 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_EnableInterrupts.4286
+                0x0000000000000000       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_DisableInterrupts.4282
+                0x0000000000000000       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_GetEnabledInterrupts.4279
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferCreateHandle.4256
+                0x0000000000000000       0x88 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferStartRingBuffer.4250
+                0x0000000000000000       0x5c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferStopRingBuffer.4246
+                0x0000000000000000       0x60 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferSendNonBlocking.4241
+                0x0000000000000000       0x6c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferAbortSend.4237
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferGetSendCount.4232
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferReceiveNonBlocking.4222
+                0x0000000000000000      0x164 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferAbortReceive.4218
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferGetReceiveCount.4213
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferHandleIRQ.4209
+                0x0000000000000000      0x24c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_TransferHandleErrorIRQ.4180
+                0x0000000000000000       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART0_RX_TX_DriverIRQHandler.4176
+                0x0000000000000000        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_GetPowerModeState.5174.4171
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeRun.4168
+                0x0000000000000000       0x2c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeHsrun
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeWait.4162
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeStop.4156
+                0x0000000000000000       0x78 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeVlpr
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeVlpw.4150
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeVlps.4147
+                0x0000000000000000       0x5c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeLls.4140
+                0x0000000000000000       0x7c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.SMC_SetPowerModeVlls.4123
+                0x0000000000000000       0xb0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.NVIC_EnableIRQ.5267.4120
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.CLOCK_DisableClock.5278
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.EnableIRQ.5281
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.DisableGlobalIRQ.5284
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.EnableGlobalIRQ.5287
+                0x0000000000000000       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.UART_TransferGetRxRingBufferLength.5343
+                0x0000000000000000       0x54 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.UART_TransferIsRxRingBufferFull.5367
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .data          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .bss           0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_GetInternalRefClkFreq
+                0x0000000000000000       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_GetFixedFreqClkFreq
+                0x0000000000000000       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_CalcPllDiv.4140
+                0x0000000000000000      0x16c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetOsc0MonitorMode.4134
+                0x0000000000000000       0x78 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetRtcOscMonitorMode.4131
+                0x0000000000000000       0x48 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetPll0MonitorMode.4126
+                0x0000000000000000       0x74 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_GetStatusFlags.4124
+                0x0000000000000000       0x84 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_ClearStatusFlags.4121
+                0x0000000000000000       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_DeinitOsc0.4104
+                0x0000000000000000       0x2c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_TrimInternalRefClk.4095
+                0x0000000000000000      0x138 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_GetMode
+                0x0000000000000000       0xb8 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetFeiMode
+                0x0000000000000000       0xb0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetFeeMode
+                0x0000000000000000       0xdc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetFbiMode
+                0x0000000000000000       0xc0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetFbeMode
+                0x0000000000000000       0xfc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetBlpiMode
+                0x0000000000000000       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetBlpeMode
+                0x0000000000000000       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_SetPeeMode
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_ExternalModeToFbeModeQuick
+                0x0000000000000000       0x68 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_InternalModeToFbiModeQuick.4057
+                0x0000000000000000       0x4c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_BootToFeiMode.4053
+                0x0000000000000000       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_BootToFeeMode.4042
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_BootToBlpiMode
+                0x0000000000000000       0x68 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text.CLOCK_BootToBlpeMode.4032
+                0x0000000000000000       0x54 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .text          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .data          0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .bss           0x0000000000000000        0x0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_Deinit.4167
+                0x0000000000000000       0x4c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_Scanf.4158
+                0x0000000000000000       0x98 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_ScanIgnoreWhiteSpace.4110.4153
+                0x0000000000000000       0x60 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_ScanfFormattedData.4140.4124
+                0x0000000000000000      0x60c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text._write.4119
+                0x0000000000000000       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text._read.4113
+                0x0000000000000000       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.SystemCoreClockUpdate.4108
+                0x0000000000000000      0x264 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_EnableClock.4357.4102
+                0x0000000000000000       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_DisableClock.4363.4097
+                0x0000000000000000       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_FllStableDelay.4391
+                0x0000000000000000       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetOsc0ErClkUndivFreq.4057
+                0x0000000000000000       0x48 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetOsc0ErClkDivFreq.4055
+                0x0000000000000000       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetEr32kClkFreq.4053
+                0x0000000000000000       0x7c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetPllFllSelClkFreq.4051
+                0x0000000000000000       0x50 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetOsc0ErClkFreq.4049
+                0x0000000000000000       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetPlatClkFreq.4047
+                0x0000000000000000       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetFlashClkFreq.4045
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetFlexBusClkFreq.4043
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetBusClkFreq.4041
+                0x0000000000000000       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetFreq.4034
+                0x0000000000000000      0x148 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_EnableUsbfs0Clock.4018
+                0x0000000000000000      0x100 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .data          0x0000000000000000        0x0 ./startup/startup_MK22F51212.o
+ .bss           0x0000000000000000        0x0 ./startup/startup_MK22F51212.o
+ .text          0x0000000000000000        0x0 ./startup/system_MK22F51212.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./source/hello_world.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_clock.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_common.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_gpio.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_lpuart.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_smc.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./drivers/fsl_uart.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./board/board.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./board/clock_config.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ./board/pin_mux.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x0000000000000000        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .eh_frame      0x0000000000000000        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .text          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+ .data          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+ .bss           0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+m_interrupts     0x0000000000000000 0x0000000000000400 xr
+m_flash_config   0x0000000000000400 0x0000000000000010 xr
+m_text           0x0000000000000410 0x000000000007fbf0 xr
+m_data           0x000000001fff0000 0x0000000000010000 rw
+m_data_2         0x0000000020000000 0x0000000000010000 rw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+START GROUP
+LOAD ./utilities/fsl_debug_console.o
+LOAD /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+LOAD /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+LOAD /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+LOAD /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_s.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_s.a
+LOAD ./startup/startup_MK22F51212.o
+LOAD ./startup/system_MK22F51212.o
+LOAD ./source/hello_world.o
+LOAD ./drivers/fsl_clock.o
+LOAD ./drivers/fsl_common.o
+LOAD ./drivers/fsl_gpio.o
+LOAD ./drivers/fsl_lpuart.o
+LOAD ./drivers/fsl_smc.o
+LOAD ./drivers/fsl_uart.o
+LOAD ./board/board.o
+LOAD ./board/clock_config.o
+LOAD ./board/pin_mux.o
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a
+END GROUP
+START GROUP
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_s.a
+END GROUP
+START GROUP
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_s.a
+END GROUP
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+                0x0000000000000400                HEAP_SIZE = DEFINED (__heap_size__)?__heap_size__:0x400
+                0x0000000000000400                STACK_SIZE = DEFINED (__stack_size__)?__stack_size__:0x400
+                0x0000000000000000                M_VECTOR_RAM_SIZE = DEFINED (__ram_vector_table__)?0x400:0x0
+
+.interrupts     0x0000000000000000      0x400
+                0x0000000000000000                __VECTOR_TABLE = .
+                0x0000000000000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x0000000000000000      0x400 ./startup/startup_MK22F51212.o
+                0x0000000000000000                __isr_vector
+                0x0000000000000400                . = ALIGN (0x4)
+
+.flash_config   0x0000000000000400       0x10
+                0x0000000000000400                . = ALIGN (0x4)
+ *(.FlashConfig)
+ .FlashConfig   0x0000000000000400       0x10 ./startup/startup_MK22F51212.o
+                0x0000000000000410                . = ALIGN (0x4)
+
+.text           0x0000000000000410     0x2184
+                0x0000000000000410                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000000410       0x54 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .text          0x0000000000000464       0x74 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+                0x0000000000000464                _mainCRTStartup
+                0x0000000000000464                _start
+ .text          0x00000000000004d8      0x178 ./startup/startup_MK22F51212.o
+                0x00000000000004d8                Reset_Handler
+                0x0000000000000534                Reserved54_IRQHandler
+                0x0000000000000534                DebugMon_Handler
+                0x0000000000000534                Reserved96_IRQHandler
+                0x0000000000000534                DMA0_DriverIRQHandler
+                0x0000000000000534                DMA12_DriverIRQHandler
+                0x0000000000000534                SPI1_DriverIRQHandler
+                0x0000000000000534                Reserved86_IRQHandler
+                0x0000000000000534                Reserved85_IRQHandler
+                0x0000000000000534                DMA_Error_DriverIRQHandler
+                0x0000000000000534                SPI0_DriverIRQHandler
+                0x0000000000000534                DMA13_DriverIRQHandler
+                0x0000000000000534                Reserved81_IRQHandler
+                0x0000000000000534                Reserved94_IRQHandler
+                0x0000000000000534                DMA15_DriverIRQHandler
+                0x0000000000000534                LVD_LVW_IRQHandler
+                0x0000000000000534                PIT1_IRQHandler
+                0x0000000000000534                FTF_IRQHandler
+                0x0000000000000534                PORTC_IRQHandler
+                0x0000000000000534                CMP0_IRQHandler
+                0x0000000000000534                Reserved99_IRQHandler
+                0x0000000000000534                PIT0_IRQHandler
+                0x0000000000000534                LLWU_IRQHandler
+                0x0000000000000534                I2S0_Tx_DriverIRQHandler
+                0x0000000000000534                Reserved84_IRQHandler
+                0x0000000000000534                DMA6_DriverIRQHandler
+                0x0000000000000534                Reserved92_IRQHandler
+                0x0000000000000534                DMA7_DriverIRQHandler
+                0x0000000000000534                SWI_IRQHandler
+                0x0000000000000534                ADC0_IRQHandler
+                0x0000000000000534                UsageFault_Handler
+                0x0000000000000534                I2C0_DriverIRQHandler
+                0x0000000000000534                Reserved93_IRQHandler
+                0x0000000000000534                DefaultISR
+                0x0000000000000534                DMA2_DriverIRQHandler
+                0x0000000000000534                UART1_ERR_DriverIRQHandler
+                0x0000000000000534                DMA11_DriverIRQHandler
+                0x0000000000000534                Reserved82_IRQHandler
+                0x0000000000000534                CMP1_IRQHandler
+                0x0000000000000534                Reserved71_IRQHandler
+                0x0000000000000534                PORTD_IRQHandler
+                0x0000000000000534                PORTB_IRQHandler
+                0x0000000000000534                DMA10_DriverIRQHandler
+                0x0000000000000534                UART2_ERR_DriverIRQHandler
+                0x0000000000000534                Reserved70_IRQHandler
+                0x0000000000000534                ADC1_IRQHandler
+                0x0000000000000534                DMA5_DriverIRQHandler
+                0x0000000000000534                DMA4_DriverIRQHandler
+                0x0000000000000534                PIT2_IRQHandler
+                0x0000000000000534                BusFault_Handler
+                0x0000000000000534                Reserved53_IRQHandler
+                0x0000000000000534                LPTMR0_IRQHandler
+                0x0000000000000534                RTC_IRQHandler
+                0x0000000000000534                PDB0_IRQHandler
+                0x0000000000000534                FTM1_IRQHandler
+                0x0000000000000534                Reserved61_IRQHandler
+                0x0000000000000534                Reserved95_IRQHandler
+                0x0000000000000534                DMA3_DriverIRQHandler
+                0x0000000000000534                PIT3_IRQHandler
+                0x0000000000000534                RTC_Seconds_IRQHandler
+                0x0000000000000534                MCG_IRQHandler
+                0x0000000000000534                DMA9_DriverIRQHandler
+                0x0000000000000534                DMA8_DriverIRQHandler
+                0x0000000000000534                UART0_ERR_DriverIRQHandler
+                0x0000000000000534                FTM2_IRQHandler
+                0x0000000000000534                PORTE_IRQHandler
+                0x0000000000000534                Read_Collision_IRQHandler
+                0x0000000000000534                Reserved98_IRQHandler
+                0x0000000000000534                DMA14_DriverIRQHandler
+                0x0000000000000534                FTM3_IRQHandler
+                0x0000000000000534                I2S0_Rx_DriverIRQHandler
+                0x0000000000000534                Reserved101_IRQHandler
+                0x0000000000000534                USB0_IRQHandler
+                0x0000000000000534                WDOG_EWM_IRQHandler
+                0x0000000000000534                MemManage_Handler
+                0x0000000000000534                Reserved90_IRQHandler
+                0x0000000000000534                Reserved83_IRQHandler
+                0x0000000000000534                MCM_IRQHandler
+                0x0000000000000534                DMA1_DriverIRQHandler
+                0x0000000000000534                DAC1_IRQHandler
+                0x0000000000000534                Reserved100_IRQHandler
+                0x0000000000000534                RNG_IRQHandler
+                0x0000000000000534                Reserved97_IRQHandler
+                0x0000000000000534                I2C1_DriverIRQHandler
+                0x0000000000000534                Reserved91_IRQHandler
+                0x0000000000000534                PORTA_IRQHandler
+                0x0000000000000534                FTM0_IRQHandler
+                0x0000000000000534                DAC0_IRQHandler
+                0x0000000000000538                NMI_Handler
+                0x000000000000053c                HardFault_Handler
+                0x0000000000000540                SVC_Handler
+                0x0000000000000544                PendSV_Handler
+                0x0000000000000548                SysTick_Handler
+                0x000000000000054c                DMA0_IRQHandler
+                0x0000000000000550                DMA1_IRQHandler
+                0x0000000000000554                DMA2_IRQHandler
+                0x0000000000000558                DMA3_IRQHandler
+                0x000000000000055c                DMA4_IRQHandler
+                0x0000000000000560                DMA5_IRQHandler
+                0x0000000000000564                DMA6_IRQHandler
+                0x0000000000000568                DMA7_IRQHandler
+                0x000000000000056c                DMA8_IRQHandler
+                0x0000000000000570                DMA9_IRQHandler
+                0x0000000000000574                DMA10_IRQHandler
+                0x0000000000000578                DMA11_IRQHandler
+                0x000000000000057c                DMA12_IRQHandler
+                0x0000000000000580                DMA13_IRQHandler
+                0x0000000000000584                DMA14_IRQHandler
+                0x0000000000000588                DMA15_IRQHandler
+                0x000000000000058c                DMA_Error_IRQHandler
+                0x0000000000000590                I2C0_IRQHandler
+                0x0000000000000594                I2C1_IRQHandler
+                0x0000000000000598                SPI0_IRQHandler
+                0x000000000000059c                SPI1_IRQHandler
+                0x00000000000005a0                I2S0_Tx_IRQHandler
+                0x00000000000005a4                I2S0_Rx_IRQHandler
+                0x00000000000005a8                LPUART0_IRQHandler
+                0x00000000000005ac                UART0_RX_TX_IRQHandler
+                0x00000000000005b0                UART0_ERR_IRQHandler
+                0x00000000000005b4                UART1_RX_TX_IRQHandler
+                0x00000000000005b8                UART1_ERR_IRQHandler
+                0x00000000000005bc                UART2_RX_TX_IRQHandler
+                0x00000000000005c0                UART2_ERR_IRQHandler
+ *(.text*)
+ .text.UART_Init
+                0x0000000000000650      0x1dc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000650                UART_Init
+ .text.UART_GetDefaultConfig
+                0x000000000000082c       0x54 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000000000082c                UART_GetDefaultConfig
+ .text.UART_GetStatusFlags.4242
+                0x0000000000000880       0x48 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART_WriteBlocking
+                0x00000000000008c8       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000008c8                UART_WriteBlocking
+ .text.UART_ReadBlocking
+                0x0000000000000904       0x84 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000904                UART_ReadBlocking
+ .text.UART0_DriverIRQHandler.4086
+                0x0000000000000988       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART0_RX_TX_DriverIRQHandler
+                0x00000000000009a8        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000009a8                UART0_RX_TX_DriverIRQHandler
+ .text.UART1_DriverIRQHandler.4082
+                0x00000000000009b4       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART1_RX_TX_DriverIRQHandler
+                0x00000000000009d4        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000009d4                UART1_RX_TX_DriverIRQHandler
+ .text.UART2_DriverIRQHandler.4078
+                0x00000000000009e0       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.UART2_RX_TX_DriverIRQHandler
+                0x0000000000000a00        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000a00                UART2_RX_TX_DriverIRQHandler
+ .text.BOARD_InitDebugConsole
+                0x0000000000000a0c       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000a0c                BOARD_InitDebugConsole
+ .text.CLOCK_SetXtal0Freq.5564.4069
+                0x0000000000000a30       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.CLOCK_SetSimSafeDivs.5569.4067
+                0x0000000000000a4c       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.BOARD_BootClockRUN
+                0x0000000000000a6c       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000a6c                BOARD_BootClockRUN
+ .text.CLOCK_EnableClock.5686.4038
+                0x0000000000000ac4       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.PORT_SetPinMux.5692.4016
+                0x0000000000000af8       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .text.BOARD_InitPins
+                0x0000000000000b30       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000000b30                BOARD_InitPins
+ .text.__assert_func
+                0x0000000000000b58       0x28 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000b58                __assert_func
+ .text.CLOCK_EnableClock.4938.4349
+                0x0000000000000b80       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_GetInstance.4335
+                0x0000000000000bb4       0x50 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_Init
+                0x0000000000000c04      0x1fc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000c04                LPUART_Init
+ .text.LPUART_GetDefaultConfig
+                0x0000000000000e00       0x50 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000e00                LPUART_GetDefaultConfig
+ .text.LPUART_GetStatusFlags.4276
+                0x0000000000000e50       0x1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_ClearStatusFlags.4272
+                0x0000000000000e6c       0x88 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .text.LPUART_WriteBlocking
+                0x0000000000000ef4       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000ef4                LPUART_WriteBlocking
+ .text.LPUART_ReadBlocking
+                0x0000000000000f30       0xac /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000f30                LPUART_ReadBlocking
+ .text.LPUART0_DriverIRQHandler
+                0x0000000000000fdc       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000fdc                LPUART0_DriverIRQHandler
+ .text.CLOCK_EnableClock.5273
+                0x0000000000000ffc       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000000ffc                CLOCK_EnableClock.5273
+ .text.UART_GetInstance
+                0x0000000000001030       0x5c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                0x0000000000001030                UART_GetInstance
+ .text.CLOCK_GetFllFreq
+                0x000000000000108c       0x74 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x000000000000108c                CLOCK_GetFllFreq
+ .text.CLOCK_GetPll0Freq
+                0x0000000000001100       0x58 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x0000000000001100                CLOCK_GetPll0Freq
+ .text.CLOCK_SetExternalRefClkConfig
+                0x0000000000001158       0x90 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x0000000000001158                CLOCK_SetExternalRefClkConfig
+ .text.CLOCK_SetInternalRefClkConfig
+                0x00000000000011e8      0x100 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x00000000000011e8                CLOCK_SetInternalRefClkConfig
+ .text.CLOCK_EnablePll0
+                0x00000000000012e8       0x90 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x00000000000012e8                CLOCK_EnablePll0
+ .text.CLOCK_InitOsc0
+                0x0000000000001378       0x88 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x0000000000001378                CLOCK_InitOsc0
+ .text.CLOCK_SetPbeMode
+                0x0000000000001400       0x90 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x0000000000001400                CLOCK_SetPbeMode
+ .text.CLOCK_BootToPeeMode
+                0x0000000000001490       0x70 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                0x0000000000001490                CLOCK_BootToPeeMode
+ .text.UART_EnableTx.4013.4268
+                0x0000000000001500       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.UART_EnableRx.4069.4264
+                0x0000000000001540       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.LPUART_EnableTx.4073.4260
+                0x0000000000001580       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.LPUART_EnableRx.4086.4256
+                0x00000000000015b8       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_Init
+                0x00000000000015f0       0xe8 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x00000000000015f0                DbgConsole_Init
+ .text.DbgConsole_Printf
+                0x00000000000016d8       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x00000000000016d8                DbgConsole_Printf
+ .text.DbgConsole_Putchar.4161
+                0x0000000000001718       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_Getchar.4156
+                0x0000000000001750       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_PrintfPaddingCharacter.4114.4146
+                0x0000000000001788       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_ConvertRadixNumToString.4122.4138
+                0x00000000000017c8      0x114 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.DbgConsole_PrintfFormattedData.4129.4132
+                0x00000000000018dc      0x350 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.SystemInit
+                0x0000000000001c2c       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001c2c                SystemInit
+ .text.main     0x0000000000001c68       0x30 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001c68                main
+ .text.CLOCK_SetEr32kClock.4366.4094
+                0x0000000000001c98       0x2c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_SetPllFllSelClock.4370.4091
+                0x0000000000001cc4       0x38 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.OSC_SetExtRefClkConfig.4373
+                0x0000000000001cfc       0x40 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001cfc                OSC_SetExtRefClkConfig.4373
+ .text.OSC_SetCapLoad.4387
+                0x0000000000001d3c       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001d3c                OSC_SetCapLoad.4387
+ .text.CLOCK_GetMcgExtClkFreq.4393.4072
+                0x0000000000001d70       0x8c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetFllExtRefClkFreq.4395.4070
+                0x0000000000001dfc       0xc8 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .text.CLOCK_GetInternalRefClkSelectFreq.4397
+                0x0000000000001ec4       0x44 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001ec4                CLOCK_GetInternalRefClkSelectFreq.4397
+ .text.CLOCK_GetFllRefClkFreq.4399
+                0x0000000000001f08       0x2c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001f08                CLOCK_GetFllRefClkFreq.4399
+ .text.CLOCK_GetPll0RefFreq.4401
+                0x0000000000001f34       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001f34                CLOCK_GetPll0RefFreq.4401
+ .text.CLOCK_GetOscRangeFromFreq.4403
+                0x0000000000001f44       0x3c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001f44                CLOCK_GetOscRangeFromFreq.4403
+ .text.CLOCK_GetCoreSysClkFreq
+                0x0000000000001f80       0x24 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001f80                CLOCK_GetCoreSysClkFreq
+ .text.CLOCK_SetSimConfig
+                0x0000000000001fa4       0x34 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001fa4                CLOCK_SetSimConfig
+ .text.CLOCK_GetOutClkFreq
+                0x0000000000001fd8       0x64 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                0x0000000000001fd8                CLOCK_GetOutClkFreq
+ .text.exit     0x000000000000203c       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+                0x000000000000203c                exit
+ .text.__libc_init_array
+                0x0000000000002064       0x4c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+                0x0000000000002064                __libc_init_array
+ .text.memset   0x00000000000020b0       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+                0x00000000000020b0                memset
+ .text.strlen   0x00000000000020c0       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+                0x00000000000020c0                strlen
+ .text._exit    0x00000000000020d0        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+                0x00000000000020d0                _exit
+ *(.rodata)
+ .rodata        0x00000000000020d4       0xec /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata        0x00000000000021c0      0x1d0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .rodata        0x0000000000002390       0x64 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .rodata        0x00000000000023f4       0x88 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ *(.rodata*)
+ .rodata.__func__.6051.4606
+                0x000000000000247c       0x18 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000000000247c                __func__.6051.4606
+ .rodata.fllFactorTable.6187.4613
+                0x0000000000002494       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000002494                fllFactorTable.6187.4613
+ .rodata.__func__.6249.4615
+                0x00000000000024a4       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000024a4                __func__.6249.4615
+ .rodata.__func__.6445.4617
+                0x00000000000024b8       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000024b8                __func__.6445.4617
+ .rodata.__func__.6239.5126
+                0x00000000000024cc       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000024cc                __func__.6239.5126
+ .rodata.__func__.6273.5127
+                0x00000000000024e0        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000024e0                __func__.6273.5127
+ .rodata.__func__.6295.5128
+                0x00000000000024ec       0x18 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x00000000000024ec                __func__.6295.5128
+ .rodata.s_uartBases.5507
+                0x0000000000002504        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x0000000000002504                s_uartBases.5507
+ .rodata.s_uartClock.5510.4427
+                0x0000000000002510        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6245.5508
+                0x000000000000251c       0x14 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000000000251c                __func__.6245.5508
+ .rodata.__func__.6259.5509.4429
+                0x0000000000002530        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.__func__.6275.5511.4426
+                0x000000000000253c       0x18 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.g_defaultClockConfigRun.4405
+                0x0000000000002554       0x20 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .rodata.str1.1
+                0x0000000000002574        0x2 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ *fill*         0x0000000000002576        0x2 
+ .rodata._global_impure_ptr
+                0x0000000000002578        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                0x0000000000002578                _global_impure_ptr
+ *(.glue_7)
+ .glue_7        0x0000000000000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x000000000000257c        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ *(.init)
+ .init          0x000000000000257c        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+                0x000000000000257c                _init
+ .init          0x0000000000002580        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+ *(.fini)
+ .fini          0x0000000000002588        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+                0x0000000000002588                _fini
+ .fini          0x000000000000258c        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+                0x0000000000002594                . = ALIGN (0x4)
+
+.vfp11_veneer   0x0000000000002594        0x0
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+
+.v4_bx          0x0000000000002594        0x0
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.iplt           0x0000000000002594        0x0
+ .iplt          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x0000000000002594        0x8
+                0x0000000000002594                __exidx_start = .
+ *(.ARM.exidx*)
+ .ARM.exidx     0x0000000000002594        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+                0x000000000000259c                __exidx_end = .
+
+.rel.dyn        0x000000000000259c        0x0
+ .rel.iplt      0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+
+.ctors          0x000000000000259c        0x0
+                0x000000000000259c                __CTOR_LIST__ = .
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+                0x000000000000259c                __CTOR_END__ = .
+
+.dtors          0x000000000000259c        0x0
+                0x000000000000259c                __DTOR_LIST__ = .
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+                0x000000000000259c                __DTOR_END__ = .
+
+.preinit_array  0x000000000000259c        0x0
+                0x000000000000259c                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array*)
+                0x000000000000259c                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x000000000000259c        0x4
+                0x000000000000259c                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array*)
+ .init_array    0x000000000000259c        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+                0x00000000000025a0                PROVIDE (__init_array_end, .)
+
+.fini_array     0x00000000000025a0        0x4
+                0x00000000000025a0                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x00000000000025a0        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+                0x00000000000025a4                PROVIDE (__fini_array_end, .)
+                0x00000000000025a4                __etext = .
+                0x00000000000025a4                __DATA_ROM = .
+
+.interrupts_ram
+                0x000000001fff0000        0x0
+                0x000000001fff0000                . = ALIGN (0x4)
+                0x000000001fff0000                __VECTOR_RAM__ = .
+                0x000000001fff0000                __interrupts_ram_start__ = .
+ *(.m_interrupts_ram)
+                0x000000001fff0000                . = (. + M_VECTOR_RAM_SIZE)
+                0x000000001fff0000                . = ALIGN (0x4)
+                0x000000001fff0000                __interrupts_ram_end__ = .
+                0x0000000000000000                __VECTOR_RAM = DEFINED (__ram_vector_table__)?__VECTOR_RAM__:ORIGIN (m_interrupts)
+                0x0000000000000000                __RAM_VECTOR_TABLE_SIZE_BYTES = DEFINED (__ram_vector_table__)?(__interrupts_ram_end__ - __interrupts_ram_start__):0x0
+
+.data           0x000000001fff0000       0x70 load address 0x00000000000025a4
+                0x000000001fff0000                . = ALIGN (0x4)
+                0x000000001fff0000                __DATA_RAM = .
+                0x000000001fff0000                __data_start__ = .
+ *(.data)
+ *(.data*)
+ .data.SystemCoreClock
+                0x000000001fff0000        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff0000                SystemCoreClock
+ .data.s_slowIrcFreq.4608
+                0x000000001fff0004        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff0004                s_slowIrcFreq.4608
+ .data.s_fastIrcFreq.4609
+                0x000000001fff0008        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff0008                s_fastIrcFreq.4609
+ .data.impure_data
+                0x000000001fff000c       0x60 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ *(.jcr*)
+ .jcr           0x000000001fff006c        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .jcr           0x000000001fff006c        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+                0x000000001fff0070                . = ALIGN (0x4)
+                0x000000001fff0070                __data_end__ = .
+                0x0000000000002614                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+                0x0000000000080000                text_end = (ORIGIN (m_text) + 0x7fbf0)
+                0x0000000000000001                ASSERT ((__DATA_END <= text_end), region m_text overflowed with text and data)
+                0x0000000000000800                USB_RAM_GAP = DEFINED (__usb_ram_size__)?__usb_ram_size__:0x800
+
+.igot.plt       0x000000001fff0070        0x0 load address 0x0000000000002614
+ .igot.plt      0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+
+.bss            0x000000001fff0070      0x990 load address 0x0000000000002614
+                0x000000001fff0070                . = ALIGN (0x4)
+                0x000000001fff0070                __START_BSS = .
+                0x000000001fff0070                __bss_start__ = .
+ *(.bss)
+ .bss           0x000000001fff0070       0x1c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ *(.bss*)
+ .bss.s_debugConsole.4186
+                0x000000001fff008c       0x10 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff008c                s_debugConsole.4186
+ .bss.g_xtal0Freq
+                0x000000001fff009c        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff009c                g_xtal0Freq
+ .bss.g_xtal32Freq
+                0x000000001fff00a0        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff00a0                g_xtal32Freq
+ .bss.s_lpuartHandle.5131
+                0x000000001fff00a4        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff00a4                s_lpuartHandle.5131
+ .bss.s_lpuartIsr.5132
+                0x000000001fff00a8        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff00a8                s_lpuartIsr.5132
+ .bss.s_uartHandle.5514.4419
+                0x000000001fff00ac        0xc /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .bss.s_uartIsr.5515.4417
+                0x000000001fff00b8        0x4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                0x000000001fff0200                . = ALIGN (0x200)
+ *fill*         0x000000001fff00bc      0x144 
+                0x000000001fff0200                USB_RAM_START = .
+                0x000000001fff0a00                . = (. + USB_RAM_GAP)
+ *fill*         0x000000001fff0200      0x800 
+ *(COMMON)
+                0x000000001fff0a00                . = ALIGN (0x4)
+                0x000000001fff0a00                __bss_end__ = .
+                0x000000001fff0a00                __END_BSS = .
+
+.heap           0x0000000020000000      0x400
+                0x0000000020000000                . = ALIGN (0x8)
+                0x0000000020000000                __end__ = .
+                0x0000000020000000                PROVIDE (end, .)
+                0x0000000020000000                __HeapBase = .
+                0x0000000020000400                . = (. + HEAP_SIZE)
+ *fill*         0x0000000020000000      0x400 
+                0x0000000020000400                __HeapLimit = .
+                0x0000000020000400                __heap_limit = .
+
+.stack          0x0000000020000400      0x400
+                0x0000000020000400                . = ALIGN (0x8)
+                0x0000000020000800                . = (. + STACK_SIZE)
+ *fill*         0x0000000020000400      0x400 
+
+m_usb_bdt       0x000000001fff0200        0x0
+ *(m_usb_bdt)
+                0x000000001fff0200                USB_RAM_BDT_END = .
+
+m_usb_global
+ *(m_usb_global)
+                0x0000000020010000                __StackTop = (ORIGIN (m_data_2) + 0x10000)
+                0x000000002000fc00                __StackLimit = (__StackTop - STACK_SIZE)
+                0x0000000020010000                PROVIDE (__stack, __StackTop)
+
+.ARM.attributes
+                0x0000000000000000       0x30
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+ .ARM.attributes
+                0x0000000000000022       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .ARM.attributes
+                0x0000000000000056       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+ .ARM.attributes
+                0x0000000000000076       0x37 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .ARM.attributes
+                0x00000000000000ad       0x37 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .ARM.attributes
+                0x00000000000000e4       0x37 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .ARM.attributes
+                0x000000000000011b       0x37 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .ARM.attributes
+                0x0000000000000152       0x1f ./startup/startup_MK22F51212.o
+ .ARM.attributes
+                0x0000000000000171       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000000000001a5       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000000001d9       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .ARM.attributes
+                0x000000000000020d       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000241       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x0000000000000275       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .ARM.attributes
+                0x00000000000002a9       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .ARM.attributes
+                0x00000000000002dd       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+                0x0000000000000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data_2 overflowed with stack and heap)
+OUTPUT(hello_world_frdmk22f.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000     0x67d5
+ .debug_info    0x0000000000000000     0x2393 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_info    0x0000000000002393     0x2292 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_info    0x0000000000004625      0xc1c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_info    0x0000000000005241     0x14aa /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .debug_info    0x00000000000066eb       0xea ./startup/startup_MK22F51212.o
+
+.debug_abbrev   0x0000000000000000      0xe34
+ .debug_abbrev  0x0000000000000000      0x3f6 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_abbrev  0x00000000000003f6      0x470 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_abbrev  0x0000000000000866      0x216 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_abbrev  0x0000000000000a7c      0x3a4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .debug_abbrev  0x0000000000000e20       0x14 ./startup/startup_MK22F51212.o
+
+.debug_aranges  0x0000000000000000      0x630
+ .debug_aranges
+                0x0000000000000000      0x160 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_aranges
+                0x0000000000000160      0x208 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_aranges
+                0x0000000000000368      0x118 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_aranges
+                0x0000000000000480      0x190 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .debug_aranges
+                0x0000000000000610       0x20 ./startup/startup_MK22F51212.o
+
+.debug_ranges   0x0000000000000000      0x5d0
+ .debug_ranges  0x0000000000000000      0x150 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_ranges  0x0000000000000150      0x1f8 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_ranges  0x0000000000000348      0x108 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_ranges  0x0000000000000450      0x180 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+
+.debug_line     0x0000000000000000     0x2029
+ .debug_line    0x0000000000000000      0x75d /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_line    0x000000000000075d      0x9b2 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_line    0x000000000000110f      0x4d6 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_line    0x00000000000015e5      0x8d5 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .debug_line    0x0000000000001eba      0x16f ./startup/startup_MK22F51212.o
+
+.debug_str      0x0000000000000000     0x2d6a
+ .debug_str     0x0000000000000000     0x1a6a /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                                       0x1e04 (size before relaxing)
+ .debug_str     0x0000000000001a6a      0x777 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+                                       0x1b08 (size before relaxing)
+ .debug_str     0x00000000000021e1      0x41c /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+                                        0xa23 (size before relaxing)
+ .debug_str     0x00000000000025fd      0x76d /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+                                       0x1074 (size before relaxing)
+
+.comment        0x0000000000000000       0x70
+ .comment       0x0000000000000000       0x70 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+                                         0x71 (size before relaxing)
+ .comment       0x0000000000000000       0x71 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .comment       0x0000000000000000       0x71 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .comment       0x0000000000000000       0x71 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+
+.debug_frame    0x0000000000000000     0x15f0
+ .debug_frame   0x0000000000000000      0x4c0 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans0.ltrans.o
+ .debug_frame   0x00000000000004c0      0x740 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans1.ltrans.o
+ .debug_frame   0x0000000000000c00      0x3b4 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans2.ltrans.o
+ .debug_frame   0x0000000000000fb4      0x588 /var/folders/xt/frmp4xg90_v9qdj7pzlkf2fc0000gn/T//ccaQK8ze.ltrans3.ltrans.o
+ .debug_frame   0x000000000000153c       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .debug_frame   0x0000000000001564       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .debug_frame   0x0000000000001590       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .debug_frame   0x00000000000015b0       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .debug_frame   0x00000000000015d0       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)

@@ -1,0 +1,32 @@
+--- uC/OS-II integration notes ---
+Original package is available on demand from Micrium, Inc. Supported version can be found in Kinetis
+SDK Release notes document. Folder structure of uc/OS-II in SDK is reduced to keep only necessary
+Kinetis related files. Folder nesting is minimalized.
+
+Original uC/OS-II folder structure
+uC_OS-II Package (OS2+LIB+CPU+Common+Clk+Shell)
+  └ Micrium
+    └ Software
+      ├ uC-Common
+      ├ uC-Shell
+      ├ uC-Clk
+      ├ uC-CPU
+      ├ uC-LIB
+      └ uCOS-II
+
+SDK uC/OS-II folder structure
+ucosii
+  ├ uC-CPU
+  ├ uC-LIB
+  └ uCOS-II
+
+Configuration:
+Application contains several cofiguration and RTOS adaptation files:
+    cpu_cfg.h
+    os_cfg.h
+    app_cfg.h
+    app_hooks.c
+
+The cpu_cfg.h and os_cfg.h are based on templates located in folloving paths:
+    rtos\ucosii\uC-CPU\Cfg\Template\cpu_cfg.h
+    rtos\ucosii\uCOS-II\Cfg\Template\os_cfg.h

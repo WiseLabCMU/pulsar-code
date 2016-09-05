@@ -1,0 +1,23 @@
+20:10:20 **** Incremental Build of configuration Debug for project KDS_hello_world ****
+make -j3 all 
+Building file: ../board/pin_mux.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/pin_mux.d" -MT"board/pin_mux.o" -c -o "board/pin_mux.o" "../board/pin_mux.c"
+../board/pin_mux.c: In function 'BOARD_InitPins':
+../board/pin_mux.c:44:2: warning: implicit declaration of function 'CLOCK_EnableClock' [-Wimplicit-function-declaration]
+  CLOCK_EnableClock(kCLOCK_PortA); // Debug Serial: UART0
+  ^
+../board/pin_mux.c:44:20: error: 'kCLOCK_PortA' undeclared (first use in this function)
+  CLOCK_EnableClock(kCLOCK_PortA); // Debug Serial: UART0
+                    ^
+../board/pin_mux.c:44:20: note: each undeclared identifier is reported only once for each function it appears in
+../board/pin_mux.c:47:2: warning: implicit declaration of function 'PORT_SetPinMux' [-Wimplicit-function-declaration]
+  PORT_SetPinMux(PORTA, 1U, kPORT_MuxAlt2); // Debug Serial: UART0 TX
+  ^
+../board/pin_mux.c:47:28: error: 'kPORT_MuxAlt2' undeclared (first use in this function)
+  PORT_SetPinMux(PORTA, 1U, kPORT_MuxAlt2); // Debug Serial: UART0 TX
+                            ^
+make: *** [board/pin_mux.o] Error 1
+
+20:10:21 Build Finished (took 115ms)
+

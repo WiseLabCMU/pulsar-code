@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;pulsar_csac_test/board/board.c&apos; to &apos;pulsar_board.c&apos;" description="Rename resource &apos;board.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="board/board.c" name="pulsar_board.c" stamp="1472505287479" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;pulsar_csac_test/board/clock_config&apos; to &apos;clock_config.h&apos;" description="Rename resource &apos;clock_config&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="board/clock_config" name="clock_config.h" stamp="1472569787988" updateReferences="true"/>
+</session>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="287" key="DIALOG_WIDTH"/>
+		<item value="402" key="DIALOG_Y_ORIGIN"/>
+		<item value="919" key="DIALOG_X_ORIGIN"/>
+		<item value="411" key="DIALOG_HEIGHT"/>
+		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="SemaphoreTake" key="selection"/>
+		<list key="findhistory">
+			<item value="semaphoretake"/>
+			<item value="configMAX_TASK_NAME_LEN"/>
+			<item value="snprintf"/>
+			<item value="vTaskDelay"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>

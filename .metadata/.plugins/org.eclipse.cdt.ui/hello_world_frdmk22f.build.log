@@ -1,0 +1,6 @@
+17:00:58 **** Incremental Build of configuration debug for project hello_world_frdmk22f ****
+make -k all 
+make: Nothing to be done for `all'.
+
+17:00:58 Build Finished (took 61ms)
+
