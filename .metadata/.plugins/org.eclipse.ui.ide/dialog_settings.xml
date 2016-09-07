@@ -6,9 +6,10 @@
 	</section>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
-		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="true" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/adwait/Downloads/eclipse_temp/pulsar_reference"/>
 			<item value="/Users/adwait/Workspace/KDS/SDK_2.0_MK22FN512xxx12/boards/frdmk22f/demo_apps/hello_world/kds"/>
 			<item value="/Users/adwait/Workspace/KDS/SDK_2.0_MK22FN512xxx12/boards/frdmk22f/demo_apps/hello_world"/>
 		</list>

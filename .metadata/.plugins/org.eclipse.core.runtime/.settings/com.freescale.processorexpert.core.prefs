@@ -1,5 +1,6 @@
 UserPEpath=/Users/adwait/Processor Expert/PEXDRV_PE5_3
 UserPEpath_Default=/Users/adwait/Processor Expert/CWMCU_PE5_00
 eclipse.preferences.version=1
+internal/debugLevel=0
 localPEpath=/Applications/KDS_v3.app/Contents/eclipse/ProcessorExpert
 localPEpath_Default=/Applications/KDS_v3.app/Contents/eclipse/ProcessorExpert

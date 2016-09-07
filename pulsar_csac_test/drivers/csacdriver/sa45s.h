@@ -14,7 +14,9 @@
  * CSAC command definitions and macros
  */
 
-#define csacQueryCmd	"!^\r\n"
+#define csacCmd ( cmd ) "!" cmd "\r\n"
+
+#define csacStateQuery	"^"
 
 /*
  * CSAC states
@@ -27,8 +29,7 @@
 
 // TODO: change csacInit defintion based on what is required
 int csacInit(UART_Type *uart_dev);
-int csacDenit(UART_Type *uart_dev);
-
+int csacDenit(void);
 int getCsacState(void);
 
 extern UART_Type *csacUart;

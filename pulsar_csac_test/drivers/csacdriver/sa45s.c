@@ -9,6 +9,15 @@
 
 UART_Type *csacUart = NULL;
 
+int csacInit(UART_Type *uart_dev) {
+	// TODO: add other checks here
+	csacUart = uart_dev;
+}
+
+int csacDenit(void) {
+	// TODO: add other checks here
+	csacUart = NULL;
+}
 
 int getCsacState(void) {
 

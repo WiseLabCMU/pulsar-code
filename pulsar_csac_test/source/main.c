@@ -51,8 +51,11 @@
 
 
 /* Task priorities. */
-#define heartbeat_PRIORITY 0
-#define csac_watchdog_PRIORITY 4
+#define heartbeat_PRIORITY 				tskIDLE_PRIORITY
+#define csac_watchdog_PRIORITY 			4
+#define csac_query_PRIORITY 			max(csac_watchdog_PRIORITY - 1, 0)
+
+#define CSAC_UART_TIMEOUT 				20		// UART query timeout in OS ticks
 
 /*!
  * @brief Task function headers
@@ -60,7 +63,7 @@
 
 static void heartbeat_task(void *pvParameters);
 static void csac_watcher(void *pvParameters);
-//static void csac_uart_query(void *pvParameters);
+static void csac_state_query(void *pvParameters);
 
 static int getCsacState(void);
 
@@ -104,7 +107,7 @@ static void heartbeat_task(void *pvParameters) {
 	static const TickType_t xHeartbeat_period = 1000 / portTICK_PERIOD_MS;	// beat once every 1000 msec
 	uint32_t count = 0;
 
-	while (1) {
+	while (true) {		// infinite loop
 		count++;
 		PRINTF("Beat #%u\r\n", count);
 		LED_RED_ON();
@@ -121,57 +124,54 @@ static void heartbeat_task(void *pvParameters) {
 static void csac_watcher(void *pvParameters) {
 
 	// useful variables
-	uint32_t lock_pin_state = 0;
-	int csac_state = 0;
+	int csac_state = -kStatus_InvalidArgument;
+	TaskHandle_t *csac_query_handle = NULL;
 
 	// create CSAC semaphore
 	CSAC_lock_semaphore = xSemaphoreCreateBinary();	// create "empty" binary semaphore
 	if(CSAC_lock_semaphore == NULL) {
-
 		// heap memory not sufficient
 		// handle error
 		DbgConsole_Printf("[%u] insufficient memory for semaphore. suspend csac_watcher\r\n", xTaskGetTickCount());
-		vTaskSuspend(NULL);
-
+		vTaskDelete(NULL);
 	} else {
 
 		// check CSAC state in infinite loop
-		while(1) {
+		while(true) {
 
-			// loop-wait if lock not acquired
+			// get LOCK pin state
+			xSemaphoreTake(CSAC_lock_semaphore, 0);
+			lock_pin_state = GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_LOCK_PIN);
 
-			// check LOCK pin state and wait if it is not high
-			while(1) {
-				lock_pin_state = GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_LOCK_PIN);
-				if(lock_pin_state == 0){
+			if(lock_pin_state == 0) {
+				// LOCK pin was low (for whatever reason)
+				// Something is not right. Wait and check again
+				vTaskDelay(100);
 
-					// note: instead of loop, an interrupt can be programmed
-					// work on this later
+			} else {
 
-					// no lock. wait and loop indefinitely till lock is detected.
-					vTaskDelay(100);
+				/*
+				 * CSAC LOCK pin was high.
+				 * This could be because:
+				 * 	1. CSAC is just starting up
+				 * 	2. CSAC is locked
+				 * confirm through a UART query
+				 */
+
+				if(xTaskCreate(csac_state_query, "CsacQuery", configMINIMAL_STACK_SIZE, (void *) &csac_state, csac_query_PRIORITY, csac_query_handle) = pdTRUE) {
+					vTaskDelay(CSAC_UART_TIMEOUT);
+					vTaskDelete(csac_query_handle);
+					if(csac_state == 0) {
+						// CSAC is confirmed to be locked, give CSAC_lock_semaphore
+						xSemaphoreGive(CSAC_lock_semaphore);
+						DbgConsole_Printf("[%u] CSAC lock detected\r\n", xTaskGetTickCount(), csac_state);
+					}
 
 				} else {
-					// lock pin is high. this can occur due to 2 reasons on the CSAC:
-					// 1. power on indication at startup
-					// 2. CSAC is actually locked
-
-					// check actual state through UART
-
-					csac_state = getCsacState();
-					break;
+					// could not create query task
+					vTaskDelete(NULL);
 				}
 			}
-
-			// if not locked, wait and loop
-			// if locked, query over Serial
-			// if not locked, wait and loop
-			// if locked, wait and re-check after timeout period (once per sec?)
-
-			// CSAC is confirmed to be locked, give CSAC_lock_semaphore
-			xSemaphoreGive(CSAC_lock_semaphore);
-
-			DbgConsole_Printf("[%u] CSAC lock detected\r\n", xTaskGetTickCount(), csac_state);
 
 			// sleep for 1 sec then check again
 			vTaskDelay(1000);
@@ -179,20 +179,33 @@ static void csac_watcher(void *pvParameters) {
 	}
 }
 
-//static void csac_uart_query(void *pvParameters) {
-//	// send query symbols
-//	// wait for response but also implement timeout
-//	// return
-//}
+/*
+ * This thread is responsible for getting the CSAC state over UART
+ * It assumes the CSAC lock pin is already high
+ *
+ * This task is currently implemented as one-shot.
+ * It is the responsibility of the parent task to delete it after completion
+ */
+
+static void csac_state_query (void *pvParameters) {
+	int *ret_val = (int *) pvParameters;
+
+	// query CSAC over UART
+	// TODO: acquire CSAC UART lock
+	*ret_val = getCsacState();
+	// TODO: release CSAC UART lock
+	vTaskSuspend(NULL);
+}
 
 /*
  * get and parse state of csac
  */
 // TODO: create serial driver for all CSAC operations
+// TODO: move this function to generic CSAC library
 static int getCsacState(void) {
 
 	// variables
-	int state = -1;
+	int state = -kStatus_InvalidArgument;
 	char ch;
 	const char stateQuery[5] = "!^\r\n";
 
