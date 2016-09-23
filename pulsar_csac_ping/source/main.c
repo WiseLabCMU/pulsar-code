@@ -32,6 +32,8 @@
  * Simple test application that implements a heartbeat
  **/
 
+#define DEBUG_MODE 1
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,69 +41,58 @@
 #include "pulsar_board.h"
 #include "pin_mux.h"
 #include "clock_config.h"
-#include "fsl_debug_console.h"
-#include "fsl_uart.h"
+
+// TODO: get rid of temporary includes
+#include "pll_driver.h"
+
+/**
+ * Contains application thread functions
+ * Threads are implemented in different files to ensure independent operation
+ * Any information exchange must thus be intentionally setup
+ */
+#include "application_threads.h"
 
 /* FreeRTOS kernel includes. */
 #include "FreeRTOS.h"
+#include "event_groups.h"
 #include "task.h"
 #include "queue.h"
 #include "timers.h"
 #include "semphr.h"
 
+
+/**
+ * Utility includes
+ */
+#include "fsl_debug_console.h"
+
+static void commander_thread(void * pvParameters);
+
 /*
  * Useful constants
  */
-#define beatFrequency 1000				// beat frequency in OS ticks
 
-/*
- * Useful commands for CSAC UART communication
- */
+#define heartbeat_PRIORITY 				tskIDLE_PRIORITY		// lowest priority possible
+#define commander_PRIORITY				(configMAX_PRIORITIES -1)	// highest priority possible
 
-enum csacCmd {
-	cmdNONE 		= 0,
-	cmdGET_STATE 	= 1,
-	cmdN,
-};
+// TODO: define proper priorities here
+#define watcher_PRIORITY
+#define worker_PRIORITY
 
-typedef enum csacCmd csacCmd_t;
+// TODO: get rid of temporary globals
 
-/*
- * CSAC worker thread communication struct
- */
-
-struct csacWorkerStruct {
-	csacCmd_t 	cmd;		// command for worker thread
-	void 		*data;		// data pointer to pass
-};
-
-/*
- *  Task priorities.
- */
-
-#define heartbeat_PRIORITY 				tskIDLE_PRIORITY	// lowest priority possible
-
-
-/*!
- * @brief Task function headers
- */
-
-static void heartbeat_task(void *pvParameters);
-static void csac_worker_task(void *pvParameters);
 
 /*
  * GLOBAL VARIABLES
  */
 
 TaskHandle_t heartbeatHandle = NULL;
-uint32_t beatCount = 0;
-TickType_t xHeartbeat_period = beatFrequency / portTICK_PERIOD_MS;	// default value: beat once every 1/beatFrequency sec
-
+volatile QueueHandle_t heartbeatCmdQ = NULL;
 /*
  * CONFIGURATION SECTION
  */
 
-
+// Empty for now
 
 /*!
  * @brief Application entry point.
@@ -109,50 +100,31 @@ TickType_t xHeartbeat_period = beatFrequency / portTICK_PERIOD_MS;	// default va
 int main(void) {
 	/* Init board hardware. */
 	BOARD_ConfigPinmux();
+
+
 	BOARD_InitPins();
 	BOARD_BootClockRUN();
+
 	BOARD_InitDebugConsole();
 
-	/* Add your code here */
-
 	/* Create RTOS heartbeat task */
-	xTaskCreate(heartbeat_task, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &beatCount, heartbeat_PRIORITY, heartbeatHandle);
+	xTaskCreate(heartbeat_thread, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &heartbeatCmdQ, heartbeat_PRIORITY, heartbeatHandle);
+	xTaskCreate(commander_thread, "Commander", configMINIMAL_STACK_SIZE, (void *) &heartbeatCmdQ, commander_PRIORITY, NULL);
 
 	vTaskStartScheduler();
 
-	for(;;) { /* Infinite loop to avoid leaving the main function */
+	while(true) { /* Infinite loop to avoid leaving the main function */
 		__asm("NOP"); /* something to use as a breakpoint stop while looping */
 	}
 }
 
-static void heartbeat_task(void *pvParameters) {
-
-	uint32_t *count = (uint32_t *) pvParameters;
-	*count = 0;
-	TickType_t t;
-
-	while (true) {		// infinite loop
-		t = xTaskGetTickCount();
-		(*count)++;
-		PRINTF("[%u] Beat #%u\r\n", t, *count);
-		LED_RED_ON();
-		vTaskDelay((xHeartbeat_period * 10) / 100);
-		LED_RED_OFF();
-		vTaskDelay((xHeartbeat_period * 13) / 100);
-		LED_RED_ON();
-		vTaskDelay((xHeartbeat_period * 12) / 100);
-		LED_RED_OFF();
-		vTaskDelayUntil(&t, xHeartbeat_period);	// wait for next cycle
+static void commander_thread(void * pvParameters) {
+//	volatile int val = 0;
+	dspi_rtos_handle_t spiRtosHandle;
+	pll_communication_init(&spiRtosHandle, CLOCK_GetFreq(BOARD_PLL_SPI_MASTER_CLK_SRC));
+	while(true) {
+		pll_register_write(&spiRtosHandle, lmx2571_reg_val[0].datamap.ADDRESS, lmx2571_reg_val[0].datamap.data);
+		vTaskDelay(900);
 	}
-}
 
-/*!
- * @brief	This task is responsible for UART based interactions with the CSAC
- */
-
-static void csac_worker_task(void *pvParameters) {
-
-
-
-	// acquire mutex
 }

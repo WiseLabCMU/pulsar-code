@@ -52,6 +52,8 @@
 #define FSL_UART_FREERTOS_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
 /*@}*/
 
+#define RTOS_UART_COMPLETE 0x1
+
 /*! @brief UART configuration structure */
 struct rtos_uart_config
 {
@@ -72,7 +74,6 @@ typedef struct _uart_rtos_handle
     struct _uart_transfer rx_xfer; /*!< RX transfer structure */
     SemaphoreHandle_t rx_sem;      /*!< RX semaphore for resource sharing */
     SemaphoreHandle_t tx_sem;      /*!< TX semaphore for resource sharing */
-#define RTOS_UART_COMPLETE 0x1
     EventGroupHandle_t rx_event; /*!< RX completion event */
     EventGroupHandle_t tx_event; /*!< TX completion event */
     void *t_state;               /*!< Transactional state of the underlying driver */

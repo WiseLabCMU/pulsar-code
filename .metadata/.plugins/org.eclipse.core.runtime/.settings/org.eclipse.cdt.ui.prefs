@@ -1,6 +1,8 @@
 content_assist_disabled_computers=org.eclipse.cdt.ui.parserProposalCategory\u0000
 content_assist_proposals_timeout=5000
 eclipse.preferences.version=1
+editor_folding_preprocessor_enabled=true
+editor_folding_statements=true
 sourceHoverBackgroundColor=250,251,197
 spelling_locale_initialized=true
 spelling_user_dictionary_encoding=

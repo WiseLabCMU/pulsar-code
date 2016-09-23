@@ -4,6 +4,22 @@
 	<item value="Default C++ header template" key="LastUsedHeaderTemplate"/>
 	<section name="completion_proposal_size">
 	</section>
+	<section name="PDOMSearchPage">
+		<item value="227191" key="searchFlags"/>
+		<item value="false" key="caseSensitive"/>
+		<list key="previousPatterns">
+			<item value="BOARD_USE_UART"/>
+			<item value="INCLUDE_xTimerPendFunctionCall"/>
+			<item value="xEventGroupSetBitsFromISR"/>
+		</list>
+	</section>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item value="444" key="DIALOG_WIDTH"/>
+		<item value="194" key="DIALOG_Y_ORIGIN"/>
+		<item value="738" key="DIALOG_X_ORIGIN"/>
+		<item value="449" key="DIALOG_HEIGHT"/>
+		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
 	</section>
 </section>
