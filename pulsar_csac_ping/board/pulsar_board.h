@@ -73,6 +73,10 @@
 #define BOARD_DW1000_SPI_IRQn 		SPI0_IRQn
 #define BOARD_DW1000_SPI_PCS 		kDSPI_Pcs0
 
+// SPI communication config
+#define BOARD_DW1000_SLOW_BAUDRATE 	500000U
+#define BOARD_DW1000_FAST_BAUDRATE 	20000000U
+
 /**
  * Parameters for GPIO interface to DW1000
  */
@@ -131,7 +135,7 @@
 // UART communication config
 #define BOARD_CSAC_UART_CLKSRC	 	SYS_CLK
 #define BOARD_CSAC_UART_CLK_FREQ 	CLOCK_GetCoreSysClkFreq()
-#define BOARD_UART1_IRQ 			UART1_RX_TX_IRQn
+#define BOARD_UART1_IRQn 			UART1_RX_TX_IRQn
 #define BOARD_CSAC_UART_BAUD_RATE	57600
 
 /**

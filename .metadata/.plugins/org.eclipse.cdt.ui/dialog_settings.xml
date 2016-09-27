@@ -8,6 +8,8 @@
 		<item value="227191" key="searchFlags"/>
 		<item value="false" key="caseSensitive"/>
 		<list key="previousPatterns">
+			<item value="writetospi"/>
+			<item value="portTICK_PERIOD_MS"/>
 			<item value="BOARD_USE_UART"/>
 			<item value="INCLUDE_xTimerPendFunctionCall"/>
 			<item value="xEventGroupSetBitsFromISR"/>

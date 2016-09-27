@@ -36,15 +36,6 @@ enum workerCommand {
  * Useful structures
  */
 
-/**
- * PLL Watcher commands worker threads through data passed in pllWorkerCmDStruct
- */
-struct pllWorkerCmdStruct {
-	enum workerCommand 	cmd;		// command to send to worker thread
-	dspi_rtos_handle_t 	dspiHandle;	// which handle to use
-	void 				*data;		// optional data pointer
-};
-
 /*
  * Functions
  */

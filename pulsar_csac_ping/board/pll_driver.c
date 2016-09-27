@@ -15,7 +15,7 @@
 /**
  * Variables only necessary for this driver
  */
-static uint32_t old_spi_irq_prio = 0;
+static uint32_t old_pll_spi_irq_prio = 0;
 
 status_t pll_communication_init(dspi_rtos_handle_t *pllRtosHandle, uint32_t srcClock_Hz) {
 
@@ -38,14 +38,12 @@ status_t pll_communication_init(dspi_rtos_handle_t *pllRtosHandle, uint32_t srcC
 		.samplePoint = kDSPI_SckToSin0Clock,
 	};
 
-	old_spi_irq_prio = NVIC_GetPriority(BOARD_PLL_SPI_IRQn);
+	old_pll_spi_irq_prio = NVIC_GetPriority(BOARD_PLL_SPI_IRQn);
 	NVIC_SetPriority(BOARD_PLL_SPI_IRQn, 6);
 
 	status = DSPI_RTOS_Init(pllRtosHandle, BOARD_PLL_SPI, &pll_spi_master_config, srcClock_Hz);
 	if(status != kStatus_Success) {
-		// handle initialization failure
-		NVIC_SetPriority(BOARD_PLL_SPI_IRQn, old_spi_irq_prio);
-		old_spi_irq_prio = 0;
+		pll_communication_deinit(pllRtosHandle);
 	}
 	return status;
 }
@@ -53,7 +51,8 @@ status_t pll_communication_init(dspi_rtos_handle_t *pllRtosHandle, uint32_t srcC
 // TODO: deinit must clean a PLL protector mutex later
 status_t pll_communication_deinit(dspi_rtos_handle_t *pllRtosHandle) {
 
-	NVIC_SetPriority(BOARD_PLL_SPI_IRQn, old_spi_irq_prio);
+	NVIC_SetPriority(BOARD_PLL_SPI_IRQn, old_pll_spi_irq_prio);
+	old_pll_spi_irq_prio = 0;
 	return DSPI_RTOS_Deinit(pllRtosHandle);
 }
 
@@ -129,112 +128,3 @@ uint16_t pll_register_read(dspi_rtos_handle_t *pllRtosHandle, unsigned int addr)
 	return reg.datamap.data;	// temporary return value. replace this with actual code
 }
 
-/**
- * This function transfers (read or write) a complete LMX2571 register.
- * All the required buffers are to be provided by the caller
- * @param spiData	pointer to SPI transfer object
- * @return
- */
-//status_t spi_transfer(dspi_transfer_t *spiData) {
-//	uint8_t rxData;
-//
-//	while (!(DSPI_GetStatusFlags(BOARD_DW1000_SPI) & kDSPI_TxFifoFillRequestFlag)) {
-//		DSPI_ClearStatusFlags(BOARD_DW1000_SPI , kDSPI_TxFifoFillRequestFlag);
-//	}
-//
-//	// send TX data
-//	DSPI_MasterWriteData(BOARD_DW1000_SPI , spi_command, (uint16_t)txData);
-//	DSPI_ClearStatusFlags(BOARD_DW1000_SPI , kDSPI_TxFifoFillRequestFlag);
-//
-//	// wait for TX done
-//	while (!(DSPI_GetStatusFlags(BOARD_DW1000_SPI) & kDSPI_TxCompleteFlag));
-//
-//	// get data from RX
-//	while (!(DSPI_GetStatusFlags(BOARD_DW1000_SPI) & kDSPI_RxFifoDrainRequestFlag));
-//	rxData = DSPI_ReadData(BOARD_DW1000_SPI);
-//	DSPI_ClearStatusFlags(BOARD_DW1000_SPI, kDSPI_RxFifoDrainRequestFlag);
-//
-//	return rxData;
-//}
-
-/*
- * REFERENCE FUNCTIONS FROM DECAWAVE
- * NOTE: Discard these later
- */
-
-// decawave SPI write function
-//int writetospi(uint16 hLen, const uint8 *hbuff, uint32 bLen, const uint8 *buffer) {
-//	uint16_t hCount;
-//	uint32_t bCount;
-//	static dspi_command_data_config_t dw_spi_command;
-//
-//	dw_spi_command.whichPcs = kDSPI_Pcs0;
-//	dw_spi_command.isEndOfQueue = false;
-//	dw_spi_command.clearTransferCount = false;
-//	dw_spi_command.whichCtar = kDSPI_Ctar0;
-//	dw_spi_command.isPcsContinuous = true;
-//
-//	DSPI_FlushFifo(BOARD_DW1000_SPI, true, true);
-//	DSPI_ClearStatusFlags(BOARD_DW1000_SPI, kDSPI_AllStatusFlag);
-//
-//	DSPI_StartTransfer(BOARD_DW1000_SPI);
-//
-//	// loop to write header
-//	for(hCount = 0; hCount < hLen; hCount++) {
-//		spi_transfer_byte((uint8_t) hbuff[hCount], &dw_spi_command);
-//	}
-//	// loop to read data
-//	for(bCount = 0; bCount < bLen; bCount++) {
-//		if(bCount == bLen -1) {
-//			dw_spi_command.isEndOfQueue = true;
-//			dw_spi_command.clearTransferCount = true;
-//			dw_spi_command.isPcsContinuous = false;
-//		}
-//		spi_transfer_byte((uint8_t) buffer[bCount], &dw_spi_command);
-//	}
-//
-//	DSPI_StopTransfer(BOARD_DW1000_SPI);
-//
-//	return 0;
-//
-//	return 0;
-//}
-
-// decawave SPI read function
-//int readfromspi(uint16 hLen, const uint8 *hbuff, uint32 bLen, uint8 *buffer) {
-//
-//	uint16_t hCount;
-//	uint32_t bCount;
-//	static dspi_command_data_config_t dw_spi_command;
-//
-//	// DbgConsole_Printf("SPI read req header size: %u, data size: %u\r\n", hLen, bLen);
-//
-//	dw_spi_command.whichPcs = kDSPI_Pcs0;
-//	dw_spi_command.isEndOfQueue = false;
-//	dw_spi_command.clearTransferCount = false;
-//	dw_spi_command.whichCtar = kDSPI_Ctar0;
-//	dw_spi_command.isPcsContinuous = true;
-//
-//	DSPI_FlushFifo(BOARD_DW1000_SPI, true, true);
-//	DSPI_ClearStatusFlags(BOARD_DW1000_SPI, kDSPI_AllStatusFlag);
-//
-//	DSPI_StartTransfer(BOARD_DW1000_SPI);
-//
-//	// loop to write header
-//	for(hCount = 0; hCount < hLen; hCount++) {
-//		spi_transfer_byte((uint8_t) hbuff[hCount], &dw_spi_command);
-//	}
-//	// loop to read data
-//	for(bCount = 0; bCount < bLen; bCount++) {
-//		if(bCount == bLen -1) {
-//			dw_spi_command.isEndOfQueue = true;
-//			dw_spi_command.clearTransferCount = true;
-//			dw_spi_command.isPcsContinuous = false;
-//		}
-//		buffer[bCount] = (uint8) spi_transfer_byte(0, &dw_spi_command);
-//	}
-//
-//	DSPI_StopTransfer(BOARD_DW1000_SPI);
-//
-//	return 0;
-//}

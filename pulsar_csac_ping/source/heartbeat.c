@@ -48,7 +48,13 @@
  * @param pvParameters Command queue handle (QueueHandle_t) for inter-task comm
  */
 void heartbeat_thread(void *pvParameters) {
-
+	/*
+	 * Discussion: the queue is created and owned by the thread. Thus, the
+	 * memory allocation would come from the thread's memory space.
+	 * For external threads to access the queue, they can only have access to
+	 * the pointer to the locatoion of the queue. Hence QueueHandle_t *q is
+	 * passed as a parameter
+	 */
 	volatile QueueHandle_t *q = (QueueHandle_t *) pvParameters;
 	volatile int request = 0;
 	TickType_t xHeartbeat_period = HEARTBEAT_DEFAULT_RATE_MS/portTICK_PERIOD_MS;

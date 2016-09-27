@@ -1,6 +1,9 @@
 /*
  * pll_worker.c
  *
+ * The pll_worker_thread is responsible for any communication and interfacing
+ * with the lmx2571 PLL on the Pulsar board.
+ *
  *  Created on: Sep 12, 2016
  *      Author: adwait
  */
@@ -9,25 +12,9 @@
 #include "application_threads.h"
 #include "pll_driver.h"
 
-enum pllWorkerCmd {
-	cmdNONE 		= 0,
-	cmdRESET 		= 1,
-	cmdINIT_DEFAULT = 2,
-	cmdREAD_REG 	= 3,
-	cmdWRITE_REG 	= 4,
-	cmdDISABLE 		= 5,
-};
 
-/**
- *
- */
-struct pllWorkerCmdStruct {
-	enum pllWorkerCmd 		cmd; 		// required command structure
-	dspi_rtos_handle_t 		*spiHandle; // required handle to spi device
-	QueueHandle_t 			qHandle; 	// (optional) queue handle for returns
-	volatile union lmx2571_register 	*data; 		// (optional) pointer to data
-	// TODO: add required mutexes to command struct later
-};
+
+
 
 /**
  * Approximate delay by spinning
@@ -92,60 +79,68 @@ void pll_worker_thread(void *pvParameters) {
 	status_t status = kStatus_Timeout;	// default q return from thread
 	int i;
 	switch(cmdStruct->cmd) {
-		case cmdNONE:
-			// do nothing
+
+		// do nothing
+		case cmdPLL_NONE:
 			status = kStatus_Success;
 			break;
 
-		case cmdRESET:
-			// reset the PLL and wait till it restarts
-			GPIO_SetPinsOutput(BOARD_PLL_IO_GPIO, 1U << BOARD_PLL_IO_CE_PIN);	// CE = HIGH
-			delay(100);										// wait for LDOs to stabilize
-			memset((void*) &reg_local, 0, LMX2571_REG_SIZE);	// clear TX register
-			reg_local.R0.RESET = 1;							// set reset bit
+		// reset the PLL and wait till it restarts
+		case cmdPLL_RESET:
+			GPIO_SetPinsOutput(BOARD_PLL_IO_GPIO, 1U << BOARD_PLL_IO_CE_PIN);	// turn CE = HIGH
+			delay(100);											// wait for LDOs to stabilize
+			memset((void*) &reg_local, 0, PLL_REG_BYTESIZE);	// clear TX register
+			reg_local.R0.RESET = 1;								// set reset bit
 			pll_register_write(cmdStruct->spiHandle, R0_addr, reg_local.datamap.data);	// reset chip
-			delay(1000);
+			delay(1000);	// empirical time to wait for lock.
+							// TODO: maybe replace with a state check loop later
 			status = kStatus_Success;
 			break;
 
-		case cmdINIT_DEFAULT:
-			// program the PLL with the default register values for 10MHz -> 38.4 MHz
+		// program the PLL with the default register values for 10MHz -> 38.4 MHz
+		case cmdPLL_INIT_DEFAULT:
 			for(i = 0; i < LMX2571_NREG; i++) {
+				// reuse the status provided by the SPI function
 				status = pll_register_write(cmdStruct->spiHandle, lmx2571_reg_val[i].datamap.ADDRESS, lmx2571_reg_val[i].datamap.data);
 				if(status != kStatus_Success) break;	// something went wrong
+				delay(100);
 			}
 			break;
 
-		case cmdREAD_REG:
-			// read the register with provided address and respond in data section
-			cmdStruct->data->datamap->data = pll_register_read(cmdStruct->spiHandle, cmdStruct->data->datamap.ADDRESS);
+		// read the register with provided address and respond in data section
+		case cmdPLL_READ_REG:
+			cmdStruct->data->datamap.data = pll_register_read(cmdStruct->spiHandle, cmdStruct->data->datamap.ADDRESS);
 			status = kStatus_Success;
 			break;
 
-		case cmdWRITE_REG:
-			// write the register and value in data
+		// write the register and value in data
+		case cmdPLL_WRITE_REG:
 			status = pll_register_write(cmdStruct->spiHandle, cmdStruct->data->datamap.ADDRESS, cmdStruct->data->datamap.data);
 			break;
 
-		case cmdDISABLE:
-			// disable the PLL by pulling the CE line low
+		// disable the PLL by pulling the CE line low
+		case cmdPLL_DISABLE:
 			GPIO_ClearPinsOutput(BOARD_PLL_IO_GPIO, 1U << BOARD_PLL_IO_CE_PIN);
 			status = kStatus_Success;
 			break;
 
+		// default action for unknown commands
 		default:
 			status = kStatus_InvalidArgument;
 	}
 
 	// task completed
+	// inform the parent about status through provided queue
 	if(cmdStruct->qHandle != NULL) {
 		// parent task is expecting a response in queue
+		// we assume the parent can manage the space in it's own queue
 		xQueueSendToBack(cmdStruct->qHandle, (void *) &status, 0);
 	}
 
 	vTaskSuspend(NULL);	// suspend worker task
 }
 
+// TODO: replace with PIT based delay function for everyone
 static inline void delay(uint32_t microsec) {
 	// the core clock is 80MHz
 	volatile uint32_t i = 8U * microsec;

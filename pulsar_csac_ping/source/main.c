@@ -66,28 +66,26 @@
  */
 #include "fsl_debug_console.h"
 
+
+
 static void commander_thread(void * pvParameters);
-
-/*
- * Useful constants
- */
-
-#define heartbeat_PRIORITY 				tskIDLE_PRIORITY		// lowest priority possible
-#define commander_PRIORITY				(configMAX_PRIORITIES -1)	// highest priority possible
-
-// TODO: define proper priorities here
-#define watcher_PRIORITY
-#define worker_PRIORITY
-
-// TODO: get rid of temporary globals
 
 
 /*
  * GLOBAL VARIABLES
  */
 
-TaskHandle_t heartbeatHandle = NULL;
-volatile QueueHandle_t heartbeatCmdQ = NULL;
+TaskHandle_t heartbeatHandle 			= NULL;
+/**
+ * TODO: needs update
+ * Set of shared queues for various tasks
+ * 0: heartbeat commands
+ * 1: csac-PLL synchronization
+ * 2: PLL-DW1000 synchronization
+ * 3: DW1000-App synchronization
+ */
+volatile SemaphoreHandle_t sem[SEM_N];	// general semaphores for synchronization
+volatile QueueHandle_t HeartbeatQ;		// allocate space for general purpose queues
 /*
  * CONFIGURATION SECTION
  */
@@ -107,9 +105,32 @@ int main(void) {
 
 	BOARD_InitDebugConsole();
 
-	/* Create RTOS heartbeat task */
-	xTaskCreate(heartbeat_thread, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &heartbeatCmdQ, heartbeat_PRIORITY, heartbeatHandle);
-	xTaskCreate(commander_thread, "Commander", configMINIMAL_STACK_SIZE, (void *) &heartbeatCmdQ, commander_PRIORITY, NULL);
+	vSemaphoreCreateBinary(sem[CSAC_PLL_SEM]);
+	vSemaphoreCreateBinary(sem[PLL_DW_SEM]);
+	vSemaphoreCreateBinary(sem[DW_APP_SEM]);
+
+	// task for debug and control
+	// there can only be one of these
+	xTaskCreate(commander_thread, "Command", configMINIMAL_STACK_SIZE, NULL, commander_PRIORITY, NULL);
+
+	// low priority task for heartbeat LED control
+	// there can only be one of these
+	xTaskCreate(heartbeat_thread, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &HeartbeatQ, heartbeat_PRIORITY, heartbeatHandle);
+
+	// thread watches over and configures CSAC for proper operation
+	// there can only be one of these
+	xTaskCreate(csac_watcher_thread, "CSACwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+
+	// thread watches over and configures PLL for proper operation
+	// there can only be one of these
+	xTaskCreate(pll_watcher_thread, "PLLwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+
+	// thread watches over and configures Decawave radio for proper operation
+	// there can only be one of these
+	xTaskCreate(dw_watcher_thread, "DWwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+
+	// Application thread. All the magic happens here (hopefully) :-)
+	xTaskCreate(application_thread, "App", configMINIMAL_STACK_SIZE, (void *) sem, application_PRIORITY, NULL);
 
 	vTaskStartScheduler();
 
@@ -118,13 +139,11 @@ int main(void) {
 	}
 }
 
+/**
+ * Commander thread for command and control over the system
+ * @param pvParameters
+ */
 static void commander_thread(void * pvParameters) {
-//	volatile int val = 0;
-	dspi_rtos_handle_t spiRtosHandle;
-	pll_communication_init(&spiRtosHandle, CLOCK_GetFreq(BOARD_PLL_SPI_MASTER_CLK_SRC));
-	while(true) {
-		pll_register_write(&spiRtosHandle, lmx2571_reg_val[0].datamap.ADDRESS, lmx2571_reg_val[0].datamap.data);
-		vTaskDelay(900);
-	}
-
+	// do nothing for now
+	vTaskSuspend(NULL);
 }
