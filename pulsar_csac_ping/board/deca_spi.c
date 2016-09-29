@@ -32,7 +32,7 @@ static uint8_t spi_transfer_byte(uint8_t txData, dspi_command_data_config_t *spi
 // TODO: convert to use RTOS functions later
 status_t dw_communication_slow_init(dspi_rtos_handle_t *dwRtosHandle, uint32_t srcClock_Hz) {
 
-	status_t status;
+//	status_t status;
 	dspi_master_config_t dw_slow_spi_master_config = {
 		.whichCtar = kDSPI_Ctar0,
 		.ctarConfig.baudRate = BOARD_DW1000_SLOW_BAUDRATE,
@@ -66,7 +66,7 @@ status_t dw_communication_slow_init(dspi_rtos_handle_t *dwRtosHandle, uint32_t s
 
 status_t dw_communication_fast_init(dspi_rtos_handle_t *dwRtosHandle, uint32_t srcClock_Hz) {
 
-	status_t status;
+//	status_t status;
 	dspi_master_config_t dw_fast_spi_master_config = {
 		.whichCtar = kDSPI_Ctar0,
 		.ctarConfig.baudRate = BOARD_DW1000_FAST_BAUDRATE,

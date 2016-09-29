@@ -40,6 +40,8 @@
 #define HEARTBEAT_DEFAULT_RATE_MS 1000
 #endif // HEARTBEAT_DEFAULT_RATE_MS
 
+
+
 /**
  * Self contained heartbeat task.
  * The task assumes peripherals are properly setup.
@@ -55,7 +57,7 @@ void heartbeat_thread(void *pvParameters) {
 	 * the pointer to the locatoion of the queue. Hence QueueHandle_t *q is
 	 * passed as a parameter
 	 */
-	volatile QueueHandle_t *q = (QueueHandle_t *) pvParameters;
+	volatile QueueHandle_t *q = ((struct TaskSharedInfo *) pvParameters)->queues[HEARTBEAT_Q];
 	volatile int request = 0;
 	TickType_t xHeartbeat_period = HEARTBEAT_DEFAULT_RATE_MS/portTICK_PERIOD_MS;
 	uint32_t beat_count = 0;
@@ -64,15 +66,15 @@ void heartbeat_thread(void *pvParameters) {
 //	PRINTF("heartbeat: q addr=%p\r\n", q);
 //#endif // DEBUG_MODE
 
-	*q = xQueueCreate(1, sizeof(int));
-	if(*q == NULL) {
-
-#if DEBUG_MODE == 1
-		PRINTF("Q not created. Suspending heartbeat\r\n");
-#endif // DEBUG_MODE
-
-		vTaskSuspend(NULL);
-	}
+//	*q = xQueueCreate(1, sizeof(int));
+//	if(*q == NULL) {
+//
+//#if DEBUG_MODE == 1
+//		PRINTF("Q not created. Suspending heartbeat\r\n");
+//#endif // DEBUG_MODE
+//
+//		vTaskSuspend(NULL);
+//	}
 
 	// setup heartbeat LED
 	HEARTBEAT_LED_INIT(LOGIC_LED_OFF);

@@ -14,6 +14,10 @@
 #include "fsl_uart_freertos.h"
 #include <stdint.h>
 
+// TODO: define all the various CSAC states
+
+#define CSAC_LOCKED 0
+
 /**
  * @brief Initializes the CSAC UART interface
  *

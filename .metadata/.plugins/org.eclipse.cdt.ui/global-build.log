@@ -1,30 +1,30 @@
-09:07:12 **** Incremental Build of configuration Debug for project pulsar_csac_ping ****
+00:22:44 **** Incremental Build of configuration Debug for project pulsar_csac_ping ****
 make -j3 all 
-Building file: ../source/dw_watcher.c
+Building file: ../board/deca_spi.c
 Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/dw_watcher.d" -MT"source/dw_watcher.o" -c -o "source/dw_watcher.o" "../source/dw_watcher.c"
-Finished building: ../source/dw_watcher.c
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/deca_spi.d" -MT"board/deca_spi.o" -c -o "board/deca_spi.o" "../board/deca_spi.c"
+Finished building: ../board/deca_spi.c
  
 Building target: pulsar_csac_ping.elf
 Invoking: Cross ARM C++ Linker
-arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_csac_ping.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_csac_ping.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/application_thread.o ./source/csac_watcher.o ./source/csac_worker.o ./source/dw_watcher.o ./source/dw_worker.o ./source/heartbeat.o ./source/main.o ./source/pll_watcher.o ./source/pll_worker.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
+arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_csac_ping.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_csac_ping.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/application_thread.o ./source/csac_threads.o ./source/dw_watcher.o ./source/dw_worker.o ./source/heartbeat.o ./source/main.o ./source/pll_watcher.o ./source/pll_worker.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
 Finished building target: pulsar_csac_ping.elf
  
 Invoking: Cross ARM GNU Create Flash Image
-Invoking: Cross ARM GNU Print Size
 arm-none-eabi-objcopy -O ihex "pulsar_csac_ping.elf"  "pulsar_csac_ping.hex"
+Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "pulsar_csac_ping.elf"
    text	   data	    bss	    dec	    hex	filename
-  40464	    132	  15332	  55928	   da78	pulsar_csac_ping.elf
+  49808	    148	  15428	  65384	   ff68	pulsar_csac_ping.elf
 Finished building: pulsar_csac_ping.siz
  
 Finished building: pulsar_csac_ping.hex
  
-09:07:21 **** Incremental Build of configuration Debug for project pulsar_csac_ping ****
+00:22:56 **** Incremental Build of configuration Debug for project pulsar_csac_ping ****
 make -j3 all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "pulsar_csac_ping.elf"
    text	   data	    bss	    dec	    hex	filename
-  40464	    132	  15332	  55928	   da78	pulsar_csac_ping.elf
+  49808	    148	  15428	  65384	   ff68	pulsar_csac_ping.elf
 Finished building: pulsar_csac_ping.siz
  

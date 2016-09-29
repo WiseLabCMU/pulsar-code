@@ -75,17 +75,36 @@ static void commander_thread(void * pvParameters);
  * GLOBAL VARIABLES
  */
 
-TaskHandle_t heartbeatHandle 			= NULL;
 /**
- * TODO: needs update
- * Set of shared queues for various tasks
- * 0: heartbeat commands
- * 1: csac-PLL synchronization
- * 2: PLL-DW1000 synchronization
- * 3: DW1000-App synchronization
+ * Set of shared synchronization semaphores for various tasks
+ * 0: csac-PLL synchronization
+ * 1: PLL-DW1000 synchronization
+ * 2: DW1000-App synchronization
  */
 volatile SemaphoreHandle_t sem[SEM_N];	// general semaphores for synchronization
-volatile QueueHandle_t HeartbeatQ;		// allocate space for general purpose queues
+
+/**
+ * Set of shared queues between tasks
+ */
+volatile QueueHandle_t task_queues[Q_N];		// allocate space for general purpose queues
+
+/**
+ * Set of shared task handles between all tasks
+ */
+volatile TaskHandle_t task_handle[TASK_N];
+
+/**
+ * Set of peripheral access mutexes
+ */
+volatile SemaphoreHandle_t mutex[MUTEX_N];
+
+struct TaskSharedInfo taskInfo = {
+		.semaphores = sem,
+		.mutex		= mutex,
+		.queues 	= task_queues,
+		.tasks 		= task_handle,
+};
+
 /*
  * CONFIGURATION SECTION
  */
@@ -105,32 +124,47 @@ int main(void) {
 
 	BOARD_InitDebugConsole();
 
-	vSemaphoreCreateBinary(sem[CSAC_PLL_SEM]);
-	vSemaphoreCreateBinary(sem[PLL_DW_SEM]);
-	vSemaphoreCreateBinary(sem[DW_APP_SEM]);
+	// create necessary semaphores
+	sem[CSAC_PLL_SEM] = xSemaphoreCreateBinary();
+	sem[CSAC_WORK_P_SEM] = xSemaphoreCreateBinary();
+	sem[CSAC_WORK_C_SEM] = xSemaphoreCreateBinary();
+	sem[PLL_DW_SEM] = xSemaphoreCreateBinary();
+	sem[DW_APP_SEM] = xSemaphoreCreateBinary();
+
+	// create necessary queues
+	task_queues[HEARTBEAT_Q] = xQueueCreate(1, sizeof(int));	// queue for heartbeat task
+	task_queues[CSAC_WORKER_RESP_Q] = xQueueCreate(1, sizeof(int));	// queue for CSAC worker responses
+
+	// create necessary mutexes
+	mutex[CSAC_UART_MUTEX] = xSemaphoreCreateMutex();
+	mutex[PLL_SPI_MUTEX] = xSemaphoreCreateMutex();
+	mutex[DW_SPI_MUTEX] = xSemaphoreCreateMutex();
 
 	// task for debug and control
 	// there can only be one of these
-	xTaskCreate(commander_thread, "Command", configMINIMAL_STACK_SIZE, NULL, commander_PRIORITY, NULL);
+	xTaskCreate(commander_thread, "Command", configMINIMAL_STACK_SIZE, (void *) &taskInfo, commander_PRIORITY, task_handle[COMMAND]);
 
 	// low priority task for heartbeat LED control
 	// there can only be one of these
-	xTaskCreate(heartbeat_thread, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &HeartbeatQ, heartbeat_PRIORITY, heartbeatHandle);
+	xTaskCreate(heartbeat_thread, "Heartbeat", configMINIMAL_STACK_SIZE, (void *) &taskInfo, heartbeat_PRIORITY, task_handle[HEARTBEAT]);
 
 	// thread watches over and configures CSAC for proper operation
 	// there can only be one of these
-	xTaskCreate(csac_watcher_thread, "CSACwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+	xTaskCreate(csac_watcher_thread, "CSACwatch", configMINIMAL_STACK_SIZE, (void *) &taskInfo, watcher_PRIORITY, task_handle[CSAC_WATCHER]);
+
+	// TODO: add description here
+	xTaskCreate(csac_worker_thread, "CSACwork", configMINIMAL_STACK_SIZE, (void *) &taskInfo, worker_PRIORITY, task_handle[CSAC_WORKER]);
 
 	// thread watches over and configures PLL for proper operation
 	// there can only be one of these
-	xTaskCreate(pll_watcher_thread, "PLLwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+	xTaskCreate(pll_watcher_thread, "PLLwatch", configMINIMAL_STACK_SIZE, (void *) &taskInfo, watcher_PRIORITY, task_handle[PLL_WATCHER]);
 
 	// thread watches over and configures Decawave radio for proper operation
 	// there can only be one of these
-	xTaskCreate(dw_watcher_thread, "DWwatch", configMINIMAL_STACK_SIZE, (void *) sem, watcher_PRIORITY, NULL);
+	xTaskCreate(dw_watcher_thread, "DWwatch", configMINIMAL_STACK_SIZE, (void *) &taskInfo, watcher_PRIORITY, task_handle[DW_WATCHER]);
 
 	// Application thread. All the magic happens here (hopefully) :-)
-	xTaskCreate(application_thread, "App", configMINIMAL_STACK_SIZE, (void *) sem, application_PRIORITY, NULL);
+	xTaskCreate(application_thread, "App", configMINIMAL_STACK_SIZE, (void *) &taskInfo, application_PRIORITY, task_handle[APPLICATION]);
 
 	vTaskStartScheduler();
 

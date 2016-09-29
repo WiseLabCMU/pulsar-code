@@ -72,6 +72,7 @@
 #define BOARD_DW1000_SPI 			SPI0
 #define BOARD_DW1000_SPI_IRQn 		SPI0_IRQn
 #define BOARD_DW1000_SPI_PCS 		kDSPI_Pcs0
+#define BOARD_DW1000_SPI_CLKSRC 	DSPI0_CLK_SRC
 
 // SPI communication config
 #define BOARD_DW1000_SLOW_BAUDRATE 	500000U
@@ -101,9 +102,13 @@
  */
 
 // set DW100 reset pin as output for uC
-#define DW1000_RST_INIT(output) \
+#define DW1000_RST_INIT_OUT(output) \
 	GPIO_PinInit(BOARD_DW1000_GPIO, BOARD_DW1000_GPIO_RST_PIN, \
 			&(gpio_pin_config_t){kGPIO_DigitalOutput, (output)})
+
+#define DW1000_RST_INIT_IN() \
+		GPIO_PinInit(BOARD_DW1000_GPIO, BOARD_DW1000_GPIO_RST_PIN, \
+				&(gpio_pin_config_t){kGPIO_DigitalInput, 0})
 
 // set RST pin to low (resetting the radio)
 #define DW1000_RST_LOW() \
@@ -189,6 +194,9 @@
 
 // GPIO device config
 #define BOARD_PLL_IO_GPIO 			GPIOD
+
+#define PLL_CE_ENABLE 1U
+#define PLL_CE_DISABLE 0U
 
 #define PLL_CE_INIT(output) \
 	GPIO_PinInit(BOARD_PLL_IO_GPIO, BOARD_PLL_IO_CE_PIN, \
