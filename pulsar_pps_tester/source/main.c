@@ -90,7 +90,7 @@ int main(void) {
 
 	sem[0] = xSemaphoreCreateBinary();
 
-	NVIC_SetPriority(PORTA_IRQn, 5);
+	NVIC_SetPriority(PORTA_IRQn, 5); // this is the max allowed interrupt priority
 	PORT_SetPinInterruptConfig(BOARD_CSAC_GPIO_PORT, BOARD_CSAC_PPSOUT_PIN, kPORT_InterruptRisingEdge);
 	EnableIRQ(PORTA_IRQn);		// enable IRQ
 	GPIO_PinInit(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});

@@ -12,48 +12,42 @@
 #include "deca_regs.h"
 
 dspi_rtos_handle_t dw_rtos_handle;
+volatile uint32_t dw_pps_count;		// PPS cycles since the DW was synchronized to CSAC
 
 static inline void delay(uint32_t microsec);
 
 void dw_watcher_thread(void *pvParameters) {
 
 	// scratch space
-	uint32_t devid = 0;
-	uint64_t dw_time1 = 0;
-	uint64_t dw_time2 = 0;
-	uint32_t *dw_time132 = (uint32_t *) &dw_time1;
-	uint32_t *dw_time232 = (uint32_t *) &dw_time2;
-	uint32_t ec_ctrl_val = 0;
+	uint32_t ec_ctrl_val = 0;	// local storage for external control register
 
 	volatile SemaphoreHandle_t pll_dw_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[PLL_DW_SEM];
 	volatile SemaphoreHandle_t dw_app_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[DW_APP_SEM];
+	volatile SemaphoreHandle_t dw_pps_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[DW_PPS_SEM];
 //	volatile SemaphoreHandle_t dw_spi_mutex = ((struct TaskSharedInfo *) pvParameters)->mutex[DW_SPI_MUTEX];
 
-	// initialize PPSOUT as digital input
-	GPIO_PinInit(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
+
 
 	while(true) {
-
-		// initialize SPI device
-		dw_communication_slow_init(&dw_rtos_handle, CLOCK_GetFreq(BOARD_DW1000_SPI_CLKSRC));
-
-		/*
-		 * Reset DW chip
-		 */
-		DW1000_RST_INIT_OUT(LOGIC_DW1000_RST_ASSERT);
 
 		/*
 		 * Initialize SPI device
 		 */
+		dw_communication_slow_init(&dw_rtos_handle, CLOCK_GetFreq(BOARD_DW1000_SPI_CLKSRC));
 
 		/*
-		 * Wait for PLL lock
+		 * Reset DW chip by asserting the reset pin to ground
+		 */
+		DW1000_RST_INIT_OUT(LOGIC_DW1000_RST_ASSERT);
+
+		/*
+		 * Wait for PLL lock. The PLL watcher thread will give a semaphore once this happens
 		 */
 		xSemaphoreTake(pll_dw_sem, portMAX_DELAY);	// wait for PLL lock
-//		PRINTF("got pll_locked message\r\n");
 
 		/*
-		 * Start the decawave chip
+		 * Start the decawave chip by de-asserting the reset line.
+		 * It will go high once the device is on
 		 */
 		DW1000_RST_INIT_IN();	// Change the DW reset pin to input mode
 
@@ -63,16 +57,35 @@ void dw_watcher_thread(void *pvParameters) {
 		// TODO: replace with interrupt stabilization later
 		while(!GPIO_ReadPinInput(BOARD_DW1000_GPIO, BOARD_DW1000_GPIO_RST_PIN));
 
+		PRINTF("starting DW startup process\r\n");
+
+		// load microcode instruction to DW
 		dwt_initialise(DWT_LOADUCODE);
 
+		/*
+		 * Initialize SPI device in fast mode since microcode is now in place
+		 */
 		dw_communication_fast_init(&dw_rtos_handle, CLOCK_GetFreq(BOARD_DW1000_SPI_CLKSRC));
 
-		// wait for PPS pin to go high: simple read loop
+		/*
+		 * Wait for PPS pin rising edge
+		 */
+		PORT_SetPinInterruptConfig(BOARD_CSAC_GPIO_PORT, BOARD_CSAC_PPSOUT_PIN, kPORT_InterruptRisingEdge);
+		EnableIRQ(PORTA_IRQn);		// enable IRQ
+		GPIO_PinInit(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
 
-		while(GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN) == 0);
-		while(GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN) == 1);
+		PRINTF("waiting for PPS\r\n");
+
+		if(xSemaphoreTake(dw_pps_sem, 10) != pdTRUE) {
+			// handle error
+			PRINTF("could not find 1st PPS. restart DW\r\n");
+			xSemaphoreGive(pll_dw_sem);	// give back PPS lock semaphore
+			continue;
+		}
 
 		delay(1000);	// wait for a while
+
+		PRINTF("acquired 1st PPS edge\r\n");
 
 		// program external sync functions
 
@@ -82,16 +95,28 @@ void dw_watcher_thread(void *pvParameters) {
 		// enable delay time of 1 count on EXT_CLK like
 		ec_ctrl_val = EC_CTRL_OSTRM | EC_CTRL_PLLLCK | (1U << 3);
 		dwt_write32bitoffsetreg(EXT_SYNC_ID, EC_CTRL_OFFSET, ec_ctrl_val);
-		dwt_readsystime((uint8 *) &dw_time1);
+//		dwt_readsystime((uint8 *) &dw_time1);
 
-		// wait for pin to go high again
-		while(GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN) == 0);
+
+		// wait for another PPS edge
+//		while(GPIO_ReadPinInput(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN) == 0);
+
+		if(xSemaphoreTake(dw_pps_sem, 0) != pdTRUE) {
+			// handle error
+			PRINTF("could not find 2nd PPS. restart DW\r\n");
+			xSemaphoreGive(pll_dw_sem);	// give back PPS lock semaphore
+			continue;
+		}
 
 		// wait for 10 millisecs for stabilization to complete
 		delay(1000);
 		ec_ctrl_val = 0;
 		dwt_write32bitoffsetreg(EXT_SYNC_ID, EC_CTRL_OFFSET, ec_ctrl_val);
-		dwt_readsystime((uint8 *) &dw_time2);
+//		dwt_readsystime((uint8 *) &dw_time2);
+		dw_pps_count = 0;
+
+		PRINTF("acquired 2nd PPS edge\r\n");
+
 
 		/*
 		 * Configure and enable GPIO interrupts

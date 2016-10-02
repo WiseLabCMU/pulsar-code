@@ -17,7 +17,6 @@ void csac_watcher_thread(void *pvParameters) {
 	volatile SemaphoreHandle_t csac_pll_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[CSAC_PLL_SEM];
 	volatile SemaphoreHandle_t csac_worker_prod_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[CSAC_WORK_P_SEM];
 	volatile SemaphoreHandle_t csac_worker_con_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[CSAC_WORK_C_SEM];
-//	volatile SemaphoreHandle_t csac_uart_mutex = ((struct TaskSharedInfo *) pvParameters)->mutex[CSAC_UART_MUTEX];
 	volatile QueueHandle_t csac_worker_response = ((struct TaskSharedInfo *) pvParameters)->queues[CSAC_WORKER_RESP_Q];
 	uint8_t buf[8];	// 8 character buffer
 	int csac_state = -1;
@@ -95,7 +94,7 @@ void csac_worker_thread(void *pvParameters) {
 	size_t nRecv = 0;
 	uint8_t csacRecvBuffer[1];
 	bool first = true;	// flag to indicate if this is first byte in stream
-	// TODO: pointer to necesssary sem_C
+
 	volatile SemaphoreHandle_t csac_worker_prod_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[CSAC_WORK_P_SEM];
 	volatile SemaphoreHandle_t csac_worker_con_sem = ((struct TaskSharedInfo *) pvParameters)->semaphores[CSAC_WORK_C_SEM];
 	volatile QueueHandle_t worker_response_q = ((struct TaskSharedInfo *) pvParameters)->queues[CSAC_WORKER_RESP_Q];
@@ -110,7 +109,7 @@ void csac_worker_thread(void *pvParameters) {
 
 			// this is a blocking functions which may never return if the
 			// necessary peripherals are bad or off. How do we deal with this
-			// case?
+			// case? The only answer seem to be rewriting the function
 			UART_RTOS_Receive(&csac_uart_handle, csacRecvBuffer, 1, &nRecv);
 
 			if(first == true) {

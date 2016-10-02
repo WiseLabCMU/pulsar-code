@@ -113,18 +113,51 @@ struct TaskSharedInfo taskInfo = {
 /*
  * Interrupt handlers go here
  */
-
-static volatile uint32_t irq_reg;
+static volatile uint32_t airq_reg;
+static volatile uint32_t cirq_reg;
+static BaseType_t xHigherPriorityTaskWoken;
 
 void PORTC_IRQHandler(void) {
-	irq_reg = PORT_GetPinsInterruptFlags(PORTC);
+
+
+	cirq_reg = PORT_GetPinsInterruptFlags(PORTC);
+	xHigherPriorityTaskWoken = pdFALSE;
 
 	/*
 	 * Handle Decawave IRQ from here (by "giving" the appropriate semaphore)
 	 */
-	if(irq_reg & (1U<<BOARD_DW1000_GPIO_IRQ_PIN)) {
-		xSemaphoreGiveFromISR(sem[DW_IRQ_SEM], NULL);
+	if(cirq_reg & (1U<<BOARD_DW1000_GPIO_IRQ_PIN)) {
+
+		/*
+		 * NOTE: to be able to use FreeRTOS synchronization features like
+		 * semaphores, the interrupts must be maskable ie prio >= 5
+		 */
+//		xSemaphoreGiveFromISR(sem[DW_IRQ_SEM], &xHigherPriorityTaskWoken);
 		GPIO_ClearPinsInterruptFlags(GPIOC, (1U<<BOARD_DW1000_GPIO_IRQ_PIN));
+
+		portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+	}
+
+}
+
+void PORTA_IRQHandler(void) {
+
+	airq_reg = PORT_GetPinsInterruptFlags(PORTA);
+	xHigherPriorityTaskWoken = pdFALSE;
+
+	/*
+	 * Handle PPS interrupts from here (by "giving" the appropriate semaphore)
+	 */
+	if(airq_reg & (1U<<BOARD_CSAC_PPSOUT_PIN)) {
+		dw_pps_count++;	// increment count value
+		/*
+		 * NOTE: to be able to use FreeRTOS synchronization features like
+		 * semaphores, the interrupts must be maskable ie prio >= 5
+		 */
+		xSemaphoreGiveFromISR(sem[DW_PPS_SEM], &xHigherPriorityTaskWoken);
+		GPIO_ClearPinsInterruptFlags(GPIOC, (1U<<BOARD_CSAC_PPSOUT_PIN));
+
+		portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
 	}
 
 }
@@ -135,20 +168,22 @@ void PORTC_IRQHandler(void) {
 int main(void) {
 	/* Init board hardware. */
 	BOARD_ConfigPinmux();
-
-
-	BOARD_InitPins();
+	BOARD_InitPins();		// currently only initializes the LEDs
+							// TODO: move LED initialization into heartbeat and make this an empty function
 	BOARD_BootClockHSRUN();
 
-	BOARD_InitDebugConsole();
+	/*
+	 * Create necessary OS resources
+	 */
 
 	// create necessary semaphores
-	sem[CSAC_PLL_SEM] = xSemaphoreCreateBinary();
-	sem[CSAC_WORK_P_SEM] = xSemaphoreCreateBinary();
-	sem[CSAC_WORK_C_SEM] = xSemaphoreCreateBinary();
-	sem[PLL_DW_SEM] = xSemaphoreCreateBinary();
-	sem[DW_APP_SEM] = xSemaphoreCreateBinary();
-	sem[DW_IRQ_SEM] = xSemaphoreCreateBinary();
+	sem[CSAC_PLL_SEM] 		= xSemaphoreCreateBinary();
+	sem[CSAC_WORK_P_SEM] 	= xSemaphoreCreateBinary();
+	sem[CSAC_WORK_C_SEM] 	= xSemaphoreCreateBinary();
+	sem[PLL_DW_SEM] 		= xSemaphoreCreateBinary();
+	sem[DW_APP_SEM] 		= xSemaphoreCreateBinary();
+	sem[DW_IRQ_SEM] 		= xSemaphoreCreateBinary();
+	sem[DW_PPS_SEM] 		= xSemaphoreCreateBinary();
 
 	// create necessary queues
 	task_queues[HEARTBEAT_Q] = xQueueCreate(1, sizeof(int));	// queue for heartbeat task
@@ -158,6 +193,11 @@ int main(void) {
 	mutex[CSAC_UART_MUTEX] = xSemaphoreCreateMutex();
 	mutex[PLL_SPI_MUTEX] = xSemaphoreCreateMutex();
 	mutex[DW_SPI_MUTEX] = xSemaphoreCreateMutex();
+
+	BOARD_InitDebugConsole();
+
+	NVIC_SetPriority(PORTA_IRQn, 6); // 5 is the max allowed interrupt priority
+	NVIC_SetPriority(PORTC_IRQn, 6); // 5 is the max allowed interrupt priority
 
 	// task for debug and control
 	// there can only be one of these

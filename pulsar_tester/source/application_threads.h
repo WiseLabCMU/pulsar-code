@@ -28,6 +28,7 @@ enum SEM_ID {
 	PLL_DW_SEM 		= 3,   //!< PLL_DW_SEM
 	DW_APP_SEM 		= 4,   //!< DW_APP_SEM
 	DW_IRQ_SEM 		= 5,   //!< DW_IRQ_SEM
+	DW_PPS_SEM		= 6,   //!< DW_PPS_SEM
 	SEM_N,			// 6 total semaphores for task synchronization
 };
 
@@ -139,5 +140,7 @@ void dw_worker_thread(void *pvParameters);
  * @param pvParameters Command queue handle (QueueHandle_t) for inter-task comm
  */
 void heartbeat_thread(void *pvParameters);
+
+extern volatile uint32_t dw_pps_count;
 
 #endif /* SOURCE_APPLICATION_THREADS_H_ */

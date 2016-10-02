@@ -82,12 +82,12 @@ void heartbeat_thread(void *pvParameters) {
 	while (true) {		// infinite loop
 		beat_count++;		// increments beat counter
 
-		/**
+		/*
 		 * Check queue for new messages
 		 */
 		if(xQueueReceive(*q, (void *) &request, 0) == pdTRUE) {
 
-			/**
+			/*
 			 * new request received. update heartbeat period
 			 */
 			if(request > 0) {
