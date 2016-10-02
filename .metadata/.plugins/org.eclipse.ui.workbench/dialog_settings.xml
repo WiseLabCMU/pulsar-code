@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="FileSystemImportWizard">
+		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_SELECTED_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
+		<item value="PROJECT_LOC" key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_NAME_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_VIRTUAL_FOLDERS_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_LINKS_IN_WORKSPACE_ID"/>
+		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/Users/adwait/Downloads/eclipse_temp/csac_ping/pulsar_csac_ping"/>
+		</list>
+	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="800" key="dialogWidth"/>
 		<item value="500" key="dialogHeight"/>
@@ -15,6 +26,8 @@
 	<section name="WorkbenchPreferenceDialogSettings">
 		<item value="0" key="DIALOG_Y_ORIGIN"/>
 		<item value="0" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="ZipFileExportWizard">
 	</section>
 	<section name="InstallationDialogSettings">
 		<item value="702" key="DIALOG_WIDTH"/>
@@ -38,6 +51,7 @@
 		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID"/>
 		<item value="true" key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="/Users/adwait/Downloads/eclipse_temp/csac_ping"/>
 			<item value="/Users/adwait/Downloads/eclipse_temp"/>
 			<item value="/Users/adwait/Downloads/eclipse_test_export"/>
 		</list>
@@ -60,6 +74,9 @@
 		</list>
 		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.cdt.ui.exportWizardCategory"/>
+			<item value="com.freescale.projectofprojects.mqx_export"/>
+			<item value="org.eclipse.team.ui.exportWizards"/>
 		</list>
 	</section>
 </section>
