@@ -42,7 +42,6 @@
 #include "pulsar_board.h"
 #include "pin_mux.h"
 #include "clock_config.h"
-#include "fsl_debug_console.h"
 
 /**
  * FreeRTOS includes
@@ -54,6 +53,10 @@
 #include "queue.h"
 #include "timers.h"
 #include "semphr.h"
+
+#include "fsl_debug_console.h"
+#include "fsl_uart_freertos.h"
+#include "csac_driver.h"
 
 /******************************************************************************
  * end of INCLUDES section
@@ -189,6 +192,11 @@ int main(void) {
 	// low priority task for heartbeat LED control
 	// there can only be one of these
 	xTaskCreate(heartbeat_task, "heart", configMINIMAL_STACK_SIZE, NULL, heartbeat_PRIORITY, tasks[HEARTBEAT_TASK]);
+
+
+	xTaskCreate(csac_watcher_task, "CSAC", configMINIMAL_STACK_SIZE, NULL, watcher_PRIORITY, tasks[CSAC_WATCHER_TASK]);
+
+
 	vTaskStartScheduler();
 
 	for(;;) { /* Infinite loop to avoid leaving the main function */
@@ -289,11 +297,55 @@ static void heartbeat_task(void *pvParameters) {
  * NOTE: currently the watcher task is directly checking the csac state.
  * This function may later want to be moved to a worker task
  */
+
+#define CSAC_LOCKED 0
+
 static const uint8_t csacStatusRequest[4] = "!^\r\n";
 static uart_rtos_handle_t csac_uart_handle;
 
-void csac_watcher_thread(void *pvParameters) {
+int csac_get_state(uart_rtos_handle_t *rtos_uart_handle) {
 	int csac_state = -1;
+	bool first = true;
+	size_t nRecv = 0;
+	uint8_t csacRecvBuffer[1];
+	size_t totalBytes = 0;
+	TickType_t timeout = 20;
+
+	// flush UART buffers
+	// TODO: there should be a better way of handling this
+	while(true) {
+		nRecv = 0;
+		if(csac_receive_timeout(rtos_uart_handle, csacRecvBuffer, 1, &nRecv, 0) != kStatus_Success) {
+			break;
+		}
+	}
+
+	// send telemetry request
+	csac_send(rtos_uart_handle, csacStatusRequest, 4);
+
+	// listen to UART and parse response
+	while(totalBytes < 128) {	// the 128 character limit is to make sure string runoffs dont mess up communications
+		nRecv = 0;
+
+		if(csac_receive_timeout(rtos_uart_handle, csacRecvBuffer, 1, &nRecv, timeout) == kStatus_Success) {
+			if(first == true) {
+				csac_state = (int)csacRecvBuffer[0] - (int)'0';
+				timeout = 2;
+				first = false;
+			}
+
+			if(csacRecvBuffer[0] == (uint8_t) '\n') {
+				break;
+			}
+			totalBytes++;
+		} else {
+			break;
+		}
+	}
+	return csac_state;
+}
+
+void csac_watcher_task(void *pvParameters) {
 	uint8_t buf[8];
 
 	// initialize lock pin for later use
@@ -303,6 +355,12 @@ void csac_watcher_thread(void *pvParameters) {
 	csac_communication_init(&csac_uart_handle, BOARD_CSAC_UART_CLK_FREQ, buf, sizeof(buf));
 
 	while(true) {
+
+		if(csac_get_state(&csac_uart_handle) == CSAC_LOCKED) {
+			xSemaphoreGive(semaphore[DW_PPS_SEM]);
+			PRINTF("CSAC lock detected\r\n");
+			vTaskSuspend(NULL);		// replace this with something nicer once failure handling is dealt with
+		}
 
 	}
 

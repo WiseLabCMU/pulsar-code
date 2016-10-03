@@ -101,7 +101,7 @@ static int UART_RTOS_Receive_wTimeout(uart_rtos_handle_t *handle, uint8_t *buffe
     }
 
     timesem = xTaskGetTickCount();	// time we acquired the semaphore
-    if(timeout > (timesem - timestart)) {
+    if(timeout < (timesem - timestart)) {
     	return kStatus_Fail;
     }
 
