@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="287" key="DIALOG_WIDTH"/>
 		<item value="27" key="DIALOG_Y_ORIGIN"/>
-		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="914" key="DIALOG_X_ORIGIN"/>
+		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="INTERR" key="selection"/>
+		<item value="Init" key="selection"/>
 		<list key="findhistory">
+			<item value="init"/>
+			<item value="uart_init"/>
+			<item value="ec_ctrl_val"/>
 			<item value="interr"/>
 			<item value="kport_pullup"/>
 			<item value="clearpin"/>
 			<item value="_dspi_transfer_config_flag_for_master"/>
 			<item value="hBuff"/>
-			<item value="bLen"/>
-			<item value="hLen"/>
-			<item value="dwt_write8bitoffsetreg"/>
 		</list>
 		<list key="replacehistory">
 			<item value="headerBuffer"/>
