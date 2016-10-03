@@ -99,7 +99,7 @@
 
 
 /**
- * DW1000 GPIO fnctions
+ * DW1000 GPIO functions
  */
 
 // set DW100 reset pin as output for uC

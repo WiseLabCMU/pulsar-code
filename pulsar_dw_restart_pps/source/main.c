@@ -148,6 +148,18 @@ void PORTA_IRQHandler(void) {
 
 }
 
+static volatile uint32_t portC_irq_reg;
+
+void PORTC_IRQHandler(void) {
+	portC_irq_reg = PORT_GetPinsInterruptFlags(PORTC);
+
+	if(portC_irq_reg & (1U<<BOARD_DW1000_GPIO_IRQ_PIN)) {
+		xSemaphoreGiveFromISR(semaphore[DW_IRQ_SEM], NULL);
+		GPIO_ClearPinsInterruptFlags(GPIOC, (1U<<BOARD_DW1000_GPIO_IRQ_PIN));
+	}
+
+}
+
 /******************************************************************************
  * end of INTERRUPTS section
  *****************************************************************************/
@@ -171,6 +183,7 @@ static void heartbeat_task(void *pvParameters);
 static void csac_watcher_task(void *pvParameters);
 static void pll_watcher_task(void * pvParameters);
 static void dw_watcher_task(void *pvParameters);
+static void messenger_task(void *pvParamaeters);
 
 /*
  * All the device data structures
@@ -210,7 +223,7 @@ int main(void) {
 
 	// low priority task for heartbeat LED control
 	// there can only be one of these
-	xTaskCreate(heartbeat_task, "heart", configMINIMAL_STACK_SIZE, NULL, heartbeat_PRIORITY, tasks[HEARTBEAT_TASK]);
+	xTaskCreate(heartbeat_task, "heartbeat", configMINIMAL_STACK_SIZE, NULL, heartbeat_PRIORITY, tasks[HEARTBEAT_TASK]);
 
 
 	xTaskCreate(csac_watcher_task, "CSAC", configMINIMAL_STACK_SIZE, NULL, watcher_PRIORITY, tasks[CSAC_WATCHER_TASK]);
@@ -218,7 +231,11 @@ int main(void) {
 
 	xTaskCreate(pll_watcher_task, "PLL", configMINIMAL_STACK_SIZE, NULL, watcher_PRIORITY, tasks[PLL_WATCHER_TASK]);
 
+
 	xTaskCreate(dw_watcher_task, "DW", configMINIMAL_STACK_SIZE, NULL, watcher_PRIORITY, tasks[DW_WATCHER_TASK]);
+
+
+	xTaskCreate(messenger_task, "messenger", configMINIMAL_STACK_SIZE, NULL, application_PRIORITY, tasks[MESSENGER_TASK]);
 
 	vTaskStartScheduler();
 
@@ -589,6 +606,7 @@ static void dw_watcher_task(void *pvParameters) {
 		EnableIRQ(PORTA_IRQn);		// enable IRQ on PORTA
 		GPIO_PinInit(BOARD_CSAC_GPIO, BOARD_CSAC_PPSOUT_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
 
+		// TODO: add a loop around this for repeat requests
 		while(true) {
 			sync_status = resync_dw_to_pps();
 			if(sync_status == 0) {
@@ -605,5 +623,233 @@ static void dw_watcher_task(void *pvParameters) {
 
 		xSemaphoreGive(semaphore[DW_MSG_OK_SEM]);
 		vTaskSuspend(NULL);
+	}
+}
+
+/******************************************************************************
+ * end of DECAWAVE WATCHER section
+ *****************************************************************************/
+
+/******************************************************************************
+ * MESSENGER section
+ *****************************************************************************/
+
+// ID number for node
+#define NODE_ID 1
+
+#define BEACON_SLOT 	1
+#define RESPONSE_SLOT 	0
+
+/*
+ * TDMA parameters
+ */
+#define N_TDMA_SLOTS 100		// 100 slots per second at gap of 5 msec
+
+/*
+ * the number of children, siblings and parents determines where the node lies
+ * in the tree
+ *
+ * A reference node will only have non-zero children
+ * A relay node will have non-zero children and a parent
+ * An end node will have a parent, no children and optionally siblings
+ *
+ */
+#define N_CHILDREN 	1
+#define N_SIBLINGS 	0
+#define N_PARENT 	0
+
+#define BEACON_MSG_ID 		1
+#define RESPONSE_MSG_ID 	2
+
+/*
+ * Time conversions:
+ * 1 UWB us (UUS)	= 1.0256 real microsec
+ * 65536 DW TICKS 	= 1 UUS
+ * 63897.6 DW TICKS = 1 real microsec
+ */
+#define UUS2DWT(uus) 	(uint64_t)((uint64_t)uus*65536) 			// UUS to DW ticks
+#define SEC2DWT(sec) 	(uint64_t)((uint64_t)sec*63897600000ULL) 	// second to DW ticks
+#define USEC2DWT(usec) 	(uint64_t)((uint64_t)usec*638976/10) 	// microsec to DW ticks. Has residual error
+#define SEC_2_DWT 		(63897600000ULL)	// conversion factor: sec to DW ticks
+#define UUS_TO_DWT_TIME 65536
+#define US_TO_DWT_TIME 	63897.6 			// Warning: use this only if using floats
+#define LIGHT_US 299.702547		// meter distance covered by light in 1 real microsec
+
+// Default antenna delay values for 64 MHz PRF
+#define TX_ANT_DLY 16436		// in DW time units
+#define RX_ANT_DLY 16436		// in DW time units
+#define RX_TIMEOUT	8000 		// in UUS
+
+// Decawave radio configuration
+static dwt_config_t channel_config = {
+    2,               /* Channel number. */
+    DWT_PRF_64M,     /* Pulse repetition frequency. */
+    DWT_PLEN_1024,   /* Preamble length. */
+    DWT_PAC32,       /* Preamble acquisition chunk size. Used in RX only. */
+    9,               /* TX preamble code. Used in TX only. */
+    9,               /* RX preamble code. Used in RX only. */
+    1,               /* Use non-standard SFD (Boolean) */
+    DWT_BR_110K,     /* Data rate. */
+    DWT_PHRMODE_STD, /* PHY header mode. */
+    (1025 + 64 - 32) /* SFD timeout (preamble length + 1 + SFD length - PAC size). Used in RX only. */
+};
+
+// Beacons are only sent out if you have child nodes
+#define BEACON_SIZE 30
+#if (N_CHILDREN > 0)
+/*
+ * beacon_message structure
+ * # preamble section
+ * 1: 			message type
+ * 2: 			origin node ID
+ * 3: 			beacon slot
+ * 4,5,6,7: 	message number
+ * 8,9,10,11,12,13,14,15: 	TX timestamp (in 64 bit values)
+ * 16,17:		Child IDs
+ * 18,19: 		Child response slots
+ * 20,21,22,23,24: Child 1 RX timestamp
+ * 25,26,27.28.29: Child 2 RX timestamp
+ * 29,30: 		Checksum
+ */
+static char beacon_message[BEACON_SIZE];
+#endif
+
+// Responses are only sent out if you have parent nodes
+#define RESPONSE_SIZE 15
+#if (N_PARENT > 0)
+/*
+ * response_message structure
+ * # preamble section
+ * 1: 			message type
+ * 2: 			origin node ID
+ * 3: 			response slot
+ * 4:			parent node ID
+ * 5,6,7,8: 	message number
+ * 9,10,11,12,13: 	TX timestamp
+ * 14,15: 		Checksum
+ */
+static char response_message[RESPONSE_SIZE];
+#endif
+
+// converts 64 bit timestamp into 2 32 bit timestamps
+// this is useful while printing
+#define TS64_TO_TS32(ts64,index) ( ((uint32_t *)&ts64)[index] )
+
+// shortcut string modifiers to print 64 bit and 40 bit timestamps easily
+#define TX40_XSTR "0x%02X%08X"	// used to print 40 bit timestamps in hex
+#define TS64_XSTR "0x%08X%08X" // used to print 64 bit timestamps in hex
+
+/*
+ * useful functions
+ */
+
+/**
+ * Find the next acceptable DW time
+ * @param last_send_time
+ * @param interval_uus
+ * @return
+ */
+static inline uint32_t compute_next_dwtime_uus(uint32_t last_send_time, uint32_t interval_uus) {
+	return((last_send_time + interval_uus*128UL)&0xFFFFFFFE);
+}
+
+/**
+ * Find the next send time based on value of last send time and microsecond delay.
+ * This function will have a residual value due to integer division
+ * @param last_send_time
+ * @param usec
+ * @return The next send time (in 32-bit). Note that this will have residual errors
+ */
+static inline uint32_t compute_next_dwtime_usec(uint32_t last_send_time, uint32_t interval_usec) {
+	return ((last_send_time + ((interval_usec*1248UL)/10UL))&0xFFFFFFFE);
+}
+
+/**
+ * Use this function while embedding timestamps in beacon messages
+ * @param send_time
+ * @param overflow_correction
+ * @return
+ */
+static inline uint64_t sendtime_to_expected_timestamp(uint32_t send_time, uint64_t overflow_correction) {
+	return ((( (uint64_t) (send_time & 0xFFFFFFFE) ) << 8) + TX_ANT_DLY + overflow_correction);
+}
+
+
+
+static void messenger_task(void *pvParamaeters) {
+	uint32_t msg_no = 0;	// keep a track of the message number
+	uint32_t programmed_send_time; 	// used for storing 31 bit DW delayed TX time
+	uint64_t tx_timestamp = 0;
+
+	xSemaphoreTake(semaphore[DW_MSG_OK_SEM], portMAX_DELAY);
+
+	dwt_configure(&channel_config);		// configure decawave channel parameters
+	dwt_setrxantennadelay(RX_ANT_DLY);	// antenna delay value for 64 MHz PRF in DW ticks
+	dwt_settxantennadelay(TX_ANT_DLY);	// antenna delay value for 64 MHz PRF in DW ticks
+	dwt_setrxtimeout(RX_TIMEOUT);		// RX timeout after start in UUS
+
+	// set init values for beacon message
+	beacon_message[0] = BEACON_MSG_ID; 	// type of message (unchanged)
+	beacon_message[1] = NODE_ID; 		// ID of beacon originator (unchanged)
+	beacon_message[2] = BEACON_SLOT; 	// Which slot is this transmitting in (unchanged)
+	memset((void *)&beacon_message[3], 0, 4 + 8);	// clear message number and TX timestamp (volatile)
+	beacon_message[15] = 2;				// 1st child ID (unchanged)
+	beacon_message[16] = 0; 			// 2nd child ID (unchanged)
+	beacon_message[17] = 50; 			// 1st child response slot (unchanged)
+	beacon_message[18] = 0; 			// 2nd child response slot (unchanged)
+	memset((void *)&beacon_message[19], 0, 5 + 5 + 2);	// clear timestamp and checksum bits (volatile)
+
+	// configure IRQ pin interrupt
+	PORT_SetPinInterruptConfig(BOARD_DW1000_GPIO_PORT, BOARD_DW1000_GPIO_IRQ_PIN, kPORT_InterruptRisingEdge);
+	EnableIRQ(PORTC_IRQn);
+	GPIO_PinInit(BOARD_DW1000_GPIO, BOARD_DW1000_GPIO_IRQ_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
+	// set DW interrupt configuration
+	dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 1);	// enable only frame sent interrupt
+
+	// test messaging loop
+	dwt_readsystime((uint8 *) &tx_timestamp);
+	programmed_send_time = (uint32_t)(tx_timestamp>>8);	// bootstrap the process with current decawave time
+
+
+	while(true) {
+		// construct message
+		msg_no++;
+
+		programmed_send_time = compute_next_dwtime_usec(programmed_send_time, 10000); // schedule next message for ~10msec from now
+		tx_timestamp = sendtime_to_expected_timestamp(programmed_send_time, 0); // compute expected timestamp
+
+		memcpy((void *) &beacon_message[3], (void *) &msg_no, 4);
+		memcpy((void *) &beacon_message[7], (void *) &tx_timestamp, 8);
+
+		// write data to DW1000
+		dwt_writetxdata(sizeof(beacon_message), (uint8_t *) beacon_message, 0);
+		dwt_writetxfctrl(sizeof(beacon_message), 0, 1);
+
+		dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);	// clear transmit status flag
+		dwt_setdelayedtrxtime(programmed_send_time);
+
+		xSemaphoreTake(semaphore[DW_IRQ_SEM], 0); // clear previous IRQ flags
+
+		// begin and wait for transmission
+
+		// why does delayed sending fail?
+		dwt_starttx(DWT_START_TX_DELAYED);
+
+//		PRINTF("[%u] Sending message %d\r\n", xTaskGetTickCount(), msg_no);
+
+		// wait for message or timeout
+		if(xSemaphoreTake(semaphore[DW_IRQ_SEM], 500) != pdTRUE) {
+			PRINTF("[%u] Sending failed\r\n", xTaskGetTickCount());
+			dwt_isr();		// run ISR function to complete callbacks etc
+			tx_timestamp = 0;
+			dwt_readsystime((uint8 *) &tx_timestamp);
+			continue;
+		}
+		dwt_isr();		// run ISR function to complete callbacks etc
+		dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);	// clear transmit status flag
+//		PRINTF("[%u] Sent message %d\r\n", xTaskGetTickCount(), msg_no);
+		PRINTF("*");
+
+//		vTaskDelay(500);
 	}
 }
