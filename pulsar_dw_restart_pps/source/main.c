@@ -541,6 +541,8 @@ int resync_dw_to_pps() {
 
 	vTaskDelay(10);
 
+
+
 	// program reset on next PPS edge
 	ec_ctrl_val = EC_CTRL_OSTRM | EC_CTRL_PLLLCK | (1U << 3);
 	dwt_write32bitoffsetreg(EXT_SYNC_ID, EC_CTRL_OFFSET, ec_ctrl_val);
@@ -556,8 +558,14 @@ int resync_dw_to_pps() {
 	ec_ctrl_val = 0;
 	dwt_write32bitoffsetreg(EXT_SYNC_ID, EC_CTRL_OFFSET, ec_ctrl_val);
 
+	// clear ext sync bit in DW
+	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_ESYNCR);
+
 	// disable PPS pin interrupt
 	PORT_SetPinInterruptConfig(BOARD_CSAC_GPIO_PORT, BOARD_CSAC_PPSOUT_PIN, kPORT_InterruptOrDMADisabled);
+
+	while(!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_CPLOCK));
+	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_CPLOCK);	// reset PLL lock bit in decawave
 
 	return 0;
 }
@@ -642,8 +650,14 @@ static void dw_watcher_task(void *pvParameters) {
 
 /*
  * TDMA parameters
+ * Number of slots in a cycle and width of each slot determine the total cycle
+ * period. Here we use 1 sec long cycles with 25 slots, each of size 40msec.
+ * This may be extended all the way to 5 msec and 200 slots if desired.
+ *
  */
-#define N_TDMA_SLOTS 100		// 100 slots per second at gap of 5 msec
+#define N_TDMA_SLOTS	25		// 25 slots per second at gap of 40 msec
+#define TDMA_WIDTH_UUS	39000	// each TDMA slot is 39000 UUS or 40000 microsec long
+
 
 /*
  * the number of children, siblings and parents determines where the node lies
@@ -654,12 +668,14 @@ static void dw_watcher_task(void *pvParameters) {
  * An end node will have a parent, no children and optionally siblings
  *
  */
-#define N_CHILDREN 	1
-#define N_SIBLINGS 	0
-#define N_PARENT 	0
+#define REFERENCE_NODE 	0
+#define RELAY_NODE 		1
+#define CHILD_NODE 		0
+
 
 #define BEACON_MSG_ID 		1
 #define RESPONSE_MSG_ID 	2
+#define BEACON_MSG_RESET_ID	3	// this message is sent out when the beacon timebase has been reset
 
 /*
  * Time conversions:
@@ -674,11 +690,16 @@ static void dw_watcher_task(void *pvParameters) {
 #define UUS_TO_DWT_TIME 65536
 #define US_TO_DWT_TIME 	63897.6 			// Warning: use this only if using floats
 #define LIGHT_US 299.702547		// meter distance covered by light in 1 real microsec
+#define SEC_TO_UUS 		975000
+
 
 // Default antenna delay values for 64 MHz PRF
-#define TX_ANT_DLY 16436		// in DW time units
-#define RX_ANT_DLY 16436		// in DW time units
+#define TX_ANT_DLY	16436		// in DW time units
+#define RX_ANT_DLY	16436		// in DW time units
 #define RX_TIMEOUT	8000 		// in UUS
+
+#define RX_WINDOW_KLUDGE_UUS 	10	// kludge factor to start recieve window earlier
+#define RX_TIMEOUT_KLUDGE	(8000 + RX_WINDOW_KLUDGE_UUS) // in UUS with added kludge factor
 
 // Decawave radio configuration
 static dwt_config_t channel_config = {
@@ -694,9 +715,8 @@ static dwt_config_t channel_config = {
     (1025 + 64 - 32) /* SFD timeout (preamble length + 1 + SFD length - PAC size). Used in RX only. */
 };
 
-// Beacons are only sent out if you have child nodes
+
 #define BEACON_SIZE 30
-#if (N_CHILDREN > 0)
 /*
  * beacon_message structure
  * # preamble section
@@ -711,12 +731,9 @@ static dwt_config_t channel_config = {
  * 25,26,27.28.29: Child 2 RX timestamp
  * 29,30: 		Checksum
  */
-static char beacon_message[BEACON_SIZE];
-#endif
 
 // Responses are only sent out if you have parent nodes
 #define RESPONSE_SIZE 15
-#if (N_PARENT > 0)
 /*
  * response_message structure
  * # preamble section
@@ -728,8 +745,9 @@ static char beacon_message[BEACON_SIZE];
  * 9,10,11,12,13: 	TX timestamp
  * 14,15: 		Checksum
  */
+
+static char beacon_message[BEACON_SIZE];
 static char response_message[RESPONSE_SIZE];
-#endif
 
 // converts 64 bit timestamp into 2 32 bit timestamps
 // this is useful while printing
@@ -750,7 +768,7 @@ static char response_message[RESPONSE_SIZE];
  * @return
  */
 static inline uint32_t compute_next_dwtime_uus(uint32_t last_send_time, uint32_t interval_uus) {
-	return((last_send_time + interval_uus*128UL)&0xFFFFFFFE);
+	return((last_send_time + (interval_uus<<8))&0xFFFFFFFE);
 }
 
 /**
@@ -761,8 +779,12 @@ static inline uint32_t compute_next_dwtime_uus(uint32_t last_send_time, uint32_t
  * @return The next send time (in 32-bit). Note that this will have residual errors
  */
 static inline uint32_t compute_next_dwtime_usec(uint32_t last_send_time, uint32_t interval_usec) {
-	return ((last_send_time + ((interval_usec*1248UL)/10UL))&0xFFFFFFFE);
+	return ((last_send_time + ((interval_usec*1248UL)/5UL))&0xFFFFFFFE);
 }
+
+//static inline uint64_t add_corrrection_factor_ts64(uint64_t ts64, uint64_t correction) {
+//	return (ts64 + correction);
+//}
 
 /**
  * Use this function while embedding timestamps in beacon messages
@@ -774,19 +796,147 @@ static inline uint64_t sendtime_to_expected_timestamp(uint32_t send_time, uint64
 	return ((( (uint64_t) (send_time & 0xFFFFFFFE) ) << 8) + TX_ANT_DLY + overflow_correction);
 }
 
+/**
+ * Gets the next TDMA transmit slot approximately assuming the beacon message was sent at start of slot.
+ *
+ * @param rx_ts64
+ * @param rx_slot		Slot number of last RX timestamp. The function assumes this lies in 1 to N_TDMA_SLOTS
+ * @param desired_slot	Desired slot number. The function assumes this lies in 1 to N_TDMA_SLOTS
+ * @return
+ */
+static inline uint32_t get_tdma_slot_time_from_rxts(uint64_t rx_ts64, int rx_slot, int desired_slot) {
+	uint64_t deltaT;	// time between slots in DWT
+	if(desired_slot > rx_slot) {
+		deltaT = ((desired_slot - rx_slot)*TDMA_WIDTH_UUS)<<16;
+	} else {
+		// the desired slot wraps around
+		deltaT = ((N_TDMA_SLOTS - rx_slot + desired_slot)*TDMA_WIDTH_UUS)<<16;
+	}
 
+	return ((uint32_t)((rx_ts64 + deltaT)>>8) & 0xFFFFFFFE);
+}
+
+static inline uint32_t get_tdma_slot_time_from_txts(uint32_t programmed_send_time, int tx_slot, int desired_slot) {
+	if(desired_slot > tx_slot) {
+		return ((programmed_send_time + ((uint32_t)(desired_slot - tx_slot)*TDMA_WIDTH_UUS)<<8) & 0xFFFFFFFE);
+	} else {
+		return ((programmed_send_time + ((uint32_t)(N_TDMA_SLOTS - tx_slot + desired_slot)*TDMA_WIDTH_UUS)<<8) & 0xFFFFFFFE);
+	}
+}
+
+/*
+ * Think of the radio as a state machine. A successful operation leads
+ * to a transition to the next state
+ *
+ * A REFERENCE NODE has 2 states:
+ * 1. Transmitting
+ * 2. Receiving from RELAY
+ *
+ * A RELAY NODE with 2 children has 5 states:
+ * 1. Listening to REFERENCE
+ * 2. Transmit beacon
+ * 3. Respond to REFERENCE
+ * 4. Listen to 1st CHILD
+ * 5. Listen to 2nd CHILD
+ *
+ * A CHILD NODE has 2 states:
+ * 1. Listening to RELAY
+ * 2. Respond to RELAY
+ */
+
+enum reference_states {
+	TRANSMIT_BEACON,
+	RECIEVE_RESP,
+	INVALID_MESSAGE,
+	N_REF_STATES,
+};
+
+enum relay_states {
+	RECEIVE_BEACON,
+	TRANSMIT_BEACON,
+	TRANSMIT_RESP,
+	LISTEN_CHILD1,
+	LISTEN_CHILD2,
+	INVALID_MESSAGE,
+	N_RELAY_STATES,
+};
+
+enum child_states {
+	RECEIVE_BEACON,
+	TRANSMIT_RESP,
+	INVALID_MESSAGE,
+	N_CHILD_STATES,
+};
+
+/*
+ * Variables that are better off being global for various reasons
+ */
+uint32_t rx_msg_no = 0;
+
+
+/*
+ * Callback functions
+ */
+
+// callback type for all events
+typedef void (*dwt_cb_t)(const dwt_cb_data_t *);
+
+void tx_good_callback(const dwt_cb_data_t *data) {
+
+}
+
+void rx_good_callback(const dwt_cb_data_t *data) {
+	// try parsing the message
+	if (data->datalength <= BEACON_SIZE) {
+		// copy data to buffer
+		dwt_readrxdata((uint8 *) beacon_message, data->datalength, 0);
+
+		// parse data here
+		rx_msg_no = *((uint32_t *) &beacon_message[3]);
+
+		// get and store timestamp
+
+		// print stuff and perhaps pass down to queue
+		PRINTF("[%u] message %u received\r\n", xTaskGetTickCount(), rx_msg_no);
+	}
+
+
+}
+
+void rx_timeout_callback(const dwt_cb_data_t *data) {
+
+}
+
+void rx_error_callback(const dwt_cb_data_t *data) {
+
+}
 
 static void messenger_task(void *pvParamaeters) {
-	uint32_t msg_no = 0;	// keep a track of the message number
+	uint32_t beacon_msg_no = 0;	// keep a track of the message number
 	uint32_t programmed_send_time; 	// used for storing 31 bit DW delayed TX time
 	uint64_t tx_timestamp = 0;
+	uint64_t last_tx_timestamp = 0;		// use this for applying corrections
+	uint64_t tx_time_correction = 0;	// correction factor to apply
+
+	uint32_t status_reg;
+	uint16_t frame_len;
+
+	bool is_first_beacon_rx = true;
+
 
 	xSemaphoreTake(semaphore[DW_MSG_OK_SEM], portMAX_DELAY);
+
+	// all previous systems have now been stabilized
+	// begin messaging schemes
+
+
+	// set callbacks
+	dwt_setcallbacks((dwt_cb_t) tx_good_callback, (dwt_cb_t) rx_good_callback, (dwt_cb_t) rx_timeout_callback, (dwt_cb_t) rx_error_callback);
 
 	dwt_configure(&channel_config);		// configure decawave channel parameters
 	dwt_setrxantennadelay(RX_ANT_DLY);	// antenna delay value for 64 MHz PRF in DW ticks
 	dwt_settxantennadelay(TX_ANT_DLY);	// antenna delay value for 64 MHz PRF in DW ticks
-	dwt_setrxtimeout(RX_TIMEOUT);		// RX timeout after start in UUS
+//	dwt_setrxtimeout(RX_TIMEOUT);		// RX timeout after start in UUS
 
 	// set init values for beacon message
 	beacon_message[0] = BEACON_MSG_ID; 	// type of message (unchanged)
@@ -803,53 +953,104 @@ static void messenger_task(void *pvParamaeters) {
 	PORT_SetPinInterruptConfig(BOARD_DW1000_GPIO_PORT, BOARD_DW1000_GPIO_IRQ_PIN, kPORT_InterruptRisingEdge);
 	EnableIRQ(PORTC_IRQn);
 	GPIO_PinInit(BOARD_DW1000_GPIO, BOARD_DW1000_GPIO_IRQ_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
-	// set DW interrupt configuration
-	dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 1);	// enable only frame sent interrupt
 
 	// test messaging loop
 	dwt_readsystime((uint8 *) &tx_timestamp);
 	programmed_send_time = (uint32_t)(tx_timestamp>>8);	// bootstrap the process with current decawave time
 
 
+	status_reg = dwt_read32bitreg(SYS_STATUS_ID);
+//	PRINTF("[%u] stating loop: DW status 0x%08X\r\n", status_reg);
+
+	dwt_setinterrupt(DWT_INT_RFCG | DWT_INT_RPHE | DWT_INT_RFCE | DWT_INT_RFSL | DWT_INT_RFTO | DWT_INT_SFDT | DWT_INT_RXPTO, (uint8_t) 1);
+
 	while(true) {
-		// construct message
-		msg_no++;
 
-		programmed_send_time = compute_next_dwtime_usec(programmed_send_time, 10000); // schedule next message for ~10msec from now
-		tx_timestamp = sendtime_to_expected_timestamp(programmed_send_time, 0); // compute expected timestamp
+#if RELAY_NODE > 0
 
-		memcpy((void *) &beacon_message[3], (void *) &msg_no, 4);
+		if(is_first_beacon_rx) {
+
+			// continuously listens in this state until the right beacon is found
+
+			xSemaphoreTake(semaphore[DW_IRQ_SEM], 0); // clear previous IRQ semaphore events
+			dwt_isr(); 	// clear flags
+
+			dwt_rxenable(DWT_START_RX_IMMEDIATE);
+
+			while(true) {
+				if(xSemaphoreTake(semaphore[DW_IRQ_SEM], 1200) != pdTRUE) {
+					PRINTF("[%u] DW no reception\r\n", xTaskGetTickCount());
+				} else {
+					break;
+				}
+			}
+
+			dwt_isr();	// handle event
+			is_first_beacon_rx = false;
+		} else {
+			// this is not the first instance of the beacon.
+			// we know approximately when to expect the next one
+
+
+
+
+		}
+
+		// prepare own beacon and transmit it
+
+		// state transitions must only happen after a successful reception
+
+#endif // RELAY_NODE > 0
+
+#if REFERENCE_NODE > 0
+		// if node has children, it needs to send beacons and open receive window at appropriate times
+		// TODO: listening to children nodes
+
+		// construct beacon message
+		beacon_msg_no++;
+
+		programmed_send_time = compute_next_dwtime_uus(programmed_send_time, 975000); // schedule next message for 1 sec from now
+		tx_timestamp = sendtime_to_expected_timestamp(programmed_send_time, tx_time_correction); // compute expected timestamp
+		while(tx_timestamp < last_tx_timestamp) {
+			tx_time_correction += (1ULL<<40);
+			tx_timestamp = sendtime_to_expected_timestamp(programmed_send_time, tx_time_correction); // compute expected timestamp
+		}
+
+		memcpy((void *) &beacon_message[3], (void *) &beacon_msg_no, 4);
 		memcpy((void *) &beacon_message[7], (void *) &tx_timestamp, 8);
 
 		// write data to DW1000
 		dwt_writetxdata(sizeof(beacon_message), (uint8_t *) beacon_message, 0);
 		dwt_writetxfctrl(sizeof(beacon_message), 0, 1);
-
+		dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 0);	// disable frame sent interrupt
 		dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);	// clear transmit status flag
 		dwt_setdelayedtrxtime(programmed_send_time);
 
 		xSemaphoreTake(semaphore[DW_IRQ_SEM], 0); // clear previous IRQ flags
 
 		// begin and wait for transmission
-
-		// why does delayed sending fail?
 		dwt_starttx(DWT_START_TX_DELAYED);
 
-//		PRINTF("[%u] Sending message %d\r\n", xTaskGetTickCount(), msg_no);
-
 		// wait for message or timeout
-		if(xSemaphoreTake(semaphore[DW_IRQ_SEM], 500) != pdTRUE) {
+		if(xSemaphoreTake(semaphore[DW_IRQ_SEM], 1200) != pdTRUE) {
 			PRINTF("[%u] Sending failed\r\n", xTaskGetTickCount());
 			dwt_isr();		// run ISR function to complete callbacks etc
 			tx_timestamp = 0;
 			dwt_readsystime((uint8 *) &tx_timestamp);
+			dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 0);	// disable frame sent interrupt
+
 			continue;
 		}
 		dwt_isr();		// run ISR function to complete callbacks etc
+		// TODO: check if interrupt was caused by transmit frame event
 		dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);	// clear transmit status flag
-//		PRINTF("[%u] Sent message %d\r\n", xTaskGetTickCount(), msg_no);
-		PRINTF("*");
+		last_tx_timestamp = tx_timestamp;
+		dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 0);	// disable frame sent interrupt
+		PRINTF("[%u] Sent message %d @" TS64_XSTR "\r\n", xTaskGetTickCount(), beacon_msg_no, TS64_TO_TS32(tx_timestamp, 1), TS64_TO_TS32(tx_timestamp, 0));
 
-//		vTaskDelay(500);
+#endif // REFERENCE_NODE > 0
+
+
+
 	}
 }

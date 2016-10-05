@@ -1,8 +1,31 @@
-16:09:28 **** Incremental Build of configuration Debug for project pulsar_dw_restart_pps ****
+16:03:53 **** Incremental Build of configuration Debug for project pulsar_dw_restart_pps ****
 make -j3 all 
 Building file: ../source/main.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/main.d" -MT"source/main.o" -c -o "source/main.o" "../source/main.c"
+../source/main.c: In function 'messenger_task':
+../source/main.c:848:11: warning: unused variable 'frame_len' [-Wunused-variable]
+  uint16_t frame_len;
+           ^
+../source/main.c:847:11: warning: variable 'status_reg' set but not used [-Wunused-but-set-variable]
+  uint32_t status_reg;
+           ^
+../source/main.c:845:11: warning: unused variable 'tx_time_correction' [-Wunused-variable]
+  uint64_t tx_time_correction = 0; // correction factor to apply
+           ^
+../source/main.c:844:11: warning: unused variable 'last_tx_timestamp' [-Wunused-variable]
+  uint64_t last_tx_timestamp = 0;  // use this for applying corrections
+           ^
+../source/main.c:842:11: warning: variable 'programmed_send_time' set but not used [-Wunused-but-set-variable]
+  uint32_t programmed_send_time;  // used for storing 31 bit DW delayed TX time
+           ^
+../source/main.c:841:11: warning: unused variable 'beacon_msg_no' [-Wunused-variable]
+  uint32_t beacon_msg_no = 0; // keep a track of the message number
+           ^
+../source/main.c: At top level:
+../source/main.c:750:13: warning: 'response_message' defined but not used [-Wunused-variable]
+ static char response_message[RESPONSE_SIZE];
+             ^
 Finished building: ../source/main.c
  
 Building target: pulsar_dw_restart_pps.elf
@@ -10,29 +33,21 @@ Invoking: Cross ARM C++ Linker
 arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_dw_restart_pps.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_dw_restart_pps.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
 Finished building target: pulsar_dw_restart_pps.elf
  
-Invoking: Cross ARM GNU Print Size
 Invoking: Cross ARM GNU Create Flash Image
+Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "pulsar_dw_restart_pps.elf"
 arm-none-eabi-objcopy -O ihex "pulsar_dw_restart_pps.elf"  "pulsar_dw_restart_pps.hex"
    text	   data	    bss	    dec	    hex	filename
-  54832	    144	  15376	  70352	  112d0	pulsar_dw_restart_pps.elf
+  54600	    144	  15376	  70120	  111e8	pulsar_dw_restart_pps.elf
 Finished building: pulsar_dw_restart_pps.siz
  
 Finished building: pulsar_dw_restart_pps.hex
  
-16:09:34 **** Incremental Build of configuration Debug for project pulsar_dw_restart_pps ****
+16:04:13 **** Incremental Build of configuration Debug for project pulsar_dw_restart_pps ****
 make -j3 all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "pulsar_dw_restart_pps.elf"
    text	   data	    bss	    dec	    hex	filename
-  54832	    144	  15376	  70352	  112d0	pulsar_dw_restart_pps.elf
-Finished building: pulsar_dw_restart_pps.siz
- 
-16:18:32 **** Incremental Build of configuration Debug for project pulsar_dw_restart_pps ****
-make -j3 all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "pulsar_dw_restart_pps.elf"
-   text	   data	    bss	    dec	    hex	filename
-  54832	    144	  15376	  70352	  112d0	pulsar_dw_restart_pps.elf
+  54600	    144	  15376	  70120	  111e8	pulsar_dw_restart_pps.elf
 Finished building: pulsar_dw_restart_pps.siz
  
