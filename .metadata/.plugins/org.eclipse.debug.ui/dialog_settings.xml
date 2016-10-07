@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="org.eclipse.debug.ui.sourcelookup.SourceLookupDialog">
-		<item value="613" key="DIALOG_WIDTH"/>
-		<item value="69" key="DIALOG_Y_ORIGIN"/>
-		<item value="427" key="DIALOG_HEIGHT"/>
-		<item value="334" key="DIALOG_X_ORIGIN"/>
-		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
-	</section>
 	<section name="org.eclipse.debug.ui.SCOPED_SAVE_SELECTION_DIALOG">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="370" key="DIALOG_HEIGHT"/>
 		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
+	<section name="org.eclipse.debug.ui.sourcelookup.SourceLookupDialog">
+		<item value="613" key="DIALOG_WIDTH"/>
+		<item value="69" key="DIALOG_Y_ORIGIN"/>
+		<item value="334" key="DIALOG_X_ORIGIN"/>
+		<item value="427" key="DIALOG_HEIGHT"/>
+		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="org.eclipse.debug.ui.STRING_VARIABLE_SELECTION_DIALOG_SECTION">
 		<item value="382" key="DIALOG_WIDTH"/>
 		<item value="-7" key="DIALOG_Y_ORIGIN"/>
-		<item value="538" key="DIALOG_HEIGHT"/>
 		<item value="256" key="DIALOG_X_ORIGIN"/>
+		<item value="538" key="DIALOG_HEIGHT"/>
 		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.debug.ui.LAUNCH_CONFIGURATION_PROPERTIES_DIALOG_SECTION">
@@ -29,8 +29,8 @@
 		<item value="ilg.gnuarmeclipse.debug.gdbjtag.jlink.launchConfigurationType, " key="org.eclipse.debug.ui.EXPANDED_NODES"/>
 		<item value="707" key="DIALOG_HEIGHT"/>
 		<item value="237" key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_1"/>
-		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 		<item value="762" key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_2"/>
+		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.debug.ui.SELECT_CONFIGURATION_TYPE_DIALOG">
 		<item value="253" key="DIALOG_WIDTH"/>

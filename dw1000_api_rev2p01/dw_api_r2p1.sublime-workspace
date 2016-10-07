@@ -152,36 +152,39 @@
 	"buffers":
 	[
 		{
+			"file": "examples/ex_05b_ds_twr_resp/main.c",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "platform/deca_spi.c",
-			"settings":
-			{
-				"buffer_size": 3375,
+				"buffer_size": 21749,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "platform/deca_mutex.c",
+			"file": "examples/ex_06b_ss_twr_resp/main.c",
 			"settings":
 			{
-				"buffer_size": 3310,
+				"buffer_size": 15695,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 95 files for \"openspi\"\n\n/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform/deca_spi.c:\n   18  \n   19  /*! ------------------------------------------------------------------------------------------------------------------\n   20:  * Function: openspi()\n   21   *\n   22   * Low level abstract function to open and initialise access to the SPI device.\n   23   * returns 0 for success, or -1 for error\n   24   */\n   25: int openspi(/*SPI_TypeDef* SPIx*/)\n   26  {\n   27  \t// done by port.c, default SPI used is SPI1\n   ..\n   29  \treturn 0;\n   30  \n   31: } // end openspi()\n   32  \n   33  /*! ------------------------------------------------------------------------------------------------------------------\n\n/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform/deca_spi.h:\n   24  \n   25  /*! ------------------------------------------------------------------------------------------------------------------\n   26:  * Function: openspi()\n   27   *\n   28   * Low level abstract function to open and initialise access to the SPI device.\n   29   * returns 0 for success, or -1 for error\n   30   */\n   31: int openspi(void) ;\n   32  \n   33  /*! ------------------------------------------------------------------------------------------------------------------\n\n5 matches across 2 files\n\n\nSearching 95 files for \"writetospi\"\n\n/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/decadriver/deca_device.c:\n  905  \n  906      // Write it to the SPI\n  907:     writetospi(cnt,header,length,buffer);\n  908  } // end dwt_writetodevice()\n  909  \n\n/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/decadriver/deca_device_api.h:\n 1624  \n 1625  /*! ------------------------------------------------------------------------------------------------------------------\n 1626:  * @fn writetospi()\n 1627   *\n 1628   * @brief\n ....\n 1645   * returns DWT_SUCCESS for success, or DWT_ERROR for error\n 1646   */\n 1647: int writetospi(uint16 headerLength, const uint8 *headerBuffer, uint32 bodylength, const uint8 *bodyBuffer);\n 1648  \n 1649  /*! ------------------------------------------------------------------------------------------------------------------\n\n/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform/deca_spi.c:\n   48  \n   49  /*! ------------------------------------------------------------------------------------------------------------------\n   50:  * Function: writetospi()\n   51   *\n   52   * Low level abstract function to write to the SPI\n   ..\n   55   */\n   56  #pragma GCC optimize (\"O3\")\n   57: int writetospi(uint16 headerLength, const uint8 *headerBuffer, uint32 bodylength, const uint8 *bodyBuffer)\n   58  {\n   59  \n   ..\n   89  \n   90      return 0;\n   91: } // end writetospi()\n   92  \n   93  \n\n6 matches across 3 files\n",
+			"file": "examples/ex_06a_ss_twr_init/main.c",
 			"settings":
 			{
-				"buffer_size": 2733,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
+				"buffer_size": 14525,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/adwait/Workspace/pulsar/data/pid/pid_1_0_100.csv",
+			"settings":
+			{
+				"buffer_size": 1020,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -261,10 +264,43 @@
 		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01",
 		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples",
 		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_01a_simple_tx",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_02a_simple_rx",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_03a_tx_wait_resp",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_05a_ds_twr_init",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_05b_ds_twr_resp",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_06a_ss_twr_init",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_06b_ss_twr_resp",
 		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform"
 	],
 	"file_history":
 	[
+		"/Users/adwait/Workspace/pulsar/data/pid/pid_0_0_0.txt",
+		"/Users/adwait/Desktop/f_steer_loop_test_-20000000.csv",
+		"/Users/adwait/Desktop/f_steer_loop_test_20000000.csv",
+		"/Users/adwait/Workspace/pulsar/data/long_rel_freq_trace.txt",
+		"/Users/adwait/Desktop/steer_test_100pp12.csv",
+		"/Users/adwait/Desktop/f_steer_loop_test.txt",
+		"/Users/adwait/Desktop/f_steer_loop_test_2.txt",
+		"/Users/adwait/Desktop/stee_test_100pp12.txt",
+		"/Users/adwait/Desktop/freq_sample.txt",
+		"/Users/adwait/Desktop/f_10_15.txt",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_05b_ds_twr_resp/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_05a_ds_twr_init/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/decadriver/deca_regs.h",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_02a_simple_rx/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_03a_tx_wait_resp/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_06b_ss_twr_resp/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_01a_simple_tx/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_03d_tx_wait_resp_interrupts/main.c",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/examples/ex_07a_ack_data_tx/main.c",
+		"/Users/adwait/Workspace/pulsar/exp_1_2_plot.m",
+		"/Users/adwait/Workspace/pulsar/rtas_plot_allan_dev.m",
+		"/Users/adwait/Workspace/ta-18-349-f16/build_lab2.sh",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform/deca_spi.c",
+		"/Users/adwait/Workspace/testing/Adafruit_Python_SSD1306/setup.py",
+		"/Users/adwait/Workspace/testing/Adafruit_Python_SSD1306/examples/animate.py",
+		"/Users/adwait/Workspace/testing/Adafruit_Python_SSD1306/Adafruit_SSD1306/SSD1306.py",
+		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/platform/deca_mutex.c",
 		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_dspi/freertos_dspi.c",
 		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_hello/freertos_hello.c",
 		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_three_msg/src/main.c",
@@ -273,7 +309,6 @@
 		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_three_msg/src/pll_setup.c",
 		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_uart/freertos_uart.c",
 		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_queue/freertos_queue.c",
-		"/Users/adwait/Workspace/KDS/dw1000_api_rev2p01/decadriver/deca_regs.h",
 		"/Users/adwait/Workspace/pulsar_prop_aware_sync/pulsar.tex",
 		"/Users/adwait/Workspace/quals/abstract/Makefile",
 		"/Users/adwait/Workspace/ta-18-349-f16/writeups/lab1/lab1.tex",
@@ -366,37 +401,11 @@
 		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_off_freq_corr/armgcc/CMakeLists.txt",
 		"/Users/adwait/Workspace/sensys_16_demo/.gitignore",
 		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/armgcc/init.gdb",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/pulsar_board.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/rtos/freertos_8.2.3/Source/include/queue.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_sem/FreeRTOSConfig.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/rtos/freertos_8.2.3/Source/tasks.c",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/rtos/freertos_8.2.3/Source/portable/GCC/ARM_CM4F/port.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/FreeRTOSConfig.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_onboard_tw_init/src/main.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_three_msg/Makefile",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/port.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/devices/MK22F51212/dw1000_api_rev1p01/platform/port.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/devices/MK22F51212/dw1000_api_rev1p01/decadriver/deca_device.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/deca_sleep.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/pll_setup.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/lmx2571_regs.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/dw1000_registers.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/deca_spi.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/devices/MK22F51212/drivers/fsl_port.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/deca_spi.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/drivers/pll_setup.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/devices/MK22F51212/drivers/fsl_uart_freertos.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/devices/MK22F51212/utilities/fsl_debug_console.h",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_free_hello/armgcc/CMakeLists.txt",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_sync_test/src/main.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_free_hello/src/pulsar_board.h",
-		"/Users/adwait/Workspace/arm/Kinetis/kinetis_sdk/boards/frdmk22f/rtos_examples/freertos_uart/armgcc/CMakeLists.txt",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_free_hello/src/board.c",
-		"/Users/adwait/Workspace/arm/Kinetis/projects/console_menu/src/console_menu.c"
+		"/Users/adwait/Workspace/arm/Kinetis/projects/pulsar_freertos_uart/src/pulsar_board.h"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -416,6 +425,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"]",
+			"[",
+			"39",
+			"POLL_RX_TO_RESP_TX_DLY_UUS",
+			"DWT_START_RX_DELAYED",
+			"setrxtimeout",
+			"RX_RESP_TO_UUS",
+			"setrxtimeout",
+			"setdelayedtrx",
+			"DWT_START_TX_DELAYED",
+			"dc=None",
+			"dc=dc",
+			"dc=None",
+			"closespi",
 			"writetospi",
 			"openspi",
 			"ld",
@@ -516,13 +552,7 @@
 			"SCANF_FLOAT_ENABLE",
 			"PRINTF_FLOAT_ENABLE",
 			"printf_float_enable",
-			"UARTConsole_PrintfPaddingCharacter",
-			"func_ptr",
-			"UARTConsole_PrintfFormattedData",
-			"UARTConsole_Printf",
-			"UARTCONSOLE",
-			"gdb",
-			".S"
+			"UARTConsole_PrintfPaddingCharacter"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -530,6 +560,21 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
 			"DeviceId",
 			"GccDeviceId",
 			"SdkDeviceId",
@@ -555,46 +600,19 @@
 			[
 				{
 					"buffer": 0,
+					"file": "examples/ex_05b_ds_twr_resp/main.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 21749,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "platform/deca_spi.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3375,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1640,
-								1640
+								6400,
+								6400
 							]
 						],
 						"settings":
@@ -604,7 +622,37 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 982.0,
+						"translation.y": 947.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/ex_06b_ss_twr_resp/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7088,
+								7275
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2537.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -612,27 +660,29 @@
 				},
 				{
 					"buffer": 2,
-					"file": "platform/deca_mutex.c",
+					"file": "examples/ex_06a_ss_twr_init/main.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3310,
+						"buffer_size": 14525,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2206,
-								2206
+								5379,
+								5472
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.sublime-syntax"
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 552.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -640,85 +690,27 @@
 				},
 				{
 					"buffer": 3,
+					"file": "/Users/adwait/Workspace/pulsar/data/pid/pid_1_0_100.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2733,
+						"buffer_size": 1020,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										256,
-										263
-									],
-									[
-										434,
-										441
-									],
-									[
-										574,
-										581
-									],
-									[
-										941,
-										948
-									],
-									[
-										1119,
-										1126
-									],
-									[
-										1460,
-										1470
-									],
-									[
-										1768,
-										1778
-									],
-									[
-										1902,
-										1912
-									],
-									[
-										2363,
-										2373
-									],
-									[
-										2507,
-										2517
-									],
-									[
-										2678,
-										2688
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								1297,
-								1297
+								340,
+								340
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 636.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -770,7 +762,7 @@
 	"project": "dw_api_r2p1.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":

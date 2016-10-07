@@ -1,4 +1,78 @@
-01:36:17 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+21:26:18 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+make -j3 all 
+Building file: ../source/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/main.d" -MT"source/main.o" -c -o "source/main.o" "../source/main.c"
+Finished building: ../source/main.c
+ 
+Building target: pulsar_freq_sync_child.elf
+Invoking: Cross ARM C++ Linker
+arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_freq_sync_child.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_freq_sync_child.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
+Finished building target: pulsar_freq_sync_child.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O ihex "pulsar_freq_sync_child.elf"  "pulsar_freq_sync_child.hex"
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
+   text	   data	    bss	    dec	    hex	filename
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
+Finished building: pulsar_freq_sync_child.siz
+Finished building: pulsar_freq_sync_child.hex
+ 
+ 
+21:26:24 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+make -j3 all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
+   text	   data	    bss	    dec	    hex	filename
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
+Finished building: pulsar_freq_sync_child.siz
+ 
+21:31:35 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+make -j3 all 
+Building file: ../source/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/main.d" -MT"source/main.o" -c -o "source/main.o" "../source/main.c"
+Finished building: ../source/main.c
+ 
+Building target: pulsar_freq_sync_child.elf
+Invoking: Cross ARM C++ Linker
+arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_freq_sync_child.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_freq_sync_child.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
+Finished building target: pulsar_freq_sync_child.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-objcopy -O ihex "pulsar_freq_sync_child.elf"  "pulsar_freq_sync_child.hex"
+arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
+   text	   data	    bss	    dec	    hex	filename
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
+Finished building: pulsar_freq_sync_child.siz
+ 
+Finished building: pulsar_freq_sync_child.hex
+ 
+21:34:33 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+make -j3 all 
+Building file: ../source/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/main.d" -MT"source/main.o" -c -o "source/main.o" "../source/main.c"
+Finished building: ../source/main.c
+ 
+Building target: pulsar_freq_sync_child.elf
+Invoking: Cross ARM C++ Linker
+arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_freq_sync_child.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_freq_sync_child.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
+Finished building target: pulsar_freq_sync_child.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-objcopy -O ihex "pulsar_freq_sync_child.elf"  "pulsar_freq_sync_child.hex"
+arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
+   text	   data	    bss	    dec	    hex	filename
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
+Finished building: pulsar_freq_sync_child.siz
+ 
+Finished building: pulsar_freq_sync_child.hex
+ 
+21:37:27 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
 make -j3 all 
 Building file: ../source/main.c
 Invoking: Cross ARM C Compiler
@@ -15,16 +89,16 @@ Invoking: Cross ARM GNU Create Flash Image
 arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
 arm-none-eabi-objcopy -O ihex "pulsar_freq_sync_child.elf"  "pulsar_freq_sync_child.hex"
    text	   data	    bss	    dec	    hex	filename
-  55760	    144	  15988	  71892	  118d4	pulsar_freq_sync_child.elf
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
 Finished building: pulsar_freq_sync_child.siz
 Finished building: pulsar_freq_sync_child.hex
  
  
-01:36:32 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
+21:38:03 **** Incremental Build of configuration Debug for project pulsar_freq_sync_child ****
 make -j3 all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "pulsar_freq_sync_child.elf"
    text	   data	    bss	    dec	    hex	filename
-  55760	    144	  15988	  71892	  118d4	pulsar_freq_sync_child.elf
+  62144	    212	  15964	  78320	  131f0	pulsar_freq_sync_child.elf
 Finished building: pulsar_freq_sync_child.siz
  

@@ -38,6 +38,8 @@
  *****************************************************************************/
 
 #include <string.h>
+#include <math.h>
+#include <stdio.h>
 
 #include "pulsar_board.h"
 #include "pin_mux.h"
@@ -216,6 +218,7 @@ int main(void) {
 	NVIC_SetPriority(PORTC_IRQn, 5); // 5 is the max allowed interrupt priority
 	NVIC_SetPriority(UART1_RX_TX_IRQn, 5);	// for CSAC UART interrupt
 	NVIC_SetPriority(SPI1_IRQn, 5);	// for PLL SPI interrupt
+	NVIC_SetPriority(SPI0_IRQn, 5);	// for DW SPI interrupt
 
 
 	/* Create RTOS task */
@@ -237,7 +240,7 @@ int main(void) {
 
 	xTaskCreate(messenger_task, "messenger", configMINIMAL_STACK_SIZE, NULL, application_PRIORITY, tasks[MESSENGER_TASK]);
 
-	xTaskCreate(discipline_task, "disc", configMINIMAL_STACK_SIZE, NULL, worker_PRIORITY, tasks[DISCIPLINE_TASK]);
+	xTaskCreate(discipline_task, "disc", configMINIMAL_STACK_SIZE + 200, NULL, application_PRIORITY, tasks[DISCIPLINE_TASK]);
 
 	vTaskStartScheduler();
 
@@ -331,14 +334,18 @@ static void heartbeat_task(void *pvParameters) {
 #define CSAC_LOCKED 0
 
 static const uint8_t csacStatusRequest[4] = "!^\r\n";
+static const uint8_t csacDisableDiscipline[5] = "!Md\r\n";
+volatile TickType_t timeout = 20;
+size_t nRecv = 0;
+uint8_t csacRecvBuffer[1];
+volatile size_t totalBytes = 0;
 
 int csac_get_state(uart_rtos_handle_t *rtos_uart_handle) {
 	int csac_state = -1;
 	bool first = true;
-	size_t nRecv = 0;
-	uint8_t csacRecvBuffer[1];
-	size_t totalBytes = 0;
-	TickType_t timeout = 20;
+
+
+
 
 	// flush UART buffers
 	// TODO: there should be a better way of handling this
@@ -351,6 +358,7 @@ int csac_get_state(uart_rtos_handle_t *rtos_uart_handle) {
 
 	// send telemetry request
 	csac_send(rtos_uart_handle, csacStatusRequest, 4);
+	timeout = 20;
 
 	// listen to UART and parse response
 	while(totalBytes < 128) {	// the 128 character limit is to make sure string runoffs dont mess up communications
@@ -376,6 +384,9 @@ int csac_get_state(uart_rtos_handle_t *rtos_uart_handle) {
 
 static void csac_watcher_task(void *pvParameters) {
 	uint8_t buf[8];
+//	TickType_t timeout = 20;
+	size_t nRecv = 0;
+	uint8_t csacRecvBuffer[1];
 
 	// initialize lock pin for later use
 //	GPIO_PinInit(BOARD_CSAC_GPIO, BOARD_CSAC_LOCK_PIN, &(gpio_pin_config_t){kGPIO_DigitalInput, 0});
@@ -386,6 +397,16 @@ static void csac_watcher_task(void *pvParameters) {
 	while(true) {
 
 		if(csac_get_state(&csac_uart_handle) == CSAC_LOCKED) {
+
+			// disable disciplining
+			csac_send(&csac_uart_handle, csacDisableDiscipline, 5);		// this command disables disciplining from PPS
+			while(csac_receive_timeout(&csac_uart_handle, csacRecvBuffer, 1, &nRecv, timeout) == kStatus_Success) {
+				nRecv = 0;
+				if(csacRecvBuffer[0] == (uint8_t) '\n') {
+					break;
+				}
+			}
+
 			xSemaphoreGive(semaphore[CSAC_PLL_OK_SEM]);
 			PRINTF("[%u] CSAC lock detected\r\n", xTaskGetTickCount());
 			vTaskSuspend(NULL);		// replace this with something nicer once failure handling is dealt with
@@ -1105,57 +1126,235 @@ static void messenger_task(void *pvParameters) {
  * DISCIPLINE section
  *****************************************************************************/
 
-volatile uint32_t message_no[2];
-volatile uint64_t beacon_tx[2];
-volatile uint64_t beacon_rx[2];
-volatile uint64_t resp_tx[2];
-volatile uint64_t resp_rx[2];
+struct time_sample_struct {
+	volatile uint32_t msg_no;
+	volatile uint64_t beacon_tx;
+	volatile uint64_t beacon_rx;
+	volatile uint64_t last_resp_rx;
+	volatile uint64_t next_resp_tx;
+};
+
+struct time_sample_struct sample[2];
+struct time_sample_struct correction_factor;
+
+
+//static const uint8_t csacTestSteer[11] = "!FD100000\r\n";
+static const uint8_t csacSteerQuery[5] = "!F?\r\n";
+static uint8_t csacFrequencyRequest[15];	// buffer to construct query. one additional character for \0 should not be sent to the CSAC
+
+static void apply_time_correction(volatile uint64_t *new_event, volatile uint64_t *previous_event, volatile uint64_t *correction) {
+	if(*new_event + *correction < *previous_event) {
+		// correction factor should be updated
+		*correction = (*previous_event - *new_event) & 0xFFFFFF0000000000ULL;
+		if(*new_event + *correction < *previous_event) {
+			*correction += (1ULL<<40);
+		}
+	}
+	*new_event += *correction;
+}
+
+static long csac_get_freq_steer() {
+	char buf[18];
+	long f = 0;
+
+	timeout = 20;
+	totalBytes = 0;
+	memset((void *) buf, 0, 17);	// clear buffer
+	csacRecvBuffer[0] = 0;
+
+	// flush UART buffers
+	// TODO: there should be a better way of handling this
+	while(true) {
+		nRecv = 0;
+		if(csac_receive_timeout(&csac_uart_handle, csacRecvBuffer, 1, &nRecv, 0) != kStatus_Success) {
+			break;
+		}
+	}
+
+	// send steer query
+	csac_send(&csac_uart_handle, csacSteerQuery, 5);
+
+	// listen to UART and parse response
+	while(totalBytes < 17) {
+//		PRINTF("*");
+		nRecv = 0;
+		if(csac_receive_timeout(&csac_uart_handle, csacRecvBuffer, 1, &nRecv, timeout) == kStatus_Success) {
+			buf[totalBytes] = csacRecvBuffer[0];
+			totalBytes++;
+			timeout = 2;
+			if(csacRecvBuffer[0] == (uint8_t) '\n') {
+				break;
+			}
+		} else {
+			// UART receive timed out. No response can be expected.
+			PRINTF("[%u] timeout\r\n",xTaskGetTickCount());
+			break;
+		}
+	}
+	buf[totalBytes] = '\0';
+	sscanf(buf, "Steer = %ld\r\n", &f);
+	return f;
+
+}
+
+static void csac_apply_absolute_steer(long steer_val) {
+	int query_size = 0;
+
+	query_size = sprintf((void *) csacFrequencyRequest,"!FA%ld\r\n", (long) steer_val);
+	if(query_size > 0 && query_size < 15) {
+		csac_send(&csac_uart_handle, (uint8_t *) csacFrequencyRequest, query_size);
+	}
+}
+
+struct SPid
+{
+	double dState;      	// Last position input
+	double iState;      	// Integrator state
+	double iMax, iMin;
+	// Maximum and minimum allowable integrator state
+	double	iGain,    	// integral gain
+			pGain,    	// proportional gain
+			dGain;     	// derivative gain
+};
+
+struct SPid csacPID = {
+		.dState = -20000000.0,
+		.iState = 0,
+		.iMax = 10000000.0,
+		.iMin = -10000000.0,
+		.iGain = 0.1,
+		.pGain = 0.1,
+		.dGain = 25,
+};
+
+double UpdatePID(struct SPid *pid, double error, double position) {
+	double pTerm, dTerm, iTerm;
+	pTerm = pid->pGain * error;
+	// calculate the proportional term
+	// calculate the integral state with appropriate limiting
+	pid->iState += error;
+	if (pid->iState > pid->iMax) {
+		pid->iState = pid->iMax;
+	} else if (pid->iState < pid->iMin) {
+		pid->iState = pid->iMin;
+	}
+	iTerm = pid->iGain * pid->iState;  // calculate the integral term
+	dTerm = pid->dGain * (position - pid->dState);
+	pid->dState = position;
+	return (pTerm + iTerm - dTerm);
+}
 
 static void discipline_task(void *pvParameters) {
 
-	bool first = true;
+	int samples_in_mem = 0;
+	memset((void*) sample, 0, 2*sizeof(struct time_sample_struct)); // clear memory for samples
+	memset((void*) &correction_factor, 0 , sizeof(struct time_sample_struct));	// set all
 	int64_t relative_freq_err;
+	uint64_t tof;
+	int64_t phase_offset;
+	long phase_offset_nsec;
+	long applied_f_correction;
+	bool controller_enabled = false;	// do not start the controller at the beginning
+//	uint64_t diff;
 
 	while(true) {
 		// wait for new values
+
+//		PRINTF("[%u] waiting\r\n", xTaskGetTickCount());
 		xSemaphoreTake(semaphore[MSG_DISC_OK_SEM], portMAX_DELAY);
+//		PRINTF("[%u] getting sample\r\n", xTaskGetTickCount());
 
-		// update our values
-		message_no[1] 	= rx_msg_no;
-		beacon_tx[1] 	= parent_tx_timestamp;		// already corrected
-		beacon_rx[1] 	= local_rx_timestamp;		// needs correction for overflow
-		resp_tx[1] 		= local_tx_timestamp;		// needs correction for overflow
-		resp_rx[1] 		= previous_rx_timestamp;	// needs correction for overflow
+		// update our values ie take a sample
+		sample[1].msg_no = rx_msg_no;
+		sample[1].beacon_tx = parent_tx_timestamp;
+		sample[1].beacon_rx = local_rx_timestamp;
+		sample[1].last_resp_rx = previous_rx_timestamp;
+		sample[1].next_resp_tx = local_tx_timestamp;
 
-		if(!first) {
+		if(samples_in_mem < 2) {
+			samples_in_mem++;
+			applied_f_correction = csac_get_freq_steer();	// bootstrap
+		}
+
+		apply_time_correction(&(sample[1].beacon_rx), &(sample[0].beacon_rx), &(correction_factor.beacon_rx));
+		apply_time_correction(&(sample[1].last_resp_rx), &(sample[0].last_resp_rx), &(correction_factor.last_resp_rx));
+		apply_time_correction(&(sample[1].next_resp_tx), &(sample[0].next_resp_tx), &(correction_factor.next_resp_tx));
+
+//		vTaskDelay(200);
+
+		if(samples_in_mem > 1) {
+
 			/*
-			 * Frequency estimate section
+			 * Only process things if we have enough samples
 			 */
-//			PRINTF("[%u] processing msg %u, %u\r\n", xTaskGetTickCount(),message_no[1], message_no[0]);
-//			relative_freq_err = ((int64_t)(beacon_tx[1] - beacon_tx[0]) - (int64_t)(beacon_rx[1] - beacon_rx[0]))*(1000000000000000LL)/((int64_t)(beacon_rx[1] - beacon_rx[0]));
-			relative_freq_err = ((int64_t)(beacon_tx[1] - beacon_tx[0]) - (int64_t)(beacon_rx[1] - beacon_rx[0]));
+
+
+			/*
+			 * Frequency estimate section. In parts per 10^15
+			 */
+			relative_freq_err = (((int64_t)(sample[1].beacon_tx - sample[0].beacon_tx) - (int64_t)(sample[1].beacon_rx - sample[0].beacon_rx))*(1000000000000000LL))/((int64_t)(sample[1].beacon_rx - sample[0].beacon_rx));
+
+			/*
+			 * This is our control loop.
+			 * currently just a simple exponential sum at alpha = 0.1
+			 */
+			if(!controller_enabled && (xTaskGetTickCount() > 10000)) {
+				PRINTF("\r\n");
+				controller_enabled =true;
+			}
+
+			if(controller_enabled) {
+				applied_f_correction = UpdatePID(&csacPID, (double) relative_freq_err, 0.0);
+			} else {
+				applied_f_correction = 20000000;
+			}
+
+			// clip correction values
+			if(applied_f_correction > 20000000) {
+				applied_f_correction = 20000000;
+			} else if(applied_f_correction < -20000000) {
+				applied_f_correction = -20000000;
+			}
 
 			/*
 			 * TOF estimation section
 			 */
+			tof = (sample[1].beacon_rx + sample[1].last_resp_rx - sample[0].next_resp_tx - sample[1].beacon_tx)/2;
+			// TODO: show 3 message sampling as well
 
 			/*
 			 * Phase estimation section
 			 */
-			PRINTF("[%u] %u, %ld\r\n", xTaskGetTickCount(), message_no[1], (long) relative_freq_err);
+			phase_offset = ((int64_t) sample[1].beacon_tx - (int64_t) sample[1].beacon_rx) % (63897600000LL);
+
+			phase_offset_nsec = (long)((phase_offset*40000LL/39LL)>>16);
+
+//			// try applying a fake correction once
+//			if(!test_correction && (xTaskGetTickCount() > (120000))) {
+//				csac_send(&csac_uart_handle, csacTestSteer, 11);
+//
+//				PRINTF("[%u] applying correction 100pp12\r\n", xTaskGetTickCount());
+//				test_correction = true;
+//
+//			}
+
+//			csac_get_freq_steer();
+
+			csac_apply_absolute_steer(applied_f_correction);
 
 
-		} else {
-			first = false;
+//			PRINTF("[%u] size = %d: %s", xTaskGetTickCount(), query_size, csacFrequencyRequest);
+
+			PRINTF("%u, %u, %d, %d, %d, %d\r\n", xTaskGetTickCount(), sample[1].msg_no, (long) relative_freq_err, (long) tof, phase_offset_nsec, applied_f_correction);
+
+
+
+//			PRINTF("[%u] we got here\r\n", xTaskGetTickCount());
 		}
 
 		/*
 		 * estimations complete. updates last few values
 		 */
-		message_no[0] = message_no[1];
-		beacon_tx[0] = beacon_tx[1];
-		beacon_rx[0] = beacon_rx[1];
-		resp_tx[0] = resp_tx[1];
-		resp_rx[0] = resp_rx[1];
+		sample[0] = sample[1];
 	}
 }

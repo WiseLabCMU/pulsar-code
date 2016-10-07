@@ -51,6 +51,7 @@
 		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID"/>
 		<item value="true" key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="/Users/adwait/Downloads/eclipse_temp/"/>
 			<item value="/Users/adwait/Downloads/eclipse_temp/csac_ping"/>
 			<item value="/Users/adwait/Downloads/eclipse_temp"/>
 			<item value="/Users/adwait/Downloads/eclipse_test_export"/>
