@@ -1218,7 +1218,8 @@ struct SPid
 };
 
 struct SPid csacPID = {
-		.dState = -20000000.0,
+//		.dState = -20000000.0,
+		.dState = 0,
 		.iState = 0,
 		.iMax = 10000000.0,
 		.iMin = -10000000.0,
@@ -1252,10 +1253,13 @@ static void discipline_task(void *pvParameters) {
 	int64_t relative_freq_err;
 	uint64_t tof;
 	int64_t phase_offset;
+	uint64_t phase_offset_unsigned;
 	long phase_offset_nsec;
 	long applied_f_correction;
 	bool controller_enabled = false;	// do not start the controller at the beginning
 //	uint64_t diff;
+
+	GPIO_PinInit(BOARD_PLL_IO_GPIO, BOARD_PLL_IO_TRCTL_PIN, &(gpio_pin_config_t){kGPIO_DigitalOutput, (0U)});	// initialize TRCTL pin to low as experiment marker
 
 	while(true) {
 		// wait for new values
@@ -1299,14 +1303,14 @@ static void discipline_task(void *pvParameters) {
 			 * currently just a simple exponential sum at alpha = 0.1
 			 */
 			if(!controller_enabled && (xTaskGetTickCount() > 10000)) {
-				PRINTF("\r\n");
+				GPIO_SetPinsOutput(BOARD_PLL_IO_GPIO, 1U << BOARD_PLL_IO_TRCTL_PIN);
 				controller_enabled =true;
 			}
 
 			if(controller_enabled) {
 				applied_f_correction = UpdatePID(&csacPID, (double) relative_freq_err, 0.0);
 			} else {
-				applied_f_correction = 20000000;
+//				applied_f_correction = 20000000;
 			}
 
 			// clip correction values
@@ -1326,6 +1330,7 @@ static void discipline_task(void *pvParameters) {
 			 * Phase estimation section
 			 */
 			phase_offset = ((int64_t) sample[1].beacon_tx - (int64_t) sample[1].beacon_rx) % (63897600000LL);
+			phase_offset_unsigned = sample[1].beacon_tx - sample[1].beacon_rx;
 
 			phase_offset_nsec = (long)((phase_offset*40000LL/39LL)>>16);
 
@@ -1345,7 +1350,7 @@ static void discipline_task(void *pvParameters) {
 
 //			PRINTF("[%u] size = %d: %s", xTaskGetTickCount(), query_size, csacFrequencyRequest);
 
-			PRINTF("%u, %u, %d, %d, %d, %d\r\n", xTaskGetTickCount(), sample[1].msg_no, (long) relative_freq_err, (long) tof, phase_offset_nsec, applied_f_correction);
+			PRINTF("%u, %u, %d, %d, %d, " TS64_XSTR ", %d\r\n", xTaskGetTickCount(), sample[1].msg_no, (long) relative_freq_err, (long) tof, phase_offset_nsec, TS64_TO_TS32(phase_offset_unsigned,1), TS64_TO_TS32(phase_offset_unsigned,0) ,applied_f_correction);
 
 
 

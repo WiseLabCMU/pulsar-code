@@ -3,31 +3,36 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="287" key="DIALOG_WIDTH"/>
 		<item value="27" key="DIALOG_Y_ORIGIN"/>
-		<item value="914" key="DIALOG_X_ORIGIN"/>
 		<item value="411" key="DIALOG_HEIGHT"/>
+		<item value="914" key="DIALOG_X_ORIGIN"/>
 		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="DisableDis" key="selection"/>
+		<item value="phase_set" key="selection"/>
 		<list key="findhistory">
-			<item value="disableDis"/>
-			<item value="!^"/>
-			<item value="received beacon"/>
-			<item value="parse_good_beacon_message"/>
-			<item value="RX timeou"/>
-			<item value="beacon_msg"/>
-			<item value="messaging error"/>
-			<item value="parse_good_beacon"/>
+			<item value="phase_set"/>
+			<item value="offset"/>
+			<item value="setpoint"/>
+			<item value="recvd"/>
+			<item value="do we get"/>
+			<item value="do we get here?"/>
+			<item value="received some message"/>
+			<item value="messenger was started"/>
 		</list>
 		<list key="replacehistory">
+			<item value="reference_tx_timestamp"/>
 			<item value="headerBuffer"/>
 			<item value="bodylength"/>
 			<item value="headerLength"/>
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="365" key="DIALOG_Y_ORIGIN"/>
+		<item value="686" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

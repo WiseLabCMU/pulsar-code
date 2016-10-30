@@ -94,6 +94,7 @@ enum SEM_ID {
 	MSG_DISC_FAIL_SEM 	= 7,	// informs discipline thread of DW failure
 	DW_IRQ_SEM 			= 8,	// indicates IRQ event
 	DW_PPS_SEM 			= 9,	// indicates PPS event
+	DW_HB_SEM			= 10,	// indicates it is time to blink
 	SEM_N,
 };
 
@@ -301,6 +302,7 @@ static void heartbeat_task(void *pvParameters) {
 	HEARTBEAT_LED_INIT(LOGIC_LED_OFF);	// initialize heartbeat (red) LED as output in OFF state
 
 	while(true) {
+		xSemaphoreTake(semaphore[DW_HB_SEM], portMAX_DELAY);
 		beat_count++;
 		HEARTBEAT_LED_ON();
 		vTaskDelay((xHeartbeat_period * 10) / 100);
@@ -642,9 +644,9 @@ static void dw_watcher_task(void *pvParameters) {
  *****************************************************************************/
 
 // ID number for node
-#define NODE_ID 1
+#define NODE_ID 4
 //#define REFERENCE_ID	1
-#define CHILD_ID 2
+#define CHILD_ID 3
 
 // Type of node
 #define REFERENCE_NODE 	1
@@ -1062,6 +1064,7 @@ static void messenger_task(void *pvParameters) {
 			dwt_isr();
 
 			dwt_setinterrupt(DWT_INT_RFCG | DWT_INT_RPHE | DWT_INT_RFCE | DWT_INT_RFSL | DWT_INT_RFTO | DWT_INT_SFDT | DWT_INT_RXPTO, (uint8_t) 0);
+			xSemaphoreGive(semaphore[DW_HB_SEM]);
 
 			// print sufficient information for debugging
 			PRINTF("[%u] ref, %u, %u, " TS64_XSTR", " TS40_XSTR"\r\n", xTaskGetTickCount(), current_target, beacon_msg_no, TS64_TO_TS32(tx_timestamp,1), TS64_TO_TS32(tx_timestamp,0), TS64_TO_TS32(local_rx_timestamp,1), TS64_TO_TS32(local_rx_timestamp,0));

@@ -96,6 +96,7 @@ enum SEM_ID {
 	MSG_DISC_FAIL_SEM 	= 7,	// informs discipline thread of DW failure
 	DW_IRQ_SEM 			= 8,	// indicates IRQ event
 	DW_PPS_SEM 			= 9,	// indicates PPS event
+	DW_HB_SEM			= 10,	// indicates a message was sent so we should blink now
 	SEM_N,
 };
 
@@ -307,6 +308,7 @@ static void heartbeat_task(void *pvParameters) {
 	HEARTBEAT_LED_INIT(LOGIC_LED_OFF);	// initialize heartbeat (red) LED as output in OFF state
 
 	while(true) {
+		xSemaphoreTake(semaphore[DW_HB_SEM], portMAX_DELAY);
 		beat_count++;
 		HEARTBEAT_LED_ON();
 		vTaskDelay((xHeartbeat_period * 10) / 100);
@@ -315,7 +317,7 @@ static void heartbeat_task(void *pvParameters) {
 		HEARTBEAT_LED_ON();
 		vTaskDelay((xHeartbeat_period * 12) / 100);
 		HEARTBEAT_LED_OFF();
-		vTaskDelay((xHeartbeat_period * 65) / 100);	// wait for next cycle
+//		vTaskDelay((xHeartbeat_period * 65) / 100);	// wait for next cycle
 	}
 }
 
@@ -666,8 +668,8 @@ static void dw_watcher_task(void *pvParameters) {
  *****************************************************************************/
 
 // ID number for node
-#define NODE_ID 2
-#define REFERENCE_ID	1
+#define NODE_ID 3
+#define REFERENCE_ID	4
 
 // Type of node
 #define REFERENCE_NODE 	0
@@ -1087,15 +1089,17 @@ static void messenger_task(void *pvParameters) {
 				dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 0);	// disable frame sent interrupt
 			} else {
 
-				// message sent successfully
+				// message sent successfully=
 				dwt_isr();
 				dwt_setinterrupt(DWT_INT_TFRS, (uint8_t) 0);
 
+				xSemaphoreGive(semaphore[DW_HB_SEM]);
 				parse_good_beacon_message();
 
 				// process things here before moving to next round of listening
 //				PRINTF("[%u] sent response %u: " TS64_XSTR"\r\n", xTaskGetTickCount(), rx_msg_no, TS64_TO_TS32(local_tx_timestamp,1), TS64_TO_TS32(local_tx_timestamp,0));
 				xSemaphoreGive(semaphore[MSG_DISC_OK_SEM]);
+
 			}
 
 			system_state = CH_SEARCH_BEACON;		// listen for next beacon
@@ -1140,6 +1144,7 @@ struct time_sample_struct correction_factor;
 
 //static const uint8_t csacTestSteer[11] = "!FD100000\r\n";
 static const uint8_t csacSteerQuery[5] = "!F?\r\n";
+static uint8_t csacFrequencyRequest[15];	// buffer to construct query. one additional character for \0 should not be sent to the CSAC
 
 static void apply_time_correction(volatile uint64_t *new_event, volatile uint64_t *previous_event, volatile uint64_t *correction) {
 	if(*new_event + *correction < *previous_event) {
@@ -1152,8 +1157,8 @@ static void apply_time_correction(volatile uint64_t *new_event, volatile uint64_
 	*new_event += *correction;
 }
 
-static void csac_get_freq_steer() {
-	volatile char buf[17];
+static long csac_get_freq_steer() {
+	char buf[18];
 	long f = 0;
 
 	timeout = 20;
@@ -1180,34 +1185,88 @@ static void csac_get_freq_steer() {
 		if(csac_receive_timeout(&csac_uart_handle, csacRecvBuffer, 1, &nRecv, timeout) == kStatus_Success) {
 			buf[totalBytes] = csacRecvBuffer[0];
 			totalBytes++;
-//			timeout = 2;
+			timeout = 2;
 			if(csacRecvBuffer[0] == (uint8_t) '\n') {
 				break;
 			}
 		} else {
 			// UART receive timed out. No response can be expected.
-//			PRINTF("[%u] timeout\r\n",xTaskGetTickCount());
+			PRINTF("[%u] timeout\r\n",xTaskGetTickCount());
 			break;
 		}
 	}
+	buf[totalBytes] = '\0';
+	sscanf(buf, "Steer = %ld\r\n", &f);
+	return f;
 
-//	PRINTF("bytes %u\r\n", totalBytes);
-
-//	sscanf(buf, "Steer = %ld\r\n", &f);
 }
 
+static void csac_apply_absolute_steer(long steer_val) {
+	int query_size = 0;
+
+	query_size = sprintf((void *) csacFrequencyRequest,"!FA%ld\r\n", (long) steer_val);
+	if(query_size > 0 && query_size < 15) {
+		csac_send(&csac_uart_handle, (uint8_t *) csacFrequencyRequest, query_size);
+	}
+}
+
+struct SPid
+{
+	double dState;      	// Last position input
+	double iState;      	// Integrator state
+	double iMax, iMin;
+	// Maximum and minimum allowable integrator state
+	double	iGain,    	// integral gain
+			pGain,    	// proportional gain
+			dGain;     	// derivative gain
+};
+
+struct SPid csacPID = {
+//		.dState = -20000000.0,
+		.dState = 0,
+		.iState = 0,
+		.iMax = 10000000.0,
+		.iMin = -10000000.0,
+		.iGain = -300,
+		.pGain = -12000,
+		.dGain = 3000000,
+};
+
+double UpdatePID(struct SPid *pid, double error, double position) {
+	double pTerm, dTerm, iTerm;
+	pTerm = pid->pGain * error;
+	// calculate the proportional term
+	// calculate the integral state with appropriate limiting
+	pid->iState += error;
+	if (pid->iState > pid->iMax) {
+		pid->iState = pid->iMax;
+	} else if (pid->iState < pid->iMin) {
+		pid->iState = pid->iMin;
+	}
+	iTerm = pid->iGain * pid->iState;  // calculate the integral term
+	dTerm = pid->dGain * (position - pid->dState);
+	pid->dState = position;
+	return (pTerm + iTerm - dTerm);
+}
 
 static void discipline_task(void *pvParameters) {
 
 	int samples_in_mem = 0;
 	memset((void*) sample, 0, 2*sizeof(struct time_sample_struct)); // clear memory for samples
 	memset((void*) &correction_factor, 0 , sizeof(struct time_sample_struct));	// set all
-	int64_t relative_freq_err;
+//	int64_t relative_freq_err;
 	uint64_t tof;
 	int64_t phase_offset;
+//	uint64_t phase_offset_unsigned;
+	long phase_offset_pll;
+	long phase_setpoint;
 	long phase_offset_nsec;
-//	bool test_correction = false;
+	long applied_f_correction;
+	bool controller_enabled = true;	// do not start the controller at the beginning
+	bool first_phase = true;
 //	uint64_t diff;
+
+	GPIO_PinInit(BOARD_PLL_IO_GPIO, BOARD_PLL_IO_TRCTL_PIN, &(gpio_pin_config_t){kGPIO_DigitalOutput, (0U)});	// initialize TRCTL pin to low as experiment marker
 
 	while(true) {
 		// wait for new values
@@ -1225,13 +1284,14 @@ static void discipline_task(void *pvParameters) {
 
 		if(samples_in_mem < 2) {
 			samples_in_mem++;
+			applied_f_correction = csac_get_freq_steer();	// bootstrap
 		}
 
 		apply_time_correction(&(sample[1].beacon_rx), &(sample[0].beacon_rx), &(correction_factor.beacon_rx));
 		apply_time_correction(&(sample[1].last_resp_rx), &(sample[0].last_resp_rx), &(correction_factor.last_resp_rx));
 		apply_time_correction(&(sample[1].next_resp_tx), &(sample[0].next_resp_tx), &(correction_factor.next_resp_tx));
 
-		vTaskDelay(200);
+//		vTaskDelay(200);
 
 		if(samples_in_mem > 1) {
 
@@ -1241,21 +1301,56 @@ static void discipline_task(void *pvParameters) {
 
 
 			/*
-			 * Frequency estimate section
+			 * Frequency estimate section. In parts per 10^15
 			 */
-			relative_freq_err = (((int64_t)(sample[1].beacon_tx - sample[0].beacon_tx) - (int64_t)(sample[1].beacon_rx - sample[0].beacon_rx))*(1000000000000000LL))/((int64_t)(sample[1].beacon_rx - sample[0].beacon_rx));
+//			relative_freq_err = (((int64_t)(sample[1].beacon_tx - sample[0].beacon_tx) - (int64_t)(sample[1].beacon_rx - sample[0].beacon_rx))*(1000000000000000LL))/((int64_t)(sample[1].beacon_rx - sample[0].beacon_rx));
 
 			/*
 			 * TOF estimation section
 			 */
 			tof = (sample[1].beacon_rx + sample[1].last_resp_rx - sample[0].next_resp_tx - sample[1].beacon_tx)/2;
+			// TODO: show 3 message sampling as well
 
 			/*
 			 * Phase estimation section
 			 */
 			phase_offset = ((int64_t) sample[1].beacon_tx - (int64_t) sample[1].beacon_rx) % (63897600000LL);
+//			phase_offset_unsigned = sample[1].beacon_tx - sample[1].beacon_rx;
+			phase_offset_pll = (long) sample[1].beacon_tx - (long) sample[1].beacon_rx;
 
 			phase_offset_nsec = (long)((phase_offset*40000LL/39LL)>>16);
+
+			if(first_phase) {
+				phase_setpoint = phase_offset_pll;
+//				phase_setpoint = 750000000;
+				first_phase = false;
+				PRINTF("set = %d\r\n", phase_setpoint);
+			}
+
+			/*
+			 * This is our control loop.
+			 * currently just a simple exponential sum at alpha = 0.1
+			 */
+//			if(!controller_enabled && (xTaskGetTickCount() > 10000)) {
+//				GPIO_SetPinsOutput(BOARD_PLL_IO_GPIO, 1U << BOARD_PLL_IO_TRCTL_PIN);
+//				controller_enabled =true;
+//			}
+
+			if(controller_enabled) {
+				applied_f_correction = UpdatePID(&csacPID, (double) (phase_setpoint - phase_offset_pll), (double) 0);
+//				applied_f_correction = UpdatePID(&csacPID, (double) (phase_setpoint - phase_offset_pll), (double) phase_setpoint);
+			} else {
+//				applied_f_correction = 20000000;
+			}
+
+			// clip correction values
+			if(applied_f_correction > 20000000) {
+				applied_f_correction = 20000000;
+			} else if(applied_f_correction < -20000000) {
+				applied_f_correction = -20000000;
+			}
+
+
 
 //			// try applying a fake correction once
 //			if(!test_correction && (xTaskGetTickCount() > (120000))) {
@@ -1266,7 +1361,14 @@ static void discipline_task(void *pvParameters) {
 //
 //			}
 
-			PRINTF("[%u] %u, %d, %d, %d" "\r\n", xTaskGetTickCount(), sample[1].msg_no, (long) relative_freq_err, (long) tof, phase_offset_nsec);
+//			csac_get_freq_steer();
+
+			csac_apply_absolute_steer(applied_f_correction);
+
+
+//			PRINTF("[%u] size = %d: %s", xTaskGetTickCount(), query_size, csacFrequencyRequest);
+
+			PRINTF("%u, %u, %d, %d, %d, %d\r\n", xTaskGetTickCount(), sample[1].msg_no, (phase_setpoint - phase_offset_pll), (long) tof, phase_offset_nsec ,applied_f_correction);
 
 
 
