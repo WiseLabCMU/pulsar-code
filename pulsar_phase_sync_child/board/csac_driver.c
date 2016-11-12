@@ -14,7 +14,34 @@
 static uint32_t old_uart_irq_prio = 0;
 static uart_handle_t csacUartHandle;
 
+/******************************************************************************
+ * UART SETTINGS
+ *****************************************************************************/
+
+#define CSAC_LOCKED 0
+
+
+#define CSAC_TX_BUFFER_SIZE 16	//
+#define CSAC_RX_BUFFER_SIZE 64	// size of UART receive ring buffer.
+								// note that we only get N-1 chars to work with
+
+// buffers for CSAC communications
+static uint8_t csacTxBuffer[CSAC_TX_BUFFER_SIZE];	// buffer for constructing transmit messages
+static uint8_t csacRxBuffer[CSAC_RX_BUFFER_SIZE];	// buffer for receive messages
+
+
+/*
+ * Set of CSAC commands
+ * TODO: Q. should this be a constant or be reconstructed
+ */
+
+static const uint8_t csacStatusRequest[1] = "^";
+static const uint8_t csacDisableDiscipline[2] = "Md";
+static const uint8_t csacEnableDiscipline[2] = "MD";
+
+// TODO: add function descriptions here
 static int UART_RTOS_Receive_wTimeout(uart_rtos_handle_t *handle, uint8_t *buffer, uint32_t length, size_t *received, TickType_t timeout);
+static int UART_RTOS_Clear_Pending(uart_rtos_handle_t *handle);
 
 /******************************************************************************
  * BASIC CSAC COMMUNICATION OPERATIONS
@@ -28,15 +55,17 @@ status_t csac_communication_init(uart_rtos_handle_t *csacRtosHandle, uint32_t sr
 			.baudrate = 57600,
 			.parity = kUART_ParityDisabled,
 			.stopbits = kUART_OneStopBit,
-			.buffer = buffer,
-			.buffer_size = buffer_size,
+			.buffer = buffer,				// ring buffer
+			.buffer_size = buffer_size,		// ring buffer size
 	};
 
+	// save old IRQ priority so we can restore it later
 	old_uart_irq_prio = NVIC_GetPriority(BOARD_UART1_IRQn);
 	NVIC_SetPriority(BOARD_UART1_IRQn, 5);
 
 	status = UART_RTOS_Init(csacRtosHandle, &csacUartHandle, &uart_config);
 	if(status != kStatus_Success) {
+		// restore state back to wat it was before we attempted initialization
 		csac_communication_deinit(csacRtosHandle);
 	}
 	return status;
@@ -165,6 +194,36 @@ static int UART_RTOS_Receive_wTimeout(uart_rtos_handle_t *handle, uint8_t *buffe
     return retval;
 }
 
+/**
+ * Clears all remaining contents from
+ * @param handle
+ * @return
+ */
+static int UART_RTOS_Clear_Pending(uart_rtos_handle_t *handle) {
+	if (NULL == handle->base) {
+		/* Invalid handle. */
+		return kStatus_Fail;
+	}
+
+	if (pdFALSE == xSemaphoreTake(handle->rx_sem, 0)) {
+		/* We could not take the semaphore, exit with 0 data received */
+		return kStatus_Fail;
+	}
+	// we have the UART semaphore
+	// TODO: abort any active transfers
+	UART_TransferAbortReceive(handle->base, &csacUartHandle);
+
+	xEventGroupClearBits(handle->rx_event, RTOS_UART_COMPLETE);
+	memset(handle->rx_xfer.data, 0, handle->rx_xfer.dataSize);
+
+	// give back UART semaphore
+	if (pdFALSE == xSemaphoreGive(handle->rx_sem)) {
+		/* We could not post the semaphore, exit with error */
+		retval = kStatus_Fail;
+	}
+	return kStatus_Success;
+}
+
 /******************************************************************************
  * end of ADDITIONAL RTOS FUNCTIONS
  *****************************************************************************/
@@ -173,20 +232,41 @@ static int UART_RTOS_Receive_wTimeout(uart_rtos_handle_t *handle, uint8_t *buffe
  * CSAC OPERATIONS section
  *****************************************************************************/
 
-#define CSAC_TX_BUFFER_SIZE 15
-#define CSAC_RX_BUFFER_SIZE 64
 
-#define CSAC_LOCKED 0
 
-/*
- * Set of CSAC commands
+/**
+ * Unified function for all CSAC UART commands
+ * @param rtos_uart_handle
+ * @param cmd
+ * @return
  */
-static const uint8_t csacStatusRequest[4] = "!^\r\n";
-static const uint8_t csacDisableDiscipline[5] = "!Md\r\n";
-static const uint8_t csacEnableDiscipline[5] = "!MD\r\n";
+int csac_command(uart_rtos_handle_t *rtos_uart_handle, enum csac_command cmd, uint8_t* data) {
+	int ret_val;
+	size_t nRecv;
 
-static uint8_t csacTxBuffer[CSAC_TX_BUFFER_SIZE];	// buffer for constructing transmit messages
-static uint8_t csacRxBuffer[CSAC_RX_BUFFER_SIZE];	// buffer for receive messages
+	// TODO: flush RX buffer and it's contents here
+	csac_flush_rx_buffer();
+
+	switch(cmd) {
+		case cmd_getStatus:
+			ret_val = -1;	// set default return value to 0
+			nRecv = 0;		// set number of characters received to 0
+			// send status command
+			csac_send(rtos_uart_handle, "!" csacStatusRequest "\r\n",4);
+			// wait for response
+			// only grab the first character in the response. we don't really care about the rest
+			if(csac_receive_timeout(rtos_uart_handle, csacRxBuffer, 64, &nRecv, (TickType_t) 50) == kStatus_Success) {
+				ret_val = (int)csacRxBuffer[0] - (int)'0';
+			} else {
+				// didn't receive response
+				// handle error here?
+			}
+
+			break;
+		case cmd_NONE:
+		default:
+	}
+}
 
 int csac_get_state(uart_rtos_handle_t *rtos_uart_handle) {
 	int csac_state = -1;
@@ -253,7 +333,7 @@ long csac_get_freq_steer(uart_rtos_handle_t *rtos_uart_handle) {
 		if(csac_receive_timeout(rtos_uart_handle, &csacRxBuffer[index], 1, &nReceived, timeout) == kStatus_Success) {
 			index++;
 			timeout = 2;
-			if(csacRecvBuffer[index] == (uint8_t) '\n') {
+			if(csacRxBuffer[index] == (uint8_t) '\n') {
 				break;
 			}
 		} else {

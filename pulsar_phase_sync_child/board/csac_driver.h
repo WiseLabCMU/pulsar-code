@@ -14,6 +14,13 @@
 #include "fsl_uart_freertos.h"
 #include <stdint.h>
 
+// USEFUL DATA STRUCTURES
+enum csac_command {
+	cmd_NONE = 0,
+	cmd_getStatus = 1,
+	cmd_N
+};
+
 // TODO: define all the various CSAC states
 
 #define CSAC_LOCKED 0
