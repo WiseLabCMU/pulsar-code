@@ -718,7 +718,7 @@ enum msg_type {
 
 // Decawave radio configuration
 static dwt_config_t channel_config = {
-    2,               /* Channel number. */
+    5,               /* Channel number. */
     DWT_PRF_64M,     /* Pulse repetition frequency. */
     DWT_PLEN_1024,   /* Preamble length. */
     DWT_PAC32,       /* Preamble acquisition chunk size. Used in RX only. */

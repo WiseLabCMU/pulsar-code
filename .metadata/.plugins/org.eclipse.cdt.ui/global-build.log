@@ -1,30 +1,344 @@
-16:47:40 **** Incremental Build of configuration Debug for project pulsar_phase_sync_tof_test ****
+14:31:46 **** Clean-only build of configuration Debug for project pulsar_phase_sync_child_exp ****
+make -j3 clean 
+rm -rf  pulsar_phase_sync_child_exp.siz  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o  ./utilities/fsl_debug_console.d ./utilities/fsl_notifier.d ./utilities/fsl_sbrk.d  ./startup/system_MK22F51212.d  ./source/main.d  ./freertos/Source/portable/MemMang/heap_4.d  ./freertos/Source/portable/GCC/ARM_CM4F/port.d  ./freertos/Source/croutine.d ./freertos/Source/event_groups.d ./freertos/Source/list.d ./freertos/Source/queue.d ./freertos/Source/tasks.d ./freertos/Source/timers.d  ./drivers/deca_device.d ./drivers/deca_params_init.d ./drivers/fsl_adc16.d ./drivers/fsl_clock.d ./drivers/fsl_cmp.d ./drivers/fsl_common.d ./drivers/fsl_crc.d ./drivers/fsl_dac.d ./drivers/fsl_dmamux.d ./drivers/fsl_dspi.d ./drivers/fsl_dspi_edma.d ./drivers/fsl_dspi_freertos.d ./drivers/fsl_edma.d ./drivers/fsl_ewm.d ./drivers/fsl_flash.d ./drivers/fsl_flexbus.d ./drivers/fsl_ftm.d ./drivers/fsl_gpio.d ./drivers/fsl_i2c.d ./drivers/fsl_i2c_edma.d ./drivers/fsl_i2c_freertos.d ./drivers/fsl_llwu.d ./drivers/fsl_lptmr.d ./drivers/fsl_lpuart.d ./drivers/fsl_lpuart_edma.d ./drivers/fsl_lpuart_freertos.d ./drivers/fsl_pdb.d ./drivers/fsl_pit.d ./drivers/fsl_pmc.d ./drivers/fsl_rcm.d ./drivers/fsl_rnga.d ./drivers/fsl_rtc.d ./drivers/fsl_sai.d ./drivers/fsl_sai_edma.d ./drivers/fsl_sim.d ./drivers/fsl_smc.d ./drivers/fsl_uart.d ./drivers/fsl_uart_edma.d ./drivers/fsl_uart_freertos.d ./drivers/fsl_vref.d ./drivers/fsl_wdog.d  ./board/clock_config.d ./board/csac_driver.d ./board/deca_mutex.d ./board/deca_sleep.d ./board/deca_spi.d ./board/pin_mux.d ./board/pll_driver.d ./board/pulsar_board.d  pulsar_phase_sync_child_exp.hex  ./startup/startup_MK22F51212.d  pulsar_phase_sync_child_exp.elf
+ 
+14:31:46 **** Incremental Build of configuration Debug for project pulsar_phase_sync_child_exp ****
 make -j3 all 
+Building file: ../utilities/fsl_debug_console.c
+Building file: ../utilities/fsl_notifier.c
+Building file: ../utilities/fsl_sbrk.c
+Invoking: Cross ARM C Compiler
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"utilities/fsl_sbrk.d" -MT"utilities/fsl_sbrk.o" -c -o "utilities/fsl_sbrk.o" "../utilities/fsl_sbrk.c"
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"utilities/fsl_debug_console.d" -MT"utilities/fsl_debug_console.o" -c -o "utilities/fsl_debug_console.o" "../utilities/fsl_debug_console.c"
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"utilities/fsl_notifier.d" -MT"utilities/fsl_notifier.o" -c -o "utilities/fsl_notifier.o" "../utilities/fsl_notifier.c"
+Finished building: ../utilities/fsl_sbrk.c
+ 
+Building file: ../startup/startup_MK22F51212.S
+Invoking: Cross ARM GNU Assembler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -x assembler-with-cpp -MMD -MP -MF"startup/startup_MK22F51212.d" -MT"startup/startup_MK22F51212.o" -c -o "startup/startup_MK22F51212.o" "../startup/startup_MK22F51212.S"
+Finished building: ../startup/startup_MK22F51212.S
+ 
+Building file: ../startup/system_MK22F51212.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"startup/system_MK22F51212.d" -MT"startup/system_MK22F51212.o" -c -o "startup/system_MK22F51212.o" "../startup/system_MK22F51212.c"
+Finished building: ../utilities/fsl_notifier.c
+ 
 Building file: ../source/main.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"source/main.d" -MT"source/main.o" -c -o "source/main.o" "../source/main.c"
+Finished building: ../utilities/fsl_debug_console.c
+ 
+Finished building: ../startup/system_MK22F51212.c
+Building file: ../freertos/Source/portable/MemMang/heap_4.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/portable/MemMang/heap_4.d" -MT"freertos/Source/portable/MemMang/heap_4.o" -c -o "freertos/Source/portable/MemMang/heap_4.o" "../freertos/Source/portable/MemMang/heap_4.c"
+Building file: ../freertos/Source/portable/GCC/ARM_CM4F/port.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/portable/GCC/ARM_CM4F/port.d" -MT"freertos/Source/portable/GCC/ARM_CM4F/port.o" -c -o "freertos/Source/portable/GCC/ARM_CM4F/port.o" "../freertos/Source/portable/GCC/ARM_CM4F/port.c"
+Finished building: ../freertos/Source/portable/GCC/ARM_CM4F/port.c
+ 
+Finished building: ../freertos/Source/portable/MemMang/heap_4.c
+Building file: ../freertos/Source/croutine.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/croutine.d" -MT"freertos/Source/croutine.o" -c -o "freertos/Source/croutine.o" "../freertos/Source/croutine.c"
+Building file: ../freertos/Source/event_groups.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/event_groups.d" -MT"freertos/Source/event_groups.o" -c -o "freertos/Source/event_groups.o" "../freertos/Source/event_groups.c"
+Finished building: ../freertos/Source/croutine.c
+ 
+Building file: ../freertos/Source/list.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/list.d" -MT"freertos/Source/list.o" -c -o "freertos/Source/list.o" "../freertos/Source/list.c"
+Finished building: ../freertos/Source/event_groups.c
+ 
+Building file: ../freertos/Source/queue.c
 Finished building: ../source/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/queue.d" -MT"freertos/Source/queue.o" -c -o "freertos/Source/queue.o" "../freertos/Source/queue.c"
  
-Building target: pulsar_phase_sync_tof_test.elf
+Building file: ../freertos/Source/tasks.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/tasks.d" -MT"freertos/Source/tasks.o" -c -o "freertos/Source/tasks.o" "../freertos/Source/tasks.c"
+Finished building: ../freertos/Source/list.c
+ 
+Building file: ../freertos/Source/timers.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"freertos/Source/timers.d" -MT"freertos/Source/timers.o" -c -o "freertos/Source/timers.o" "../freertos/Source/timers.c"
+Finished building: ../freertos/Source/queue.c
+ 
+Finished building: ../freertos/Source/timers.c
+Building file: ../drivers/deca_device.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/deca_device.d" -MT"drivers/deca_device.o" -c -o "drivers/deca_device.o" "../drivers/deca_device.c"
+Building file: ../drivers/deca_params_init.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/deca_params_init.d" -MT"drivers/deca_params_init.o" -c -o "drivers/deca_params_init.o" "../drivers/deca_params_init.c"
+Finished building: ../drivers/deca_params_init.c
+ 
+Building file: ../drivers/fsl_adc16.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_adc16.d" -MT"drivers/fsl_adc16.o" -c -o "drivers/fsl_adc16.o" "../drivers/fsl_adc16.c"
+Finished building: ../freertos/Source/tasks.c
+ 
+Building file: ../drivers/fsl_clock.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_clock.d" -MT"drivers/fsl_clock.o" -c -o "drivers/fsl_clock.o" "../drivers/fsl_clock.c"
+Finished building: ../drivers/deca_device.c
+ 
+Building file: ../drivers/fsl_cmp.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_cmp.d" -MT"drivers/fsl_cmp.o" -c -o "drivers/fsl_cmp.o" "../drivers/fsl_cmp.c"
+Finished building: ../drivers/fsl_adc16.c
+ 
+Building file: ../drivers/fsl_common.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_common.d" -MT"drivers/fsl_common.o" -c -o "drivers/fsl_common.o" "../drivers/fsl_common.c"
+Finished building: ../drivers/fsl_clock.c
+ 
+Building file: ../drivers/fsl_crc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_crc.d" -MT"drivers/fsl_crc.o" -c -o "drivers/fsl_crc.o" "../drivers/fsl_crc.c"
+Finished building: ../drivers/fsl_common.c
+ 
+Building file: ../drivers/fsl_dac.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_dac.d" -MT"drivers/fsl_dac.o" -c -o "drivers/fsl_dac.o" "../drivers/fsl_dac.c"
+Finished building: ../drivers/fsl_cmp.c
+ 
+Building file: ../drivers/fsl_dmamux.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_dmamux.d" -MT"drivers/fsl_dmamux.o" -c -o "drivers/fsl_dmamux.o" "../drivers/fsl_dmamux.c"
+Finished building: ../drivers/fsl_crc.c
+ 
+Finished building: ../drivers/fsl_dmamux.c
+Building file: ../drivers/fsl_dspi.c
+Finished building: ../drivers/fsl_dac.c
+ 
+Invoking: Cross ARM C Compiler
+ 
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_dspi.d" -MT"drivers/fsl_dspi.o" -c -o "drivers/fsl_dspi.o" "../drivers/fsl_dspi.c"
+Building file: ../drivers/fsl_dspi_edma.c
+Building file: ../drivers/fsl_dspi_freertos.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_dspi_edma.d" -MT"drivers/fsl_dspi_edma.o" -c -o "drivers/fsl_dspi_edma.o" "../drivers/fsl_dspi_edma.c"
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_dspi_freertos.d" -MT"drivers/fsl_dspi_freertos.o" -c -o "drivers/fsl_dspi_freertos.o" "../drivers/fsl_dspi_freertos.c"
+Finished building: ../drivers/fsl_dspi_freertos.c
+ 
+Building file: ../drivers/fsl_edma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_edma.d" -MT"drivers/fsl_edma.o" -c -o "drivers/fsl_edma.o" "../drivers/fsl_edma.c"
+Finished building: ../drivers/fsl_dspi_edma.c
+ 
+Building file: ../drivers/fsl_ewm.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_ewm.d" -MT"drivers/fsl_ewm.o" -c -o "drivers/fsl_ewm.o" "../drivers/fsl_ewm.c"
+Finished building: ../drivers/fsl_dspi.c
+ 
+Building file: ../drivers/fsl_flash.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_flash.d" -MT"drivers/fsl_flash.o" -c -o "drivers/fsl_flash.o" "../drivers/fsl_flash.c"
+Finished building: ../drivers/fsl_ewm.c
+ 
+Building file: ../drivers/fsl_flexbus.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_flexbus.d" -MT"drivers/fsl_flexbus.o" -c -o "drivers/fsl_flexbus.o" "../drivers/fsl_flexbus.c"
+Finished building: ../drivers/fsl_edma.c
+ 
+Building file: ../drivers/fsl_ftm.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_ftm.d" -MT"drivers/fsl_ftm.o" -c -o "drivers/fsl_ftm.o" "../drivers/fsl_ftm.c"
+Finished building: ../drivers/fsl_flash.c
+ 
+Building file: ../drivers/fsl_gpio.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_gpio.d" -MT"drivers/fsl_gpio.o" -c -o "drivers/fsl_gpio.o" "../drivers/fsl_gpio.c"
+Finished building: ../drivers/fsl_flexbus.c
+ 
+Building file: ../drivers/fsl_i2c.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_i2c.d" -MT"drivers/fsl_i2c.o" -c -o "drivers/fsl_i2c.o" "../drivers/fsl_i2c.c"
+Finished building: ../drivers/fsl_gpio.c
+ 
+Building file: ../drivers/fsl_i2c_edma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_i2c_edma.d" -MT"drivers/fsl_i2c_edma.o" -c -o "drivers/fsl_i2c_edma.o" "../drivers/fsl_i2c_edma.c"
+Finished building: ../drivers/fsl_ftm.c
+ 
+Building file: ../drivers/fsl_i2c_freertos.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_i2c_freertos.d" -MT"drivers/fsl_i2c_freertos.o" -c -o "drivers/fsl_i2c_freertos.o" "../drivers/fsl_i2c_freertos.c"
+Finished building: ../drivers/fsl_i2c.c
+ 
+Building file: ../drivers/fsl_llwu.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_llwu.d" -MT"drivers/fsl_llwu.o" -c -o "drivers/fsl_llwu.o" "../drivers/fsl_llwu.c"
+Finished building: ../drivers/fsl_i2c_freertos.c
+ 
+Finished building: ../drivers/fsl_i2c_edma.c
+Building file: ../drivers/fsl_lptmr.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_lptmr.d" -MT"drivers/fsl_lptmr.o" -c -o "drivers/fsl_lptmr.o" "../drivers/fsl_lptmr.c"
+Building file: ../drivers/fsl_lpuart.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_lpuart.d" -MT"drivers/fsl_lpuart.o" -c -o "drivers/fsl_lpuart.o" "../drivers/fsl_lpuart.c"
+Finished building: ../drivers/fsl_llwu.c
+Finished building: ../drivers/fsl_lptmr.c
+ 
+ 
+Building file: ../drivers/fsl_lpuart_edma.c
+Building file: ../drivers/fsl_lpuart_freertos.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_lpuart_edma.d" -MT"drivers/fsl_lpuart_edma.o" -c -o "drivers/fsl_lpuart_edma.o" "../drivers/fsl_lpuart_edma.c"
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_lpuart_freertos.d" -MT"drivers/fsl_lpuart_freertos.o" -c -o "drivers/fsl_lpuart_freertos.o" "../drivers/fsl_lpuart_freertos.c"
+Finished building: ../drivers/fsl_lpuart.c
+ 
+Building file: ../drivers/fsl_pdb.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_pdb.d" -MT"drivers/fsl_pdb.o" -c -o "drivers/fsl_pdb.o" "../drivers/fsl_pdb.c"
+Finished building: ../drivers/fsl_lpuart_edma.c
+Finished building: ../drivers/fsl_lpuart_freertos.c
+ 
+ 
+Building file: ../drivers/fsl_pit.c
+Building file: ../drivers/fsl_pmc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_pit.d" -MT"drivers/fsl_pit.o" -c -o "drivers/fsl_pit.o" "../drivers/fsl_pit.c"
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_pmc.d" -MT"drivers/fsl_pmc.o" -c -o "drivers/fsl_pmc.o" "../drivers/fsl_pmc.c"
+Finished building: ../drivers/fsl_pdb.c
+ 
+Building file: ../drivers/fsl_rcm.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_rcm.d" -MT"drivers/fsl_rcm.o" -c -o "drivers/fsl_rcm.o" "../drivers/fsl_rcm.c"
+Finished building: ../drivers/fsl_pmc.c
+ 
+Building file: ../drivers/fsl_rnga.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_rnga.d" -MT"drivers/fsl_rnga.o" -c -o "drivers/fsl_rnga.o" "../drivers/fsl_rnga.c"
+Finished building: ../drivers/fsl_pit.c
+ 
+Finished building: ../drivers/fsl_rcm.c
+Building file: ../drivers/fsl_rtc.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_rtc.d" -MT"drivers/fsl_rtc.o" -c -o "drivers/fsl_rtc.o" "../drivers/fsl_rtc.c"
+Building file: ../drivers/fsl_sai.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_sai.d" -MT"drivers/fsl_sai.o" -c -o "drivers/fsl_sai.o" "../drivers/fsl_sai.c"
+Finished building: ../drivers/fsl_rnga.c
+ 
+Building file: ../drivers/fsl_sai_edma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_sai_edma.d" -MT"drivers/fsl_sai_edma.o" -c -o "drivers/fsl_sai_edma.o" "../drivers/fsl_sai_edma.c"
+Finished building: ../drivers/fsl_rtc.c
+ 
+Building file: ../drivers/fsl_sim.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_sim.d" -MT"drivers/fsl_sim.o" -c -o "drivers/fsl_sim.o" "../drivers/fsl_sim.c"
+Finished building: ../drivers/fsl_sai.c
+ 
+Building file: ../drivers/fsl_smc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_smc.d" -MT"drivers/fsl_smc.o" -c -o "drivers/fsl_smc.o" "../drivers/fsl_smc.c"
+Finished building: ../drivers/fsl_sim.c
+ 
+Building file: ../drivers/fsl_uart.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_uart.d" -MT"drivers/fsl_uart.o" -c -o "drivers/fsl_uart.o" "../drivers/fsl_uart.c"
+Finished building: ../drivers/fsl_sai_edma.c
+ 
+Building file: ../drivers/fsl_uart_edma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_uart_edma.d" -MT"drivers/fsl_uart_edma.o" -c -o "drivers/fsl_uart_edma.o" "../drivers/fsl_uart_edma.c"
+Finished building: ../drivers/fsl_smc.c
+ 
+Building file: ../drivers/fsl_uart_freertos.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_uart_freertos.d" -MT"drivers/fsl_uart_freertos.o" -c -o "drivers/fsl_uart_freertos.o" "../drivers/fsl_uart_freertos.c"
+Finished building: ../drivers/fsl_uart_edma.c
+ 
+Building file: ../drivers/fsl_vref.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_vref.d" -MT"drivers/fsl_vref.o" -c -o "drivers/fsl_vref.o" "../drivers/fsl_vref.c"
+Finished building: ../drivers/fsl_uart.c
+ 
+Building file: ../drivers/fsl_wdog.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"drivers/fsl_wdog.d" -MT"drivers/fsl_wdog.o" -c -o "drivers/fsl_wdog.o" "../drivers/fsl_wdog.c"
+Finished building: ../drivers/fsl_uart_freertos.c
+ 
+Building file: ../board/clock_config.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/clock_config.d" -MT"board/clock_config.o" -c -o "board/clock_config.o" "../board/clock_config.c"
+Finished building: ../drivers/fsl_vref.c
+ 
+Building file: ../board/csac_driver.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/csac_driver.d" -MT"board/csac_driver.o" -c -o "board/csac_driver.o" "../board/csac_driver.c"
+Finished building: ../drivers/fsl_wdog.c
+ 
+Building file: ../board/deca_mutex.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/deca_mutex.d" -MT"board/deca_mutex.o" -c -o "board/deca_mutex.o" "../board/deca_mutex.c"
+Finished building: ../board/clock_config.c
+ 
+Finished building: ../board/deca_mutex.c
+Building file: ../board/deca_sleep.c
+ 
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/deca_sleep.d" -MT"board/deca_sleep.o" -c -o "board/deca_sleep.o" "../board/deca_sleep.c"
+Building file: ../board/deca_spi.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/deca_spi.d" -MT"board/deca_spi.o" -c -o "board/deca_spi.o" "../board/deca_spi.c"
+Finished building: ../board/deca_sleep.c
+ 
+Building file: ../board/pin_mux.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/pin_mux.d" -MT"board/pin_mux.o" -c -o "board/pin_mux.o" "../board/pin_mux.c"
+Finished building: ../board/csac_driver.c
+ 
+Building file: ../board/pll_driver.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/pll_driver.d" -MT"board/pll_driver.o" -c -o "board/pll_driver.o" "../board/pll_driver.c"
+Finished building: ../board/pin_mux.c
+ 
+Building file: ../board/pulsar_board.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -D"CPU_MK22FN512VDC12" -I../CMSIS -I../board -I../drivers -I../freertos/Source/include -I../freertos/Source/portable/GCC/ARM_CM4F -I../source -I../startup -I../utilities -std=gnu99 -MMD -MP -MF"board/pulsar_board.d" -MT"board/pulsar_board.o" -c -o "board/pulsar_board.o" "../board/pulsar_board.c"
+Finished building: ../board/pll_driver.c
+Finished building: ../board/deca_spi.c
+ 
+ 
+Finished building: ../board/pulsar_board.c
+ 
+Building target: pulsar_phase_sync_child_exp.elf
 Invoking: Cross ARM C++ Linker
-arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_phase_sync_tof_test.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_phase_sync_tof_test.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
-Finished building target: pulsar_phase_sync_tof_test.elf
+arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "../MK22FN512xxx12_flash.ld" -Xlinker --gc-sections -Wl,-Map,"pulsar_phase_sync_child_exp.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "pulsar_phase_sync_child_exp.elf"  ./utilities/fsl_debug_console.o ./utilities/fsl_notifier.o ./utilities/fsl_sbrk.o  ./startup/startup_MK22F51212.o ./startup/system_MK22F51212.o  ./source/main.o  ./freertos/Source/portable/MemMang/heap_4.o  ./freertos/Source/portable/GCC/ARM_CM4F/port.o  ./freertos/Source/croutine.o ./freertos/Source/event_groups.o ./freertos/Source/list.o ./freertos/Source/queue.o ./freertos/Source/tasks.o ./freertos/Source/timers.o  ./drivers/deca_device.o ./drivers/deca_params_init.o ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_crc.o ./drivers/fsl_dac.o ./drivers/fsl_dmamux.o ./drivers/fsl_dspi.o ./drivers/fsl_dspi_edma.o ./drivers/fsl_dspi_freertos.o ./drivers/fsl_edma.o ./drivers/fsl_ewm.o ./drivers/fsl_flash.o ./drivers/fsl_flexbus.o ./drivers/fsl_ftm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_edma.o ./drivers/fsl_i2c_freertos.o ./drivers/fsl_llwu.o ./drivers/fsl_lptmr.o ./drivers/fsl_lpuart.o ./drivers/fsl_lpuart_edma.o ./drivers/fsl_lpuart_freertos.o ./drivers/fsl_pdb.o ./drivers/fsl_pit.o ./drivers/fsl_pmc.o ./drivers/fsl_rcm.o ./drivers/fsl_rnga.o ./drivers/fsl_rtc.o ./drivers/fsl_sai.o ./drivers/fsl_sai_edma.o ./drivers/fsl_sim.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o ./drivers/fsl_uart_edma.o ./drivers/fsl_uart_freertos.o ./drivers/fsl_vref.o ./drivers/fsl_wdog.o  ./board/clock_config.o ./board/csac_driver.o ./board/deca_mutex.o ./board/deca_sleep.o ./board/deca_spi.o ./board/pin_mux.o ./board/pll_driver.o ./board/pulsar_board.o   
+Finished building target: pulsar_phase_sync_child_exp.elf
  
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O ihex "pulsar_phase_sync_tof_test.elf"  "pulsar_phase_sync_tof_test.hex"
 Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "pulsar_phase_sync_tof_test.elf"
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-size --format=berkeley "pulsar_phase_sync_child_exp.elf"
+arm-none-eabi-objcopy -O ihex "pulsar_phase_sync_child_exp.elf"  "pulsar_phase_sync_child_exp.hex"
    text	   data	    bss	    dec	    hex	filename
-  62104	    212	  15972	  78288	  131d0	pulsar_phase_sync_tof_test.elf
-Finished building: pulsar_phase_sync_tof_test.siz
-Finished building: pulsar_phase_sync_tof_test.hex
+  62096	    212	  15972	  78280	  131c8	pulsar_phase_sync_child_exp.elf
+Finished building: pulsar_phase_sync_child_exp.siz
  
+Finished building: pulsar_phase_sync_child_exp.hex
  
-16:47:48 **** Incremental Build of configuration Debug for project pulsar_phase_sync_tof_test ****
+14:32:12 **** Incremental Build of configuration Debug for project pulsar_phase_sync_child_exp ****
 make -j3 all 
 Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "pulsar_phase_sync_tof_test.elf"
+arm-none-eabi-size --format=berkeley "pulsar_phase_sync_child_exp.elf"
    text	   data	    bss	    dec	    hex	filename
-  62104	    212	  15972	  78288	  131d0	pulsar_phase_sync_tof_test.elf
-Finished building: pulsar_phase_sync_tof_test.siz
+  62096	    212	  15972	  78280	  131c8	pulsar_phase_sync_child_exp.elf
+Finished building: pulsar_phase_sync_child_exp.siz
  

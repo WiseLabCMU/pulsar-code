@@ -109,19 +109,19 @@ status_t csac_receive_timeout(uart_rtos_handle_t *csacRtosHandle, uint8_t *buffe
 
 	}
 
-	return kStatus_OutOfRange;	// more data received than out buffer can handle
+	return kStatus_OutOfRange;	// more data received than out buffer can handle (case 3)
 
-	return UART_RTOS_Receive_wTimeout(csacRtosHandle, buffer, length, received, timeout);
+//	return UART_RTOS_Receive_wTimeout(csacRtosHandle, buffer, length, received, timeout);
 }
 
 void csac_flush_rx_buffer(uart_rtos_handle_t *csacRtosHandle) {
 	uint8_t tmpBuf;
-	int nReceived;
+	uint32_t nReceived;
 	// flush UART buffers i.e. read until no more characters can be read
 	// TODO: there should be a better way of handling this
 	while(true) {
 		nReceived = 0;
-		if(csac_receive_timeout(csacRtosHandle, &tmpBuf, 1, &nReceived, 0) != kStatus_Success) {
+		if(csac_receive_timeout(csacRtosHandle, &tmpBuf, 1, 0) != kStatus_Success) {
 			break;
 		}
 	}

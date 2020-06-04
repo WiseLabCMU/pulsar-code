@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="287" key="DIALOG_WIDTH"/>
-		<item value="27" key="DIALOG_Y_ORIGIN"/>
+		<item value="199" key="DIALOG_Y_ORIGIN"/>
 		<item value="411" key="DIALOG_HEIGHT"/>
-		<item value="914" key="DIALOG_X_ORIGIN"/>
+		<item value="760" key="DIALOG_X_ORIGIN"/>
 		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="NODE_ID" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
-			<item value="node_id"/>
+			<item value="dwt_initialize"/>
 			<item value="channel"/>
+			<item value="(long) tof"/>
+			<item value="tof"/>
+			<item value="node_id"/>
 			<item value="abort"/>
 			<item value="scan"/>
 			<item value="uart_handle_t"/>
-			<item value="heartbeat"/>
-			<item value="phase_set"/>
-			<item value="offset"/>
 		</list>
 		<list key="replacehistory">
 			<item value="reference_tx_timestamp"/>
